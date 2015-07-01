@@ -36,9 +36,21 @@ public class UserDAO {
 		
 	}
 	
-	public boolean getUpdateChoice(int id, int opt){		
-		return false;		
-	}
+
+	public boolean getUpdateFullname(User udto){
+		try(Connection con=new DBConnection().getConnection();
+			PreparedStatement ps=con.prepareStatement("update tbl_user set full_name=? where id=?");){
+			ps.setString(1, udto.getFullName());
+			ps.setInt(2, udto.getId());
+			if(ps.executeUpdate()>0){
+				return true;
+			}
+			return false;
+		}catch(Exception e){
+			e.printStackTrace();
+			return false;
+		}
+		
 	
 	public static void PassEncrypt(){
 		String Password="password";
