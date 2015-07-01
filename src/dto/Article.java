@@ -16,11 +16,11 @@ public class Article {
 	private int id;
 	private String title;
 	private String content;
-	private String authorId;
+	private int authorId;
 	//private String date;
 	
 	/* Constructor with parameter */
-	public Article(int id, String title, String content, String author /*String date*/){
+	public Article(int id, String title, String content, int author /*String date*/){
 		this.id = id;
 		this.title = title;
 		this.content = content;
@@ -56,11 +56,11 @@ public class Article {
 		this.content = content;
 	}
 	
-	public String getAuthorId() {
+	public int getAuthorId() {
 		return authorId;
 	}
 	
-	public void setAuthorId(String authorId) {
+	public void setAuthorId(int authorId) {
 		this.authorId = authorId;
 	}
 	

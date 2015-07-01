@@ -16,13 +16,12 @@ public class ArticleDAO implements IArticleDAO {
 	private DBConnection dbcon = null;
 	private Connection con = null;
 	private PreparedStatement prestm = null;
-	
-	
-	public ArticleDAO() throws SQLException{
-		
+
+	public ArticleDAO() throws SQLException {
+
 		con = DBConnection.getConnection();
 	}
-	
+
 	@Override
 	public boolean insertArticle(Article art) {
 		// TODO Auto-generated method stub
@@ -32,7 +31,7 @@ public class ArticleDAO implements IArticleDAO {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		return false;
 	}
 
@@ -46,25 +45,26 @@ public class ArticleDAO implements IArticleDAO {
 	public boolean deleteArticle(Article art) {
 		// TODO Auto-generated method stub
 		return false;
-	}
-	
-	public ArrayList<Article> searchArticle(String str){
-		
+	} 
+
+	public ArrayList<Article> searchArticle(String str) {
+
 		ArrayList<Article> arrList = new ArrayList<Article>();
-		
+
 		ResultSet rs = null;
 		try {
 			stm = con.createStatement();
-			String sql = "SELECT * from tbl_article as art join tbl_user on art.id = as.id like '%str%'";
+			String sql = "SELECT * from tbl_article JOIN tbl_user on tbl_article.author_id = tbl_user.id Where title ~* '.*"+str+".*' or content ~* '.*"+str+".*' or fullname ~* '.*D.*'";
 			rs = stm.executeQuery(sql);
-			while(rs.next()){
-				arrList.add(new Article(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4)));
+			while (rs.next()) {
+				arrList.add(new Article(rs.getInt(1), rs.getString(2), rs
+						.getString(3), rs.getInt(4)));
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}finally{
-			
+		} finally {
+
 			try {
 				stm.close();
 				con.close();
@@ -72,26 +72,25 @@ public class ArticleDAO implements IArticleDAO {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
+
 		}
 		return arrList;
 	}
-	
+
 	public static void main(String[] args) {
 		ArrayList<Article> arrList = null;
-		
+
 		try {
 			ArticleDAO adao = new ArticleDAO();
-			arrList = adao.searchArticle("Hello");
-			for(Article art : arrList){
+			arrList = adao.searchArticle("java");
+			for (Article art : arrList) {
 				System.out.println(art.getTitle());
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
+
 	}
-	
+
 }
