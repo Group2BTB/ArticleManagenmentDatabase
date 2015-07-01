@@ -1,5 +1,6 @@
 package process;
-
+import dao.*;
+import dto.Article;
 import java.sql.SQLException;
 import java.util.Scanner;
 
@@ -9,7 +10,7 @@ import dao.UserDAO;
 import dto.User;
 
 public class Process {
-	
+
 	public void respondProcess(int opt) throws Exception{
 		User udto=new User();
 		UpdateUserInfo choice = new UpdateUserInfo();
@@ -19,16 +20,14 @@ public class Process {
 			new UserDAO().insertView(udto);
 			break;
 		case 3: 
+
 			new UpdateUserInfo().inputID(udto);
-			new UserDAO().getUpdateFullname(udto);
+			new UserDAO().getUpdateFullname(udto);			
 			
-				
-			
-			break;
-			
+			break;		
+
 		default:
 			break;
 		}
-	}
-	
+	}	
 }

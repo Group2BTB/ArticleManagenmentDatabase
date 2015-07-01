@@ -15,8 +15,14 @@ public class ArticleDAO implements IArticleDAO {
 	@Override
 	public boolean insertArticle(Article art) {
 		// TODO Auto-generated method stub
-		try {
-			stm = con.createStatement();
+		try(Connection con = DBConnection.getConnection(); 
+				PreparedStatement prestm = con.prepareStatement("insert into tbl_article(title,author_id,content)values(?,?,?)"); ) {			
+			
+			prestm.setString(1, art.getTitle());
+			prestm.setInt(2,art.getAuthorId());
+			prestm.setString(3, art.getContent());
+			prestm.executeUpdate();			
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

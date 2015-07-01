@@ -8,18 +8,19 @@ import java.sql.SQLException;
 public class DBConnection {
 
 	private static Connection con = null;
-
 	/*
 	 * @param con to store the connection to database
 	 */
+
 	public static Connection getConnection(){
 		
+
 		try {
 			Class.forName("org.postgresql.Driver");// load postgresql driver
 			/* Connect to database */
 			con = DriverManager.getConnection(
-					"jdbc:postgresql://localhost:5432/ArticleManagement",
-					"postgres", "72241993vichet");
+					"jdbc:postgresql://localhost:5432/postgres",
+					"postgres", "55555");
 			
 			 //DatabaseMetaData dm = con.getMetaData();
 			 //System.out.println(dm.getDatabaseProductName());
