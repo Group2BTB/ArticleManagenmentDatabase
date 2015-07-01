@@ -17,7 +17,7 @@ public class ArticleDAO implements IArticleDAO {
 	private Connection con = null;
 	private PreparedStatement prestm = null;
 
-	public ArticleDAO() throws SQLException {
+	public ArticleDAO(){
 
 		con = DBConnection.getConnection();
 	}
@@ -54,11 +54,11 @@ public class ArticleDAO implements IArticleDAO {
 		ResultSet rs = null;
 		try {
 			stm = con.createStatement();
-			String sql = "SELECT * from tbl_article JOIN tbl_user on tbl_article.author_id = tbl_user.id Where title ~* '.*"+str+".*' or content ~* '.*"+str+".*' or fullname ~* '.*D.*'";
+			String sql = "SELECT * from tbl_article JOIN tbl_user on tbl_article.author_id = tbl_user.id Where title ~* '.*"+str+".*' or content ~* '.*"+str+".*' or fullname ~* '.*"+str+".*'";
 			rs = stm.executeQuery(sql);
 			while (rs.next()) {
 				arrList.add(new Article(rs.getInt(1), rs.getString(2), rs
-						.getString(3), rs.getInt(4)));
+						.getInt(3), rs.getString(4)));
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -80,15 +80,10 @@ public class ArticleDAO implements IArticleDAO {
 	public static void main(String[] args) {
 		ArrayList<Article> arrList = null;
 
-		try {
-			ArticleDAO adao = new ArticleDAO();
-			arrList = adao.searchArticle("java");
-			for (Article art : arrList) {
-				System.out.println(art.getTitle());
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		ArticleDAO adao = new ArticleDAO();
+		arrList = adao.searchArticle("a");
+		for (Article art : arrList) {
+			System.out.println(art.getTitle());
 		}
 
 	}

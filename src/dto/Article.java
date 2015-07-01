@@ -20,11 +20,11 @@ public class Article {
 	//private String date;
 	
 	/* Constructor with parameter */
-	public Article(int id, String title, String content, int author /*String date*/){
+	public Article(int id, String title, int authorId , String content/*String date*/){
 		this.id = id;
 		this.title = title;
 		this.content = content;
-		this.authorId = author;
+		this.authorId = authorId;
 		//this.date = date;
 	}
 	
