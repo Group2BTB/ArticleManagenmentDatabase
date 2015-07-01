@@ -24,7 +24,7 @@ public class User {
 	private String fullName;
 	private String email;
 	private String username;
-	private int password;
+	private String password;
 	private Date createDate;
 	private Date modifiedDate;
 	private boolean atived;
@@ -56,10 +56,10 @@ public class User {
 	public void setUsername(String username) {
 		this.username = username;
 	}
-	public int getPassword() {
+	public String getPassword() {
 		return password;
 	}
-	public void setPassword(int password) {
+	public void setPassword(String password) {
 		this.password = password;
 	}
 	public Date getCreateDate() {
