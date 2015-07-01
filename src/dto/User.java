@@ -9,14 +9,13 @@ import java.sql.Date;
 
 public class User {
 
-	
 	/*
 	 *@param id is used to store id of User
 	 *@param fullName is used for store title of User
 	 *@param email is used for store email of each User
 	 *@param username is used for store username of each User
 	 *@param password is used for store password of user
-	 *@param createDate
+	 *@
 	 *
 	 */
 	
@@ -92,8 +91,4 @@ public class User {
 	public void setType(String type) {
 		this.type = type;
 	}
-	
-	
-	
-	
 }
