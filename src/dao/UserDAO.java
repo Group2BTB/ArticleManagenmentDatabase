@@ -35,6 +35,14 @@ public class UserDAO {
 		
 		
 	}
+	
+	public boolean getUpdateChoice(int id, int opt){
+		
+		
+		return false;
+		
+	}
+	
 	public static void PassEncrypt(){
 		String Password="password";
 		String GeneratePass=null;
