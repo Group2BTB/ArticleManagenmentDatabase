@@ -13,15 +13,16 @@ public class UserDAO {
 	
 	public boolean insertView(User udto) {
 
-		try(Connection con=new DBConnection().getConnection();PreparedStatement ps=con.prepareStatement("insert into tbl_user(full_name, email, username, passwd ,type)"
-				+ "values(?, ?, ?, ?, ?)");){
+		try(Connection con=new DBConnection().getConnection();
+			PreparedStatement ps=con.prepareStatement("insert into tbl_user(full_name, email, username, passwd ,type)"
+			+ "values(?, ?, ?, ?, ?)");){
 			
 			ps.setString(1, udto.getFullName());
 			ps.setString(2, udto.getEmail());
 			ps.setString(3, udto.getUsername());
 			ps.setString(4, udto.getPassword());
 			ps.setString(5, udto.getType());
-			//ps.executeUpdate();
+			
 			if(ps.executeUpdate()>0){
 				return true;
 			}
