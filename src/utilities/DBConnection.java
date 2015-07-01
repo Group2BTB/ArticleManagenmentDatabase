@@ -7,12 +7,12 @@ import java.sql.SQLException;
 
 public class DBConnection {
 
-	private Connection con = null;
+	private static Connection con = null;
 
 	/*
 	 * @param con to store the connection to database
 	 */
-	public Connection getConnection(){
+	public static Connection getConnection(){
 		
 		try {
 			Class.forName("org.postgresql.Driver");// load postgresql driver
@@ -29,7 +29,6 @@ public class DBConnection {
 			System.out.println("Cannot connect to database!");
 		}catch(ClassNotFoundException e) {
 			// TODO: handle exception
-			
 			System.out.println("Cannot load driver!");
 		}
 
