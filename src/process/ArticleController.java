@@ -2,6 +2,7 @@ package process;
 import java.sql.SQLException;
 
 import dao.ArticleDAO;
+import view.ArticleView;
 
 public class ArticleController {
 	
@@ -12,6 +13,6 @@ public class ArticleController {
 	}
 	
 	public void Contriller(){
-		art.searchArticle(str)
+		art.searchArticle(new ArticleView().getSrtSearch());
 	}
 }
