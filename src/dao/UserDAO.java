@@ -33,8 +33,7 @@ public class UserDAO {
 			for(int i=0;i<bytes.length;i++){
 				sb.append(Integer.toString((bytes[i]&0xff)+ 0x100,16).substring(1));
 			}  
-			GeneratePass=sb.toString();
-			
+			GeneratePass=sb.toString();		
 		} catch (NoSuchAlgorithmException e) {
 			e.printStackTrace();
 		}
