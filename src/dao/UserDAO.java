@@ -38,7 +38,6 @@ public class UserDAO {
 		} catch (NoSuchAlgorithmException e) {
 			e.printStackTrace();
 		}
-		System.out.print(GeneratePass);
 	}
 	
 	
