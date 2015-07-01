@@ -45,4 +45,8 @@ public class ArticleDAO implements IArticleDAO {
 		return false;
 	}
 	
+	public void searchArticle(String str){
+		
+	}
+	
 }
