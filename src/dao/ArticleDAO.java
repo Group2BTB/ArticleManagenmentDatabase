@@ -13,14 +13,7 @@ import utilities.DBConnection;
 public class ArticleDAO implements IArticleDAO {
 
 	private Statement stm = null;
-	private DBConnection dbcon = null;
-	private Connection con = null;
 	private PreparedStatement prestm = null;
-
-	public ArticleDAO(){
-
-		con = DBConnection.getConnection();
-	}
 
 	@Override
 	public boolean insertArticle(Article art) {
@@ -52,7 +45,7 @@ public class ArticleDAO implements IArticleDAO {
 		ArrayList<Article> arrList = new ArrayList<Article>();
 
 		ResultSet rs = null;
-		try {
+		try(Connection con = DBConnection.getConnection()) {
 			stm = con.createStatement();
 			String sql = "SELECT * from tbl_article JOIN tbl_user on tbl_article.author_id = tbl_user.id Where title ~* '.*"+str+".*' or content ~* '.*"+str+".*' or fullname ~* '.*"+str+".*'";
 			rs = stm.executeQuery(sql);
@@ -63,17 +56,7 @@ public class ArticleDAO implements IArticleDAO {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} finally {
-
-			try {
-				stm.close();
-				con.close();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
-		}
+		} 
 		return arrList;
 	}
 
