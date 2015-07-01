@@ -11,6 +11,7 @@ public class InsertFormUser {
 		System.out.println("Input Email: ");udto.setEmail(in.next());
 		System.out.println("Input Username: ");udto.setUsername(in.next());
 		System.out.println("Input password: ");udto.setPassword(in.next());
-		System.out.println("Input UserType: ");String userType=in.next();
+		System.out.println("Input UserType: ");udto.setType(in.next());
+		
 	}
 }
