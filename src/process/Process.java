@@ -30,7 +30,7 @@ public class Process {
 			break;
 		}
 	}
-	
+
 	public static void main(String[] args) {
 		
 		Article art = new Article();
