@@ -12,16 +12,20 @@ public class Process {
 	
 	public void respondProcess(int opt) throws Exception{
 		User udto=new User();
-		Scanner in=new Scanner(System.in);
+		UpdateUserInfo choice = new UpdateUserInfo();
 		switch (opt) {
-		case 1:
-			
+		case 1:			
 			new InsertFormUser(udto);
 			new UserDAO().insertView(udto);
 			break;
 		case 3: 
-			new UpdateUserInfo().inputUserID(in);
-			updateView(opt);
+			new UpdateUserInfo().inputID(udto);
+			new UserDAO().getUpdateFullname(udto);
+			
+				
+			
+			break;
+			
 		default:
 			break;
 		}
