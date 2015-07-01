@@ -36,11 +36,8 @@ public class UserDAO {
 		
 	}
 	
-	public boolean getUpdateChoice(int id, int opt){
-		
-		
-		return false;
-		
+	public boolean getUpdateChoice(int id, int opt){		
+		return false;		
 	}
 	
 	public static void PassEncrypt(){
