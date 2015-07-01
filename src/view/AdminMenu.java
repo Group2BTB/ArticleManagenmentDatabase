@@ -9,7 +9,6 @@ public class AdminMenu {
 		Scanner in=new Scanner(System.in);
 		User user=new User();
 		Process pro=new Process();
-		//System.out.println((user.getCreateDate().toString()));
 		
 		System.out.println("1.AddUser\n2.ViewUser\n3.UpdateUser\n4.DeleteUser\n5.ViewAllUsers");
 		System.out.println("==>"); int opt=in.nextInt();
