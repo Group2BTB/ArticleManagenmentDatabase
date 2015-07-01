@@ -29,5 +29,16 @@ public class Process {
 		default:
 			break;
 		}
-	}	
+	}
+	
+	public static void main(String[] args) {
+		
+		Article art = new Article();
+		art.setTitle("title1");
+		art.setContent("content1");
+		art.setAuthorId(4);
+		
+		new ArticleDAO().insertArticle(art);
+		
+	}
 }

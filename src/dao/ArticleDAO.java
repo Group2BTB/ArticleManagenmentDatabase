@@ -22,13 +22,13 @@ public class ArticleDAO implements IArticleDAO {
 			prestm.setInt(2,art.getAuthorId());
 			prestm.setString(3, art.getContent());
 			prestm.executeUpdate();			
+			return true;
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-
-		return false;
+			return false;
+		}	
 	}
 
 	@Override
