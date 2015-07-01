@@ -10,15 +10,28 @@ import dto.User;
 import utilities.DBConnection;
 
 public class UserDAO {
-	private Connection con;
-	public UserDAO() throws Exception{
-		con=new DBConnection().getConnection();
-	}
 	
-	public boolean insertView(User udto) throws SQLException{
-		PreparedStatement ps=con.prepareStatement("insert into tbl_user(full_name)");
+	public boolean insertView(User udto) {
+
+		try(Connection con=new DBConnection().getConnection();PreparedStatement ps=con.prepareStatement("insert into tbl_user(full_name, email, username, passwd ,type)"
+				+ "values(?, ?, ?, ?, ?)");){
+			
+			ps.setString(1, udto.getFullName());
+			ps.setString(2, udto.getEmail());
+			ps.setString(3, udto.getUsername());
+			ps.setString(4, udto.getPassword());
+			ps.setString(5, udto.getType());
+			//ps.executeUpdate();
+			if(ps.executeUpdate()>0){
+				return true;
+			}
+			return false;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}
 		
-		return false;
 		
 	}
 	public static void PassEncrypt(){
