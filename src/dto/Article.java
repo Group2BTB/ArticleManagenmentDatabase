@@ -16,7 +16,7 @@ public class Article {
 	private int id;
 	private String title;
 	private String content;
-	private String author;
+	private String authorId;
 	//private String date;
 	
 	/* Constructor with parameter */
@@ -24,7 +24,7 @@ public class Article {
 		this.id = id;
 		this.title = title;
 		this.content = content;
-		this.author = author;
+		this.authorId = author;
 		//this.date = date;
 	}
 	
@@ -56,12 +56,12 @@ public class Article {
 		this.content = content;
 	}
 	
-	public String getAuthor() {
-		return author;
+	public String getAuthorId() {
+		return authorId;
 	}
 	
-	public void setAuthor(String author) {
-		this.author = author;
+	public void setAuthorId(String authorId) {
+		this.authorId = authorId;
 	}
 	
 	/*public String getDate(){
