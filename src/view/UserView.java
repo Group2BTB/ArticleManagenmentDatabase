@@ -1,11 +1,9 @@
 package view;
 
 import java.util.Scanner;
-
 import dto.User;
-
 public class UserView {
-
+	
 	public UserView() {
 		
 		// TODO Auto-generated constructor stub
