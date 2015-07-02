@@ -20,10 +20,10 @@ public class DBConnection {
 			/* Connect to database */
 			con = DriverManager.getConnection(
 					"jdbc:postgresql://localhost:5432/ArticleManagement",
-					"postgres", "72241993vichet");
+					"postgres", "12345");
 			
 			 //DatabaseMetaData dm = con.getMetaData();
-			 //System.out.println(dm.getDatabaseProductName());
+			// System.out.println(dm.getDatabaseProductName());
 			 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -36,8 +36,7 @@ public class DBConnection {
 		return con;
 	}
 	/*public static void main(String[] args) throws SQLException {
-		DBConnection dbcon = new DBConnection();
-		dbcon.getConnection();
+		getConnection();
 	}*/
 
 }

@@ -33,14 +33,6 @@ public class Process {
 	}
 
 	public static void main(String[] args) {
-		
-		/*Article art = new Article();
-		art.setTitle("title2");
-		art.setContent("content2");
-		art.setAuthorId(4);		
-		new ArticleDAO().insertArticle();
-		Process pro = new Process();
-		pro.articleResponseProcess();*/
 
 		new ArticleController().articleController();
 
