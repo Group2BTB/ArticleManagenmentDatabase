@@ -13,7 +13,7 @@ public class UserDAO {
 	
 	public boolean insertView(User udto) {
 
-		try(Connection con=new DBConnection().getConnection();
+		try(Connection con= DBConnection.getConnection();
 			PreparedStatement ps=con.prepareStatement("insert into tbl_user(full_name, email, username, passwd ,type)"
 			+ "values(?, ?, ?, ?, ?)");){
 			
@@ -38,7 +38,7 @@ public class UserDAO {
 	
 
 	public boolean getUpdateFullname(User udto){
-		try(Connection con=new DBConnection().getConnection();
+		try(Connection con = DBConnection.getConnection();
 			PreparedStatement ps=con.prepareStatement("update tbl_user set full_name=? where id=?");){
 			ps.setString(1, udto.getFullName());
 			ps.setInt(2, udto.getId());
@@ -54,7 +54,7 @@ public class UserDAO {
 	
 	public static void PassEncrypt(){
 		String Password="password";
-		String GeneratePass=null;
+		String GeneratePass = null;
 		try {
 			// create MessageDigest for instance md5
 			MessageDigest md=MessageDigest.getInstance("md5");
