@@ -2,7 +2,6 @@ package view;
 
 import java.util.Scanner;
 
-import process.UpdateProcess;
 import dto.User;
 
 public class UpdateUserInfo {
