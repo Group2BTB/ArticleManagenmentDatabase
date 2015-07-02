@@ -84,11 +84,19 @@ public class Validation {
 		}
 
 		return value;
-	}
-
+	}	
+	
 	public String[] spliteStr(String str) {
-		str = str.replace("  ", " ");
+		while(true){
+			if(str.contains("  ")){
+				str = str.replace("  ", " ");
+			}else
+				break;
+		}		
 		String[] arrStr = str.split(" ");
+		if(arrStr.length>2 || arrStr.length<=0){
+			System.out.println("Invalid Keyword!!! Please Input again!");
+		}
 		return arrStr;
 	}
 }
