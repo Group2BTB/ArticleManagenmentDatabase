@@ -34,15 +34,34 @@ public class ArticleDAO implements IArticleDAO {
 	}
 
 	@Override
-	public boolean updateArticle(Article art) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean updateArticle(int id, Article art) {
+		
+		try(Connection con = DBConnection.getConnection();
+				PreparedStatement prestm = con.prepareStatement("update tbl_article set title=?, author_id=?,content=? where id="+id+"")){
+			prestm.setString(1, art.getTitle());
+			prestm.setInt(2, art.getAuthorId());
+			prestm.setString(3, art.getContent());
+			prestm.executeUpdate();
+			return true;
+		}catch(SQLException ex){
+			ex.printStackTrace();
+			return false;
+		}		
 	}
 
 	@Override
-	public boolean deleteArticle(Article art) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean deleteArticle(int id) {
+		
+		try(Connection con = DBConnection.getConnection();
+				PreparedStatement prestm = con.prepareStatement("delete  from tbl_article where id="+id+"");){
+			
+			prestm.executeUpdate();
+			return true;
+		}catch(SQLException ex){
+			ex.printStackTrace();
+			return false;
+		}
+		
 	} 
 
 	public ArrayList<Article> searchArticle(String str) {
