@@ -2,6 +2,8 @@ package view;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import dto.Article;
+
 public class Pagination {
 	/**
 	 * @param page is current page  
@@ -101,7 +103,7 @@ public class Pagination {
 			ui.table_head();
 			// display body table 
 			for(int i=start;i<stop;i++){
-				String[] str ={""+arr.get(i).getId(),arr.get(i).getTitle(),arr.get(i).getAuthor(),arr.get(i).getDate()};
+				String[] str ={""+arr.get(i).getId(),arr.get(i).getTitle(),arr.get(i).getAuthorId()+""};
 				ui.tbl_row(str);			
 			}
 			// dislay footer table
@@ -193,7 +195,7 @@ public class Pagination {
 			ui.table_head();
 			// display body table 
 			for(int i=start;i<stop;i++){
-				String[] str ={""+arrList.get(arr.get(i)).getId(),arrList.get(arr.get(i)).getTitle(),arrList.get(arr.get(i)).getAuthor(),arrList.get(arr.get(i)).getDate()};
+				String[] str ={""+arrList.get(arr.get(i)).getId(),arrList.get(arr.get(i)).getTitle(),arrList.get(arr.get(i)).getAuthorId()+""};
 				ui.tbl_row(str);			
 			}
 			// display footer table
