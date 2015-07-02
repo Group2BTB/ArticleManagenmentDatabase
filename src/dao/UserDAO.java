@@ -12,12 +12,11 @@ import utilities.DBConnection;
 public class UserDAO {
 	
 	public boolean insertView(User udto) {
-
+			//connect database with resource
 		try(Connection con= DBConnection.getConnection();
-
+				//preparedStatement for insert Infomaiton of Users
 			PreparedStatement ps=con.prepareStatement("insert into tbl_user(full_name, email, username, passwd ,type)"
-			+ "values(?, ?, ?, ?, ?)");){
-			
+			+ "values(?, ?, ?, ?, ?)");){			
 			ps.setString(1, udto.getFullName());
 			ps.setString(2, udto.getEmail());
 			ps.setString(3, udto.getUsername());
@@ -35,20 +34,53 @@ public class UserDAO {
 		}
 	}
 	
-
-	public boolean getUpdateFullname(User udto){
-		try(Connection con = DBConnection.getConnection();
-			PreparedStatement ps=con.prepareStatement("update tbl_user set full_name=? where id=?");){
-			ps.setString(1, udto.getFullName());
-			ps.setInt(2, udto.getId());
-			if(ps.executeUpdate()>0){
-				return true;
+	//getUpdateUsername is used for Update of users informaition
+	public boolean Update(int num, User udto){
+		String str="";
+		String strup="";
+		if(num == 1)
+			{str="full_name=?";
+			  strup = udto.getFullName();
 			}
-			return false;
+		else if(num==2)
+			{ str="username=?";
+			  strup = udto.getUsername();
+			}
+		
+		else if(num==3)
+			{ str="passwd=?";
+			  strup = udto.getPassword().toString();
+			}
+		else if(num==4)
+			{ str = "email=?";
+			  strup = udto.getEmail();
+			}
+		else if(num==5) 
+			str = "full_name=? , username=?, passwd=?, email=? ";
+			
+		try(Connection con = DBConnection.getConnection();				
+			PreparedStatement ps=con.prepareStatement("update tbl_user set " + str + " where id=?");){
+			if(num==5){
+				ps.setString(1, udto.getFullName());
+				ps.setString(2, udto.getUsername());
+				ps.setString(3, udto.getPassword().toString());
+				ps.setString(4, udto.getEmail());
+				ps.setInt(5, udto.getId());
+			
+			}
+			else{
+			ps.setString(1, strup);
+			ps.setInt(2, udto.getId());			
+		}
+			if(ps.executeUpdate()<=0)
+				return false;
+				return true;
+						
 		}catch(Exception e){
 			e.printStackTrace();
 			return false;
 		}
+		
 	}
 	
 	
