@@ -11,6 +11,8 @@ import dto.Article;
 import utilities.DBConnection;
 
 public class ArticleDAO implements IArticleDAO {
+	
+	private ArrayList<Article> arrList = null;
 
 	@Override
 	public boolean insertArticle(Article art) {
@@ -45,7 +47,7 @@ public class ArticleDAO implements IArticleDAO {
 
 	public ArrayList<Article> searchArticle(String str) {
 
-		ArrayList<Article> arrList = new ArrayList<Article>();
+		this.arrList = new ArrayList<Article>();
 
 		ResultSet rs = null;
 		try(Connection con = DBConnection.getConnection();

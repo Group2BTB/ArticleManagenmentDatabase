@@ -1,7 +1,9 @@
 package process;
 import dao.*;
 import dto.Article;
+
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import view.InsertFormUser;
@@ -42,14 +44,7 @@ public class Process {
 		art.setAuthorId(4);
 		
 		new ArticleDAO().insertArticle(art);*/
-		Process pro = new Process();
-		pro.articleResponseProcess();
+		new ArticleController().articleController();
 	}
 	
-	public void articleResponseProcess(){
-		
-		new ArticleController().articleController();
-		System.out.println("Ok");
-		
-	}
 }

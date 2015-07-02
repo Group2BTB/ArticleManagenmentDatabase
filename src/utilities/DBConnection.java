@@ -19,8 +19,8 @@ public class DBConnection {
 			Class.forName("org.postgresql.Driver");// load postgresql driver
 			/* Connect to database */
 			con = DriverManager.getConnection(
-					"jdbc:postgresql://localhost:5432/postgres",
-					"postgres", "55555");
+					"jdbc:postgresql://localhost:5432/ArticleManagement",
+					"postgres", "72241993vichet");
 			
 			 //DatabaseMetaData dm = con.getMetaData();
 			 //System.out.println(dm.getDatabaseProductName());
