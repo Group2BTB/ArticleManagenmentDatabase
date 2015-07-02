@@ -1,5 +1,4 @@
 package process;
-import java.sql.SQLException;
 
 import dao.ArticleDAO;
 import view.ArticleView;
@@ -12,7 +11,14 @@ public class ArticleController {
 		art = new ArticleDAO();
 	}
 	
-	public void Contriller(){
-		art.searchArticle(new ArticleView().getSrtSearch());
+	public void articleController(){
+		String[] str = new ArticleView().getOption();
+		switch(str[0]){
+		case "S":
+			art.searchArticle(new ArticleView().getSrtSearch());
+			break;
+		}
+		
 	}
+	
 }

@@ -66,15 +66,4 @@ public class ArticleDAO implements IArticleDAO {
 		return arrList;
 	}
 
-	public static void main(String[] args) {
-		ArrayList<Article> arrList = null;
-
-		ArticleDAO adao = new ArticleDAO();
-		arrList = adao.searchArticle("a");
-		for (Article art : arrList) {
-			System.out.println(art.getTitle());
-		}
-
-	}
-
 }

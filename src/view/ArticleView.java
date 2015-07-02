@@ -2,6 +2,8 @@ package view;
 
 import java.util.Scanner;
 
+import process.Validation;
+
 public class ArticleView {
 	
 	private String srtSearch;
@@ -15,6 +17,17 @@ public class ArticleView {
 		scan = new Scanner(System.in);
 		System.out.print("Enter keywoard to search: ");
 		this.srtSearch = scan.next();
+	}
+	
+	public String[] getOption(){
+		
+		System.out.println("-> Choose: ");
+		String option = scan.next();
+		
+		String[] str = new Validation().checkNull(option);
+		
+		return str;
+		
 	}
 	
 
