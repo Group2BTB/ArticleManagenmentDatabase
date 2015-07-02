@@ -6,30 +6,26 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import view.InsertFormUser;
-import view.UpdateUserInfo;
 import view.UserView;
 import dao.UserDAO;
 import dto.User;
 
 public class Process {
-
+	
 	public void respondProcess(int opt) throws Exception{
 		User udto=new User();
-		UpdateUserInfo choice = new UpdateUserInfo();
+		UserView choice = new UserView();
 		switch (opt) {
 		case 1:		
-			new InsertFormUser(udto);
+			new UserView().InsertFormUser(udto);
 			new UserDAO().insertView(udto);
 			break;
 		case 2:
-			
-			break;
+						
 		case 3: 
-
-			new UpdateUserInfo().inputID(udto);
-			new UserDAO().getUpdateFullname(udto);			
-			
+			int num = new UserView().UpdateUser(udto);			
+			new UserDAO().Update(num,udto);		
+			break;
 
 		default:
 			break;
@@ -43,8 +39,13 @@ public class Process {
 		art.setContent("content1");
 		art.setAuthorId(4);
 		
-		new ArticleDAO().insertArticle(art);*/
+		
+		new ArticleDAO().insertArticle();
+		Process pro = new Process();
+		pro.articleResponseProcess();*/
+
 		new ArticleController().articleController();
+
 	}
 	
 }
