@@ -12,32 +12,63 @@ public class UserView {
 	public User InsertFormUser(User udto) {
 		Scanner in = new Scanner(System.in);
 		System.out.println("Input Fullname: ");
-		udto.setFullName(in.next());
+		udto.setFullName(in.nextLine());
 		System.out.println("Input Email: ");
-		udto.setEmail(in.next());
+		udto.setEmail(in.nextLine());
 		System.out.println("Input Username: ");
-		udto.setUsername(in.next());
+		udto.setUsername(in.nextLine());
 		System.out.println("Input password: ");
-		udto.setPassword(in.next());
+		udto.setPassword(in.nextLine());
 		System.out.println("Input UserType: ");
-		String userType = in.next();
+		String userType = in.nextLine();
 		
 		return udto;
 	}
 	
-	public User inputID(User udto){
+	public int UpdateUser(User udto){
 		int inputChoice;
 		Scanner in=new Scanner(System.in);
 		System.out.println("Input UserID you want to update: ");
 		udto.setId(in.nextInt());
 		System.out.println("what do you want to update? : [ 1.Fullname | 2.Username | 3.Password | 4.Email | 5.All ] ");
-		inputChoice=in.nextInt();
-		System.out.print("Input new Fullname: ");
-		udto.setFullName(in.next());
 		
-		return udto;
-	
-	}
-	
-	
+		inputChoice=in.nextInt();
+		
+		switch (inputChoice) {
+		case 1:
+			System.out.print("Input new Fullname: ");
+			udto.setFullName(in.next());
+			break;
+		case 2:
+			System.out.print("Input new Username: ");
+			udto.setUsername(in.next());
+			break;
+		case 3:
+			System.out.print("Input new Password: ");
+			udto.setPassword(in.next());
+			break;
+		case 4:
+			System.out.print("Input new Email: ");
+			udto.setEmail(in.next());
+			break;
+		case 5:
+			System.out.print("Input new Fullname: ");
+			udto.setFullName(in.next());
+			
+			System.out.print("Input new Username: ");
+			udto.setUsername(in.next());
+			
+			System.out.print("Input new Password: ");
+			udto.setPassword(in.next());
+			
+			System.out.print("Input new Email: ");
+			udto.setEmail(in.next());
+			break;
+			
+		default:
+			break;
+		}	
+		
+		return inputChoice;	
+	}	
 }
