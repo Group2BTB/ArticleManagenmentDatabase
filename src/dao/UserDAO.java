@@ -50,7 +50,7 @@ public class UserDAO {
 			e.printStackTrace();
 			return false;
 		}
-		
+	}
 	
 	public static void PassEncrypt(){
 		String Password="password";
