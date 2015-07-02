@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 import view.InsertFormUser;
 import view.UpdateUserInfo;
+import view.UserView;
 import dao.UserDAO;
 import dto.User;
 
@@ -15,16 +16,18 @@ public class Process {
 		User udto=new User();
 		UpdateUserInfo choice = new UpdateUserInfo();
 		switch (opt) {
-		case 1:			
+		case 1:		
 			new InsertFormUser(udto);
 			new UserDAO().insertView(udto);
+			break;
+		case 2:
+			
 			break;
 		case 3: 
 
 			new UpdateUserInfo().inputID(udto);
 			new UserDAO().getUpdateFullname(udto);			
 			
-			break;		
 
 		default:
 			break;
