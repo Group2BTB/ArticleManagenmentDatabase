@@ -1,6 +1,8 @@
 package dto;
 import java.sql.Date;
 
+import dao.UserDAO;
+
 	/*
 	 * This class is used to store all information of the User
 	 * and methods to set and get value of it.
@@ -25,7 +27,7 @@ public class User {
 	private String fullName;
 	private String email;
 	private String username;
-	private String password;
+	private StringBuilder password;
 	private Date createDate;
 	private Date modifiedDate;
 	private boolean atived;
@@ -57,11 +59,11 @@ public class User {
 	public void setUsername(String username) {
 		this.username = username;
 	}
-	public String getPassword() {
+	public StringBuilder getPassword() {
 		return password;
 	}
 	public void setPassword(String password) {
-		this.password = password;
+		this.password = new UserDAO().PassEncrypt(password);
 	}
 	public Date getCreateDate() {
 		return createDate;
