@@ -5,6 +5,7 @@ import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.Scanner;
 
 import dto.User;
 import utilities.DBConnection;
@@ -103,6 +104,23 @@ public class UserDAO {
 			e.printStackTrace();
 		}
 		return sb;
+	}
+	public void EmailValidate(){
+		String testString;
+		String emailAddress;
+		boolean b=false;
+		 do {
+		        System.out.println("Please enter your email address :\nExample:xyz@gmail.com");
+		        Scanner name = new Scanner(System.in);
+		        emailAddress = name.nextLine();
+
+		        String email_regex = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+		    + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+		        testString = emailAddress;
+		        b = testString.matches(email_regex);
+		        System.out.println("Your email input < " + testString + " > was " + b);
+		    } while (!b);
+		    System.out.println("Email address is < " + emailAddress+" > was added !");
 	}
 	
 	
