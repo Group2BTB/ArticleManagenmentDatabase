@@ -110,6 +110,7 @@ public class UserDAO {
 		}
 	}
 	
+	//to delete the user by selected id
 	public boolean DeleteUsers( User udto){
 		try(Connection con = DBConnection.getConnection();				
 				PreparedStatement ps=con.prepareStatement("Delete from tbl_user where id=?");){				
@@ -127,8 +128,7 @@ public class UserDAO {
 		
 	}
 	
-	
-	
+	//to encrypted password into database
 	public StringBuilder PassEncrypt(String Password){
 		String GeneratePass = null;
 		StringBuilder sb = null;
@@ -148,6 +148,8 @@ public class UserDAO {
 		}
 		return sb;
 	}
+	
+	//to validate email
 	public void EmailValidate(){
 		String emString;
 		String emailAddress;
