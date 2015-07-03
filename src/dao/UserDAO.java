@@ -84,6 +84,23 @@ public class UserDAO {
 		
 	}
 	
+	public boolean DeleteUsers( User udto){
+		try(Connection con = DBConnection.getConnection();				
+				PreparedStatement ps=con.prepareStatement("Delete from tbl_user where id=?");){				
+					ps.setInt(1, udto.getId());
+					
+				if(ps.executeUpdate()<=0)
+					return false;
+					return true;
+							
+			}catch(Exception e){
+				e.printStackTrace();
+				return false;
+			}
+		
+		
+	}
+	
 	
 	
 	public StringBuilder PassEncrypt(String Password){
