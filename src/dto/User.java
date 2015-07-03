@@ -63,7 +63,7 @@ public class User {
 		return password;
 	}
 	public void setPassword(String password) {
-		this.password = new UserDAO().PassEncrypt(password);
+		this.password = new process.Validation().PassEncrypt(password);
 	}
 	public Date getCreateDate() {
 		return createDate;
