@@ -1,5 +1,9 @@
 package process;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.Scanner;
+
 public class Validation {
 	public String[] checkNull(String str) {
 
@@ -98,5 +102,43 @@ public class Validation {
 			System.out.println("Invalid Keyword!!! Please Input again!");
 		}
 		return arrStr;
+	}
+
+	//to encrypted password into database
+
+	public StringBuilder PassEncrypt(String Password){
+		String GeneratePass = null;
+		StringBuilder sb = null;
+		
+		try {
+			// create MessageDigest for instance md5
+			MessageDigest md=MessageDigest.getInstance("md5");
+			md.update(Password.getBytes());
+			byte[] bytes=md.digest();
+			sb=new StringBuilder();
+			for(int i=0;i<bytes.length;i++){
+				sb.append(Integer.toString((bytes[i]&0xff)+ 0x100,16).substring(1));
+			}  
+			GeneratePass=sb.toString();		
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+		}
+		return sb;
+	}
+	
+	//to validate email
+	public void EmailValidate(){
+		String emString;
+		String emailAddress;
+		boolean b=false;
+		 do {
+		        Scanner name = new Scanner(System.in);
+		        emailAddress = name.nextLine();
+		        String email_regex = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+		        emString = emailAddress;
+		        b = emString.matches(email_regex);
+		        System.out.println("Your email < " + emString + " > was " + b);
+		    } while (!b);
+		    System.out.println("Email address is < " + emailAddress+" > was added !");
 	}
 }
