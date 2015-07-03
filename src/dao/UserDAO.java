@@ -13,10 +13,11 @@ import utilities.DBConnection;
 
 public class UserDAO {
 	
+	//to insert value in to database
 	public boolean insertView(User udto) {
-			//connect database with resource
+		//connect database using try with multi resources
 		try(Connection con= DBConnection.getConnection();
-				//preparedStatement for insert Infomaiton of Users
+			//preparedStatement for insert Infomaiton of Users
 			PreparedStatement ps=con.prepareStatement("insert into tbl_user(full_name, email, username, passwd ,type)"
 			+ "values(?, ?, ?, ?, ?)");){			
 			ps.setString(1, udto.getFullName());
@@ -24,7 +25,7 @@ public class UserDAO {
 			ps.setString(3, udto.getUsername());
 			ps.setString(4, udto.getPassword().toString());
 			ps.setString(5, udto.getType());
-			
+			//check if it affected row or not
 			if(ps.executeUpdate()>0){
 				return true;
 			}
@@ -84,25 +85,29 @@ public class UserDAO {
 		}		
 	}
 	
-	public User viewUser(int id){
-		//connect database with resource
-		try(Connection con= DBConnection.getConnection();
-			//preparedStatement for view Infomaiton of Users
-			PreparedStatement ps=con.prepareStatement("select id, full_name, email, username, type from tbluser where id=?");){
-			ps.setInt(1, id);
-			ResultSet rs=ps.executeQuery();
-			User udto=new User();
-			if(rs.next()){
-				udto.setId(rs.getInt("id"));
-				udto.setFullName(rs.getString("full_name"));
-				udto.setUsername(rs.getString("username"));
-				udto.setType(rs.getString("type"));
-			}
-			return udto;
-		}catch(Exception e){
-			e.printStackTrace();
+	//to view user profile detail
+	public User viewUser(User udto) throws SQLException{
+		//create connection
+		Connection con= DBConnection.getConnection();
+		//preparedStatement for view Information of Users
+		PreparedStatement ps=con.prepareStatement("select id, full_name, email, username, type from tbl_user where id=?");
+		ps.setInt(1, udto.getId());//set id to PreparedStatement
+		ResultSet rs=ps.executeQuery();
+		//loop to set the each value
+		if(rs.next()){
+			udto.setId(rs.getInt("id"));//set id
+			udto.setFullName(rs.getString("full_name"));//set full name
+			udto.setUsername(rs.getString("username"));//set user name
+			udto.setType(rs.getString("type"));//set user type
 		}
-		return null;
+		try{
+			return udto;
+		}finally{
+			//to close ResultSet, PreparedStatement, and connection
+			if(rs!=null)try{rs.close();}catch(SQLException e){throw e;}
+			if(ps!=null)try{ps.close();}catch(SQLException e){throw e;}
+			if(con!=null)try{con.close();}catch(SQLException e){throw e;}
+		}
 	}
 	
 	public boolean DeleteUsers( User udto){
