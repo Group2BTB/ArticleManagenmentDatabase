@@ -10,7 +10,7 @@ public class AdminMenu {
 		User user=new User();
 		Process pro=new Process();
 		
-		System.out.println("1.AddUser\n2.ViewUser\n3.UpdateUser\n4.DeleteUser\n5.ViewAllUsers");
+		System.out.println("1.AddUser\n2.ViewUser\n3.UpdateUser\n4.DeleteUser");
 		System.out.println("==>"); int opt=in.nextInt();
 		pro.respondProcess(opt);
 	}
