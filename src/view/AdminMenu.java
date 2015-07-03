@@ -20,6 +20,6 @@ public class AdminMenu {
 		System.out.println("|_____________________________________________________________________________|");
 		System.out.print("\n*Choose: ");
 		System.out.println("==>"); String opt=in.next();
-		pro.respondProcess(opt);
+	    pro.respondProcess(opt);
 	}
 }
