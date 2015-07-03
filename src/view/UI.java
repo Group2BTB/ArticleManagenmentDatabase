@@ -252,8 +252,8 @@ public class UI {
 	public void listContent(ArrayList<Article> arr, int start, int stop, int page,int totalRecord, int total_page){
 		table_head();
 		// display body table 
-		for(int i=start;i<stop;i++){
-			String[] str ={""+arr.get(i).getId(),arr.get(i).getTitle(),arr.get(i).getAuthorId()+""};
+		for(Article art: arr){
+			String[] str ={""+art.getId(),art.getTitle(),art.getAuthorName(),art.getDate()};
 			tbl_row(str);			
 		}
 		// dislay footer table
