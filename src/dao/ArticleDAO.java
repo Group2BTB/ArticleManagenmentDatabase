@@ -14,6 +14,38 @@ import utilities.DBConnection;
 public class ArticleDAO implements IArticleDAO {
 	
 	private ArrayList<Article> arrList = null;
+	
+	public Article checkValid(int id){
+		
+		
+		Article art = new Article();
+		ResultSet rs = null;
+//		art.setAuthorId(11);
+//		art.setContent("content1");
+//		art.setId(1);
+//		art.setTitle("title1");
+//		if(art.getId()==1)
+//			return art;
+//		System.exit(0);
+		
+		try(Connection con = DBConnection.getConnection();
+				PreparedStatement pre = con.prepareStatement("select * from tbl_article where id=?",ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);){
+			pre.setInt(1,id);
+			if((rs = pre.executeQuery()).last()){
+				
+				art.setAuthorId(rs.getInt("author_id"));
+				art.setContent(rs.getString("content"));
+				art.setTitle(rs.getString("title"));
+				art.setId(id);
+				return art;
+			}
+			return null;
+			
+		}catch(SQLException ex){
+			ex.printStackTrace();
+			return null;			
+		}		
+	}
 
 	@Override
 	public boolean insertArticle(Article art) {
@@ -54,8 +86,8 @@ public class ArticleDAO implements IArticleDAO {
 	public boolean deleteArticle(int id) {
 		
 		try(Connection con = DBConnection.getConnection();
-				PreparedStatement prestm = con.prepareStatement("delete  from tbl_article where id="+id+"");){
-			
+				PreparedStatement prestm = con.prepareStatement("delete  from tbl_article where id=?");){
+			prestm.setInt(1,id);
 			prestm.executeUpdate();
 			return true;
 		}catch(SQLException ex){

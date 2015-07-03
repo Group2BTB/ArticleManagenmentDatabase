@@ -41,8 +41,8 @@ public class Process {
 	}
 
 	public static void main(String[] args) {
-
-		new ArticleController().articleController();
+		Article art = new ArticleDAO().checkValid(11);
+		System.out.println(art);
 
 	}
 	
