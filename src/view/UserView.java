@@ -22,16 +22,23 @@ public class UserView {
 		System.out.println("Input password: ");
 		udto.setPassword(in.nextLine());
 		System.out.println("Input UserType: ");
-		String userType = in.nextLine();
-		
+		String userType = in.nextLine();		
 		return udto;
 	}
 
-	//to display the input user id to delete
-	public User DeleteUser(User udto){
+
+	public User DeleteUser(User udto){		
 		Scanner in=new Scanner(System.in);
-		System.out.println("Input UserID you want to delete : ");
-		udto.setId(in.nextInt());
+		System.out.print("Input UserID you want to delete : ");	
+		int id = in.nextInt();
+		System.out.print("Are you sure you want to delete this record??? : [y/n] ==> ");	
+		String yesNo = in.next();
+		if(yesNo.matches("y")){
+		udto.setId(id);
+		}
+		else{
+			System.out.println("Delete is cancelled");
+		}
 		return udto;
 	}	
 	
@@ -39,7 +46,7 @@ public class UserView {
 	public int UpdateUser(User udto){
 		int inputChoice;// declare a variable to get input choice method
 		Scanner in=new Scanner(System.in);
-		System.out.println("Input UserID you want to update: ");
+		System.out.println("Input UserID you want to update : ");
 		udto.setId(in.nextInt());
 		System.out.println("what do you want to update? : [ 1.Fullname | 2.Username | 3.Password | 4.Email | 5.All ] ");
 		
