@@ -97,6 +97,7 @@ public class UserDAO {
 		if(rs.next()){
 			udto.setId(rs.getInt("id"));//set id
 			udto.setFullName(rs.getString("full_name"));//set full name
+			udto.setEmail(rs.getString("email"));
 			udto.setUsername(rs.getString("username"));//set user name
 			udto.setType(rs.getString("type"));//set user type
 		}
