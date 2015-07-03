@@ -4,6 +4,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Scanner;
 
@@ -80,8 +81,28 @@ public class UserDAO {
 		}catch(Exception e){
 			e.printStackTrace();
 			return false;
+		}		
+	}
+	
+	public User viewUser(int id){
+		//connect database with resource
+		try(Connection con= DBConnection.getConnection();
+			//preparedStatement for view Infomaiton of Users
+			PreparedStatement ps=con.prepareStatement("select id, full_name, email, username, type from tbluser where id=?");){
+			ps.setInt(1, id);
+			ResultSet rs=ps.executeQuery();
+			User udto=new User();
+			if(rs.next()){
+				udto.setId(rs.getInt("id"));
+				udto.setFullName(rs.getString("full_name"));
+				udto.setUsername(rs.getString("username"));
+				udto.setType(rs.getString("type"));
+			}
+			return udto;
+		}catch(Exception e){
+			e.printStackTrace();
 		}
-		
+		return null;
 	}
 	
 	public boolean DeleteUsers( User udto){
