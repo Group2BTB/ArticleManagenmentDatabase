@@ -1,6 +1,9 @@
 package view;
 
+import java.util.ArrayList;
 import java.util.Scanner;
+
+import dto.Article;
 public class UI {
 	int width=79;
 	/**
@@ -246,6 +249,15 @@ public class UI {
 			return 0;
 		}
 	}
-	
+	public void listContent(ArrayList<Article> arr, int start, int stop, int page,int totalRecord, int total_page){
+		table_head();
+		// display body table 
+		for(int i=start;i<stop;i++){
+			String[] str ={""+arr.get(i).getId(),arr.get(i).getTitle(),arr.get(i).getAuthorId()+""};
+			tbl_row(str);			
+		}
+		// dislay footer table
+		tbl_footer(page, total_page, totalRecord,width);
+	}
 
 }

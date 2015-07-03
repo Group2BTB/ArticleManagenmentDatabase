@@ -17,17 +17,25 @@ public class Article {
 	private String title;
 	private String content;
 	private int authorId;
-	//private String date;
+	private String date;
+	private String authorName;
+	
 	
 	/* Constructor with parameter */
-	public Article(int id, String title, int authorId , String content/*String date*/){
+	public Article(int id, String title, int authorId , String content, String date){
 		this.id = id;
 		this.title = title;
 		this.content = content;
 		this.authorId = authorId;
-		//this.date = date;
+		this.date = date;
 	}
-	
+	public Article(int id, String title, String authorName , String date){
+		this.id = id;
+		this.title = title;
+		this.content = content;
+		this.authorName = authorName;
+		this.date = date;
+	}
 	public Article() {
 		// TODO Auto-generated constructor stub
 	}
@@ -64,11 +72,18 @@ public class Article {
 		this.authorId = authorId;
 	}
 	
-	/*public String getDate(){
+	public String getDate(){
 		return this.date;
 	}
 	
 	public void setDate(String date) {
 		this.date = date;
-	}*/
+	}
+	public String getAuthorName() {
+		return authorName;
+	}
+	public void setAuthorName(String authorName) {
+		this.authorName = authorName;
+	}
+	
 }

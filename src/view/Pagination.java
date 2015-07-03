@@ -97,17 +97,8 @@ public class Pagination {
 				System.out.println("page not found!!!");
 				start=0;
 				stop=0;
-			}
-			
-			// display head table 
-			ui.table_head();
-			// display body table 
-			for(int i=start;i<stop;i++){
-				String[] str ={""+arr.get(i).getId(),arr.get(i).getTitle(),arr.get(i).getAuthorId()+""};
-				ui.tbl_row(str);			
-			}
-			// dislay footer table
-			ui.tbl_footer(page, total_page, cArr,ui.width);
+			}			
+			ui.listContent(arr, start, stop, page, cArr, total_page);
 		}else{ 
 			System.out.println("No record!");
 		}
