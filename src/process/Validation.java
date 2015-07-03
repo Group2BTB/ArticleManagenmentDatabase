@@ -141,4 +141,7 @@ public class Validation {
 		    } while (!b);
 		    System.out.println("Email address is < " + emailAddress+" > was added !");
 	}
+	public void UserValidate(){
+		
+	}
 }
