@@ -1,19 +1,21 @@
 package dao;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.concurrent.Callable;
 
 import dto.Article;
 import utilities.DBConnection;
 
 public class ArticleDAO implements IArticleDAO {
 	
-	private ArrayList<Article> arrList = null;
 	
 	public Article checkValid(int id){
 		
@@ -97,19 +99,25 @@ public class ArticleDAO implements IArticleDAO {
 		
 	} 
 
-	public ArrayList<Article> searchArticle(String str) {
+	public ArrayList<Article> searchArticle(String str, String field, String order, int numRow, int startRow) {
 
-		this.arrList = new ArrayList<Article>();
+		ArrayList<Article> arrList = new ArrayList<Article>();
 
 		ResultSet rs = null;
-		try(Connection con = DBConnection.getConnection();
-				Statement stm = con.createStatement();) {
+		try(Connection con = DBConnection.getConnection();) {
+			//Statement stm = con.createStatement();
+			//String sql = "SELECT * from tbl_article JOIN tbl_user on tbl_article.author_id = tbl_user.id Where title ~* '.*"+str+".*' or content ~* '.*"+str+".*' or fullname ~* '.*"+str+".*'";
+			CallableStatement callStm = con.prepareCall("{ call search_all( ?, ?, ?, ?, ?) }");
+			callStm.setString(1, str);
+			callStm.setString(2, field);
+			callStm.setString(3, order);
+			callStm.setInt(4, numRow);
+			callStm.setInt(5, startRow);
+			rs = callStm.executeQuery();
 			
-			String sql = "SELECT * from tbl_article JOIN tbl_user on tbl_article.author_id = tbl_user.id Where title ~* '.*"+str+".*' or content ~* '.*"+str+".*' or fullname ~* '.*"+str+".*'";
-			rs = stm.executeQuery(sql);
 			while (rs.next()) {
 				arrList.add(new Article(rs.getInt(1), rs.getString(2), rs
-						.getInt(3), rs.getString(4)));
+						.getString(3), rs.getString(4)));
 			}
 			rs.close();
 
@@ -119,5 +127,5 @@ public class ArticleDAO implements IArticleDAO {
 		} 
 		return arrList;
 	}
-
+	
 }

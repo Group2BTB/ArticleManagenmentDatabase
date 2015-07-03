@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import view.ArticleView;
 import view.UserView;
 import dao.UserDAO;
 import dto.User;
@@ -43,7 +44,36 @@ public class Process {
 	public static void main(String[] args) {
 		Article art = new ArticleDAO().checkValid(11);
 		System.out.println(art);
-
+		new Process().articleController();
+	}
+	
+	public void articleController(){
+		String[] str = new ArticleView().getOption();
+		switch(str[0]){
+		case "S":
+				ArrayList<Article> arrList = new ArrayList<Article>();
+				try{
+					arrList = new ArticleDAO().searchArticle(new ArticleView().setSrtSearch(),"id","DESC",1,0);
+				}catch (NullPointerException e) {
+					// TODO: handle exception
+					System.out.println("Null Pointer Exception!");
+				}
+				new ArticleView().searchDisplay(arrList);
+			break;
+		case "A":
+			Article art = new ArticleView().insertForm();
+			new ArticleDAO().insertArticle(art);
+			break;
+		/*case "E":
+			int id = new ArticleView().setIdOption();
+			new ArticleDAO().updateArticle(id, art);
+			break;*/
+		case "D":
+			int delID = new ArticleView().setIdOption();
+			new ArticleDAO().deleteArticle(delID);
+			break;
+		}
+		
 	}
 	
 }
