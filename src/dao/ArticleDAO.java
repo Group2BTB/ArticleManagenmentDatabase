@@ -15,26 +15,16 @@ import dto.Article;
 import utilities.DBConnection;
 
 public class ArticleDAO implements IArticleDAO {
+
 	
-	
-	public Article checkValid(int id){
-		
-		
+	public Article checkValidId(int id){
 		Article art = new Article();
 		ResultSet rs = null;
-//		art.setAuthorId(11);
-//		art.setContent("content1");
-//		art.setId(1);
-//		art.setTitle("title1");
-//		if(art.getId()==1)
-//			return art;
-//		System.exit(0);
-		
+
 		try(Connection con = DBConnection.getConnection();
 				PreparedStatement pre = con.prepareStatement("select * from tbl_article where id=?",ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);){
 			pre.setInt(1,id);
 			if((rs = pre.executeQuery()).last()){
-				
 				art.setAuthorId(rs.getInt("author_id"));
 				art.setContent(rs.getString("content"));
 				art.setTitle(rs.getString("title"));
@@ -99,7 +89,7 @@ public class ArticleDAO implements IArticleDAO {
 		
 	} 
 
-	public ArrayList<Article> searchArticle(String str, String field, String order, int numRow, int startRow) {
+	public ArrayList<Article> searchArticle(String str) {
 
 		ArrayList<Article> arrList = new ArrayList<Article>();
 
@@ -107,12 +97,13 @@ public class ArticleDAO implements IArticleDAO {
 		try(Connection con = DBConnection.getConnection();) {
 			//Statement stm = con.createStatement();
 			//String sql = "SELECT * from tbl_article JOIN tbl_user on tbl_article.author_id = tbl_user.id Where title ~* '.*"+str+".*' or content ~* '.*"+str+".*' or fullname ~* '.*"+str+".*'";
-			CallableStatement callStm = con.prepareCall("{ call search_all( ?, ?, ?, ?, ?) }");
+			CallableStatement callStm = con.prepareCall("{ ? = call search_all( ?, ?, ?, ?, ?) }");
+			//callStm.registerOutParameter(1, Types.OTHER);
 			callStm.setString(1, str);
-			callStm.setString(2, field);
-			callStm.setString(3, order);
-			callStm.setInt(4, numRow);
-			callStm.setInt(5, startRow);
+			callStm.setString(2, "id");
+			callStm.setString(3,"ASC");
+			callStm.setInt(4,5);
+			callStm.setInt(5,1);
 			rs = callStm.executeQuery();
 			
 			while (rs.next()) {

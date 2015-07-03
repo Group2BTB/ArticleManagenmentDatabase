@@ -99,13 +99,47 @@ public class ArticleView {
 		scan = new Scanner(System.in);
 		System.out.print("Enter Id to delete: ");
 		String id = scan.next();
-		if (isInteger(id)) {
+		if (isInteger(id) == true) {
 			return Integer.parseInt(id);
 		} else {
 			System.out.println("Please input digit!");
 			return 0;
 		}
 
+	}
+	
+	public int updateForm(){
+		scan = new Scanner(System.in);
+		System.out.print("Enter id to update: ");
+		String id = scan.next();
+		if(isInteger(id) == true){
+			return Integer.parseInt(id);
+		}else{
+			System.out.println("Please Input Digit!");
+			return 0;
+		}
+		
+	}
+	
+	public Article updateChoice(Article art){
+		scan = new Scanner(System.in);
+		System.out.println(art.getTitle() +""+ art.getAuthorName());
+		System.out.print("Choose one of [1.Title|2.Content]: ");
+		String option = scan.next();
+		if(isInteger(option) == true){
+			switch(Integer.parseInt(option)){
+			case 1:
+				System.out.print("Enter Title: ");
+				art.setTitle(scan.next());
+				return art;
+			case 2: 
+				System.out.print("Enter Content");
+				art.setContent(getMiltiLineString());
+				return art;
+			}
+			
+		}
+		return art;
 	}
 
 }

@@ -42,8 +42,8 @@ public class Process {
 	}
 
 	public static void main(String[] args) {
-		Article art = new ArticleDAO().checkValid(11);
-		System.out.println(art);
+		/*Article art = new ArticleDAO().checkValidId(2);
+		System.out.println(art.getTitle());*/
 		new Process().articleController();
 	}
 	
@@ -53,7 +53,7 @@ public class Process {
 		case "S":
 				ArrayList<Article> arrList = new ArrayList<Article>();
 				try{
-					arrList = new ArticleDAO().searchArticle(new ArticleView().setSrtSearch(),"id","DESC",1,0);
+					arrList = new ArticleDAO().searchArticle(new ArticleView().setSrtSearch());
 				}catch (NullPointerException e) {
 					// TODO: handle exception
 					System.out.println("Null Pointer Exception!");
@@ -64,10 +64,9 @@ public class Process {
 			Article art = new ArticleView().insertForm();
 			new ArticleDAO().insertArticle(art);
 			break;
-		/*case "E":
-			int id = new ArticleView().setIdOption();
-			new ArticleDAO().updateArticle(id, art);
-			break;*/
+		case "E":
+			new ArticleController().updateControl();
+			break;
 		case "D":
 			int delID = new ArticleView().setIdOption();
 			new ArticleDAO().deleteArticle(delID);
