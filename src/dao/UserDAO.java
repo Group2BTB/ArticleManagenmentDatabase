@@ -106,17 +106,16 @@ public class UserDAO {
 		return sb;
 	}
 	public void EmailValidate(){
-		String testString;
+		String emString;
 		String emailAddress;
 		boolean b=false;
 		 do {
 		        Scanner name = new Scanner(System.in);
 		        emailAddress = name.nextLine();
-		        String email_regex = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
-		    + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
-		        testString = emailAddress;
-		        b = testString.matches(email_regex);
-		        System.out.println("Your email < " + testString + " > was " + b);
+		        String email_regex = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+		        emString = emailAddress;
+		        b = emString.matches(email_regex);
+		        System.out.println("Your email < " + emString + " > was " + b);
 		    } while (!b);
 		    System.out.println("Email address is < " + emailAddress+" > was added !");
 	}
