@@ -109,7 +109,7 @@ public class UserDAO {
 			if(con!=null)try{con.close();}catch(SQLException e){throw e;}
 		}
 	}
-	
+	//this function is used for delect users from database
 	//to delete the user by selected id
 	public boolean DeleteUsers( User udto){
 		try(Connection con = DBConnection.getConnection();				
@@ -123,12 +123,12 @@ public class UserDAO {
 			}catch(Exception e){
 				e.printStackTrace();
 				return false;
-			}
-		
-		
+			}		
 	}
 	
+
 	//to encrypted password into database
+
 	public StringBuilder PassEncrypt(String Password){
 		String GeneratePass = null;
 		StringBuilder sb = null;
