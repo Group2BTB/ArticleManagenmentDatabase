@@ -116,7 +116,7 @@ public class UserDAO {
 		    + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
 		        testString = emailAddress;
 		        b = testString.matches(email_regex);
-		        System.out.println("Your email input < " + testString + " > was " + b);
+		        System.out.println("Your email < " + testString + " > was " + b);
 		    } while (!b);
 		    System.out.println("Email address is < " + emailAddress+" > was added !");
 	}
