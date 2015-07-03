@@ -21,11 +21,12 @@ public class Process {
 			new UserDAO().insertView(udto);
 			break;
 		case 2:
-						
+					break;	
 		case 3: 
 			int num = new UserView().UpdateUser(udto);			
 			new UserDAO().Update(num,udto);		
 			break;
+			
 		case 4:
 			new UserView().DeleteUser(udto);
 			new UserDAO().DeleteUsers(udto);
