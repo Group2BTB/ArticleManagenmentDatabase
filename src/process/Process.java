@@ -26,7 +26,10 @@ public class Process {
 			int num = new UserView().UpdateUser(udto);			
 			new UserDAO().Update(num,udto);		
 			break;
-
+		case 4:
+			new UserView().DeleteUser(udto);
+			new UserDAO().DeleteUsers(udto);
+			
 		default:
 			break;
 		}
