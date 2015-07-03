@@ -110,10 +110,8 @@ public class UserDAO {
 		String emailAddress;
 		boolean b=false;
 		 do {
-		        System.out.println("Please enter your email address :\nExample:xyz@gmail.com");
 		        Scanner name = new Scanner(System.in);
 		        emailAddress = name.nextLine();
-
 		        String email_regex = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
 		    + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
 		        testString = emailAddress;
