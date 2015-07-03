@@ -24,6 +24,15 @@ public class UserView {
 		
 		return udto;
 	}
+
+	public User DeleteUser(User udto){
+		
+		Scanner in=new Scanner(System.in);
+		System.out.println("Input UserID you want to delete : ");
+		udto.setId(in.nextInt());
+		return udto;
+}	
+	
 	
 	public int UpdateUser(User udto){
 		int inputChoice;
@@ -32,8 +41,7 @@ public class UserView {
 		udto.setId(in.nextInt());
 		System.out.println("what do you want to update? : [ 1.Fullname | 2.Username | 3.Password | 4.Email | 5.All ] ");
 		
-		inputChoice=in.nextInt();
-		
+		inputChoice=in.nextInt();		
 		switch (inputChoice) {
 		case 1:
 			System.out.print("Input new Fullname: ");
