@@ -96,9 +96,9 @@ public class Validation {
 	
 	public String[] spliteStr(String str) {
 		while(true){
-			if(str.contains("  ")){
+			if(str.contains("  "))
 				str = str.replace("  ", " ");
-			}else
+			else
 				break;
 		}
 		return str.split(" ");

@@ -1,8 +1,11 @@
 package view;
 
+import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import dao.Pagination;
 import dto.Article;
 import process.ArticleController;
 import process.Validation;
@@ -27,11 +30,11 @@ public class ArticleView {
 		System.out.print("-> Choose: ");
 
 		/* Get data from keyboard and covert to Capital letter */
-		String option = scan.next().trim().toUpperCase();
-
+		String option = scan.nextLine().trim().toUpperCase();
+		
 		/* Call method checkNull from Validation Class in Process Package */
 		String[] str = new Validation().spliteStr(option);
-
+		
 		return str;// return user choice
 	}
 
@@ -140,6 +143,21 @@ public class ArticleView {
 			
 		}
 		return art;
+	}
+	
+	public void displayHomePage(){
+		int totalRecord = 0;
+		try {
+			totalRecord = Pagination.countSelectAll();
+			int totalPage = Pagination.calculatePage(totalRecord);
+			new UI().listContent(Pagination.getArticleAll("id", "DESC", 0), Pagination.page, totalRecord, totalPage);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.out.println("Cannot connect to database");
+		}catch (ParseException e) {
+			// TODO Auto-generated catch block
+			System.err.println("Cannot pasre");
+		}			 
 	}
 
 }

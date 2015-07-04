@@ -14,7 +14,7 @@ import dto.Article;
 
 public class Pagination {
 	public static int page=1;
-	public static int perpage=10;
+	public static int perpage=3;
 	public static ArrayList<Article> getArticleAll(String field,String orderTo,int stop) throws SQLException, ParseException{
 		ArrayList<Article> arr = new ArrayList<>();
 		Connection con = DBConnection.getConnection(); 
@@ -104,20 +104,22 @@ public class Pagination {
 	public static int startIndex(){
 		return (page-1)*perpage;
 	}
-	public static int next(int totalPage){
-		if(page==totalPage)
-			return page;
-		return page++;
+	public static void next(int totalPage){
+		if(page!=totalPage)
+			page++;			
 	}
-	public static int previous(){
-		if(page==1)
-			return page;
-		return page--;
+	public static void previous(){
+		if(page!=1)
+			page--;
 	}
-	public static int first(){
-		return page=1;
+	public static void first(){
+		page=1;
 	}
-	public static int last(int totalPage){
-		return page=totalPage;
+	public static void last(int totalPage){
+		page=totalPage;
+	}
+	public static void setRow(int num){
+		perpage=num;
+		page=1;
 	}
 }

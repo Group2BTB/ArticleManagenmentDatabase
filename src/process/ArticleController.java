@@ -25,5 +25,15 @@ public class ArticleController {
 			System.out.println("Invalid ID!");
 		}
 	}
+
+	public void insertControl(){
+		Article art = new ArticleView().insertForm();
+		boolean status = new ArticleDAO().insertArticle(art);
+		if(status == true){
+			 System.out.println("Insert Successfully!");
+		}else{
+			System.out.println("Insert fail!");
+		}
+	}
 	
 }

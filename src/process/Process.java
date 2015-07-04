@@ -56,9 +56,13 @@ public class Process {
 
 
 	public static void main(String[] args) throws Exception {
+/*<<<<<<< .mine
+		//new Process().respondProcess();
+=======
 		
+>>>>>>> .r110*/
 
-		//new ArticleController().articleController();
+		new Process().articleController();
 
 		/*Article art = new ArticleDAO().checkValidId(2);
 		System.out.println(art.getTitle());*/
@@ -67,36 +71,82 @@ public class Process {
 	}
 	
 	public void articleController() throws SQLException, ParseException{
-		String[] str = new ArticleView().getOption();
-		if(str.length>2 || str.length<=0){
-			System.out.println("Invalid Keyword!!! Please Input again!");
-		}else{
-			switch(str[0]){
-			case "S":
-					ArrayList<Article> arrList = new ArrayList<Article>();
-					try{
-						arrList = new ArticleDAO().searchArticle(new ArticleView().setSrtSearch());
-					}catch (NullPointerException e) {
-						// TODO: handle exception
-						System.out.println("Null Pointer Exception!");
+		new ArticleView().displayHomePage();
+		while(true){
+			String[] str = new ArticleView().getOption();
+			if(str.length>2 || str.length<=0){
+				System.out.println("Invalid Keyword!!! Please Input again!");
+			}else{
+				int totalRecord=0;
+				int totalPage=0;
+				if(str.length==2){
+					if(str[1].matches("[a-zA-z]{1}")){
+						System.out.println("Invalid Keyword!!! Please Input again!");
+						continue;
 					}
-					new ArticleView().searchDisplay(arrList);
-				break;
-			case "A":
-				Article art = new ArticleView().insertForm();
-				new ArticleDAO().insertArticle(art);
-				break;
-			case "E":
-				new ArticleController().updateControl();
-				break;
-			case "D":
-				int delID = new ArticleView().setIdOption();
-				new ArticleDAO().deleteArticle(delID);
-				break;
-			case "HM":				
-				int totalRecord = Pagination.countSelectAll();				
-				new UI().listContent(Pagination.getArticleAll("id", "DESC", 0), Pagination.page, totalRecord, Pagination.calculatePage(totalRecord));
-				break;
+				}
+				switch(str[0]){
+				case "S":
+						ArrayList<Article> arrList = new ArrayList<Article>();
+						try{
+							arrList = new ArticleDAO().searchArticle(new ArticleView().setSrtSearch());
+						}catch (NullPointerException e) {
+							// TODO: handle exception
+							System.out.println("Null Pointer Exception!");
+						}
+						new ArticleView().searchDisplay(arrList);
+					break;
+				case "A":
+					new ArticleController().insertControl();
+					new ArticleView().displayHomePage();
+					break;
+				case "E":
+					new ArticleController().updateControl();
+					break;
+				case "D":
+					int delID = new ArticleView().setIdOption();
+					new ArticleDAO().deleteArticle(delID);
+					break;
+				case "HM":				
+					new ArticleView().displayHomePage();
+					break;
+				case "R":					
+					if(Integer.parseInt(str[1])>0){
+						Pagination.setRow(Integer.parseInt(str[1]));
+					}else{
+						System.out.println("Set Row must be biger than 0.");
+						continue;
+					}
+					totalRecord = Pagination.countSelectAll();
+					totalPage = Pagination.calculatePage(totalRecord);
+					new UI().listContent(Pagination.getArticleAll("id", "DESC", Pagination.startIndex()), Pagination.page, totalRecord, totalPage);
+					break;
+				case "N":				
+					totalRecord = Pagination.countSelectAll();	
+					totalPage = Pagination.calculatePage(totalRecord);
+					Pagination.next(totalPage);
+					new UI().listContent(Pagination.getArticleAll("id", "DESC", Pagination.startIndex()), Pagination.page, totalRecord, totalPage);
+					break;
+				case "L":				
+					totalRecord = Pagination.countSelectAll();	
+					totalPage = Pagination.calculatePage(totalRecord);
+					Pagination.last(totalPage);
+					new UI().listContent(Pagination.getArticleAll("id", "DESC", Pagination.startIndex()), Pagination.page, totalRecord, totalPage);
+					break;
+				case "P":				
+					totalRecord = Pagination.countSelectAll();	
+					totalPage = Pagination.calculatePage(totalRecord);
+					Pagination.previous();
+					new UI().listContent(Pagination.getArticleAll("id", "DESC", Pagination.startIndex()), Pagination.page, totalRecord, totalPage);
+					break;
+				case "F":				
+					totalRecord = Pagination.countSelectAll();	
+					totalPage = Pagination.calculatePage(totalRecord);
+					Pagination.first();					
+					new UI().listContent(Pagination.getArticleAll("id", "DESC", Pagination.startIndex()), Pagination.page, totalRecord, totalPage);
+					break;
+				}
+				
 			}
 		}
 	}
