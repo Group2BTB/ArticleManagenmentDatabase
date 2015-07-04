@@ -14,8 +14,8 @@ public class Validation {
 		String[] value = { "Error", "" };
 		String subStr;
 		String subStr2;
-		String[] keys = { "SB","B","F", "P", "N", "L", "S", "A", "E", "D","CA", "H", "X",
-				"HM", "SO" };
+		String[] keys = { "SB", "B", "F", "P", "N", "L", "S", "A", "E", "D",
+				"CA", "H", "X", "HM", "SO" };
 
 		if (str == null)
 			return value;
@@ -49,14 +49,15 @@ public class Validation {
 						return value;
 					}
 				}
-				
+
 			}
 
 			if (subStr.equalsIgnoreCase("G") || subStr.equalsIgnoreCase("R")
 					|| subStr.equalsIgnoreCase("E")
 					|| subStr.equalsIgnoreCase("D")) {
 
-				if (subStr2.matches(".*"+str.trim().equalsIgnoreCase(str)+"*")) {
+				if (subStr2.matches(".*" + str.trim().equalsIgnoreCase(str)
+						+ "*")) {
 					return value;
 				} else {
 					value[0] = subStr;
@@ -92,62 +93,72 @@ public class Validation {
 		}
 
 		return value;
-	}	
-	
+	}
+
 	public String[] spliteStr(String str) {
-		while(true){
-			if(str.contains("  "))
+		while (true) {
+			if (str.contains("  ")) {
 				str = str.replace("  ", " ");
-			else
+			} else
 				break;
 		}
 		return str.split(" ");
 	}
-	
-	//to encrypted password into database
 
-	public StringBuilder PassEncrypt(String Password){
+	// to encrypted password into database
+
+	public StringBuilder PassEncrypt(String Password) {
 		String GeneratePass = null;
 		StringBuilder sb = null;
-		
+
 		try {
 			// create MessageDigest for instance md5
-			MessageDigest md=MessageDigest.getInstance("md5");
+			MessageDigest md = MessageDigest.getInstance("md5");
 			md.update(Password.getBytes());
-			byte[] bytes=md.digest();
-			sb=new StringBuilder();
-			// loop for covert the password encrypt into hexadecimal numberal system
-			for(int i=0;i<bytes.length;i++){
-				sb.append(Integer.toString((bytes[i]&0xff)+ 0x100,16).substring(1));
-			}  
+			byte[] bytes = md.digest();
+			sb = new StringBuilder();
+			// loop for covert the password encrypt into hexadecimal numberal
+			// system
+			for (int i = 0; i < bytes.length; i++) {
+				sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16)
+						.substring(1));
+			}
 			// Generate password to String
-			GeneratePass=sb.toString();		
+			GeneratePass = sb.toString();
 		} catch (NoSuchAlgorithmException e) {
 			e.printStackTrace();
 		}
 		return sb;
 	}
-	
-	//to validate email
-	public String EmailValidate(String email){
+
+	// to validate email
+	public String EmailValidate(String email) {
 		String emString;
-		boolean b=true;
+		boolean b = true;
 		Scanner name = new Scanner(System.in);
-		 do {				 
-			 	// check email condition  	 	
-			 	if (!b ) {
-				 email = name.nextLine();
-				}		 	
-		        String email_regex = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
-		        emString = email;
-		        b = emString.matches(email_regex);
-		        System.out.println("Your email was invalid, Please input again!"); 
-		    } while (!b);
-		    System.out.println("Email address is < " + email+" > was added !");
-		    return emString;
-		    
-	}
-	public void UserValidate(){
+		do {
+			// check email condition
+			if (!b) {
+				email = name.nextLine();
+				
+			}
+			String email_regex = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+					+ "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+			emString = email;
+			b = emString.matches(email_regex);
+			System.out.println("Your email was invalid, Please input again!");
 			
+		} while (!b);
+		return emString;
+
+	}
+
+	public void UserValidate() {
+		Scanner sc = new Scanner(System.in);
+	    while (!sc.hasNext("[A-Za-z]+")) {
+	        System.out.println("Input only charater, Please input again!");
+	        sc.next();
+	    }
+	    String word = sc.next();
 	}
 }
