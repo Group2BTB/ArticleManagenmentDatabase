@@ -125,5 +125,23 @@ public class UserDAO {
 				return false;
 			}		
 	}
+	
+	
+	public boolean DeActivedUsers( User udto){
+		try(Connection con = DBConnection.getConnection();				
+				PreparedStatement ps=con.prepareStatement("update tbl_user set active=? where id=?");){			
+			
+			    ps.setInt(1, 0);	
+				ps.setInt(2, udto.getId());
+					
+				if(ps.executeUpdate()<=0)
+					return false;
+					return true;
+							
+			}catch(Exception e){
+				e.printStackTrace();
+				return false;
+			}		
+	}
 }		
 
