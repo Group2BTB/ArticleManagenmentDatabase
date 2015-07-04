@@ -21,7 +21,7 @@ public class UserDAO {
 			+ "values(?, ?, ?, ?, ?)");){			
 			ps.setString(1, udto.getFullName());
 			ps.setString(2, udto.getEmail());
-			ps.setString(3, udto.getUsername());
+			ps.setString(3, udto.getUsername().toString());
 			ps.setString(4, udto.getPassword().toString());
 			ps.setString(5, udto.getType());
 			//check if it affected row or not
@@ -66,7 +66,7 @@ public class UserDAO {
 				ps.setString(1, udto.getFullName());
 				ps.setString(2, udto.getUsername());
 				ps.setString(3, udto.getPassword().toString());
-				ps.setString(4, udto.getEmail());
+				ps.setString(4, udto.getEmail().toString());
 				ps.setInt(5, udto.getId());
 			
 			}
@@ -115,8 +115,7 @@ public class UserDAO {
 	public boolean DeleteUsers( User udto){
 		try(Connection con = DBConnection.getConnection();				
 				PreparedStatement ps=con.prepareStatement("Delete from tbl_user where id=?");){				
-					ps.setInt(1, udto.getId());
-					
+					ps.setInt(1, udto.getId());	
 				if(ps.executeUpdate()<=0)
 					return false;
 					return true;
