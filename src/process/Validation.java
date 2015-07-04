@@ -140,9 +140,8 @@ public class Validation {
 		        System.out.println("Your email < " + emString + " > was " + b);
 		        
 		    } while (!b);
-		    System.out.println("Email address is < " + email+" > was added !");
 		    return emString;
-		    
+
 	}
 	public void UserValidate(){
 			
