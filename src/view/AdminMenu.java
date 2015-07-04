@@ -5,7 +5,8 @@ import java.sql.Date;
 import dto.User;
 import process.Process;
 public class AdminMenu {
-	public static void main(String[] args) throws Exception {
+	
+	public String DisplayAminPage() throws Exception{
 		Scanner in=new Scanner(System.in);
 		User user=new User();
 		Process pro=new Process();
@@ -19,7 +20,9 @@ public class AdminMenu {
 		System.out.println("|                                                                             |");
 		System.out.println("|_____________________________________________________________________________|");
 		System.out.print("\n*Choose: ");
-		System.out.println("==>"); String opt=in.next();
-	    pro.respondProcess(opt);
+
+		System.out.println("==>"); 
+		return in.next();
+
 	}
 }
