@@ -103,7 +103,7 @@ public class Validation {
 		}
 		return arrStr;
 	}
-
+	
 	//to encrypted password into database
 
 	public StringBuilder PassEncrypt(String Password){
@@ -127,7 +127,7 @@ public class Validation {
 	}
 	
 	//to validate email
-	public void EmailValidate(){
+	public String EmailValidate(String email){
 		String emString;
 		String emailAddress;
 		boolean b=false;
@@ -140,6 +140,8 @@ public class Validation {
 		        System.out.println("Your email < " + emString + " > was " + b);
 		    } while (!b);
 		    System.out.println("Email address is < " + emailAddress+" > was added !");
+		    
+		    return emString;
 	}
 	public void UserValidate(){
 		
