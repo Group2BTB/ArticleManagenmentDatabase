@@ -30,7 +30,7 @@ public class AdminMenu {
 		Process pro = new Process();
 		System.out.println("========================>} Login Pages {<===========================");
 		System.out.println("Username: ");
-		user.setUsername("");
+		user.setUsername(new Validation().UsernameValidate(in.next()));
 		System.out.println("Password: ");
 		user.setPassword(new Validation().PassEncrypt(in.next()));
 	}
