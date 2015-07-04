@@ -72,6 +72,7 @@ public class Process {
 	
 	public void articleController() throws SQLException, ParseException{
 		new ArticleView().displayHomePage();
+		String searchAction=null;
 		while(true){
 			String[] str = new ArticleView().getOption();
 			if(str.length>2 || str.length<=0){
@@ -107,7 +108,8 @@ public class Process {
 					int delID = new ArticleView().setIdOption();
 					new ArticleDAO().deleteArticle(delID);
 					break;
-				case "HM":				
+				case "HM":
+					searchAction = null;
 					new ArticleView().displayHomePage();
 					break;
 				case "R":					
