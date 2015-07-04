@@ -30,7 +30,7 @@ public class ArticleView {
 		String option = scan.next().trim().toUpperCase();
 
 		/* Call method checkNull from Validation Class in Process Package */
-		String[] str = new Validation().checkNull(option);
+		String[] str = new Validation().spliteStr(option);
 
 		return str;// return user choice
 	}

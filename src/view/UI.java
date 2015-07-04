@@ -249,12 +249,12 @@ public class UI {
 			return 0;
 		}
 	}
-	public void listContent(ArrayList<Article> arr, int start, int stop, int page,int totalRecord, int total_page){
+	public void listContent(ArrayList<Article> arr, int page,int totalRecord, int total_page){
 		table_head();
 		// display body table 
 		for(Article art: arr){
 			String[] str ={""+art.getId(),art.getTitle(),art.getAuthorName(),art.getDate()};
-			tbl_row(str);			
+			tbl_row(str);		
 		}
 		// dislay footer table
 		tbl_footer(page, total_page, totalRecord,width);

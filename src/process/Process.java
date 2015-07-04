@@ -3,12 +3,14 @@ import dao.*;
 import dto.Article;
 
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 import view.AdminMenu;
 
 import view.ArticleView;
+import view.UI;
 import view.UserView;
 import dao.UserDAO;
 import dto.User;
@@ -47,6 +49,7 @@ public class Process {
 		}
 	}
 
+
 	public static void main(String[] args) throws Exception {
 		new Process().respondProcess();
 
@@ -59,32 +62,39 @@ public class Process {
 
 	}
 	
-	public void articleController(){
+	public void articleController() throws SQLException, ParseException{
 		String[] str = new ArticleView().getOption();
-		switch(str[0]){
-		case "S":
-				ArrayList<Article> arrList = new ArrayList<Article>();
-				try{
-					arrList = new ArticleDAO().searchArticle(new ArticleView().setSrtSearch());
-				}catch (NullPointerException e) {
-					// TODO: handle exception
-					System.out.println("Null Pointer Exception!");
-				}
-				new ArticleView().searchDisplay(arrList);
-			break;
-		case "A":
-			Article art = new ArticleView().insertForm();
-			new ArticleDAO().insertArticle(art);
-			break;
-		case "E":
-			new ArticleController().updateControl();
-			break;
-		case "D":
-			int delID = new ArticleView().setIdOption();
-			new ArticleDAO().deleteArticle(delID);
-			break;
+		if(str.length>2 || str.length<=0){
+			System.out.println("Invalid Keyword!!! Please Input again!");
+		}else{
+			switch(str[0]){
+			case "S":
+					ArrayList<Article> arrList = new ArrayList<Article>();
+					try{
+						arrList = new ArticleDAO().searchArticle(new ArticleView().setSrtSearch());
+					}catch (NullPointerException e) {
+						// TODO: handle exception
+						System.out.println("Null Pointer Exception!");
+					}
+					new ArticleView().searchDisplay(arrList);
+				break;
+			case "A":
+				Article art = new ArticleView().insertForm();
+				new ArticleDAO().insertArticle(art);
+				break;
+			case "E":
+				new ArticleController().updateControl();
+				break;
+			case "D":
+				int delID = new ArticleView().setIdOption();
+				new ArticleDAO().deleteArticle(delID);
+				break;
+			case "HM":				
+				int totalRecord = Pagination.countSelectAll();				
+				new UI().listContent(Pagination.getArticleAll("id", "DESC", 0), Pagination.page, totalRecord, Pagination.calculatePage(totalRecord));
+				break;
+			}
 		}
-		
 	}
 	
 }

@@ -94,6 +94,8 @@ public class Pagination {
 		while(rs.next()){			
 			return rs.getInt(1);			
 		}
+		rs.close();
+		con.close();
 		return 0;
 	}
 	public static int calculatePage(int totalRecord){
@@ -101,5 +103,21 @@ public class Pagination {
 	}
 	public static int startIndex(){
 		return (page-1)*perpage;
-	}	
+	}
+	public static int next(int totalPage){
+		if(page==totalPage)
+			return page;
+		return page++;
+	}
+	public static int previous(){
+		if(page==1)
+			return page;
+		return page--;
+	}
+	public static int first(){
+		return page=1;
+	}
+	public static int last(int totalPage){
+		return page=totalPage;
+	}
 }

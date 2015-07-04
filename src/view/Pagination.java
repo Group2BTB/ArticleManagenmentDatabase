@@ -98,7 +98,7 @@ public class Pagination {
 				start=0;
 				stop=0;
 			}			
-			ui.listContent(arr, start, stop, page, cArr, total_page);
+			ui.listContent(arr, page, cArr, total_page);
 		}else{ 
 			System.out.println("No record!");
 		}
