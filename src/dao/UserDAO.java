@@ -126,20 +126,24 @@ public class UserDAO {
 			}		
 	}
 	
+	//to check the user when login with username/password
 	public boolean checkUserLogin(User udto) throws SQLException{
 		//create connection
 		Connection con= DBConnection.getConnection();
 		//preparedStatement for view Information of Users
 		PreparedStatement ps=con.prepareStatement("select active, type from tbl_user where username=? and passwd=?",ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_UPDATABLE);
+		//set value to username, and password
 		ps.setString(1, udto.getUsername());
 		ps.setString(2, udto.getPassword().toString());
 		ResultSet rs = ps.executeQuery();
 		int active=0;
 		String type="";
+		//get value 'active', 'type' from selected username and password
 		while(rs.next()){
 			active = rs.getInt("active");
 			type = rs.getString("type");
 		}
+		//check if user is active or de-active
 		if(active == 1){
 			udto.setType(type);
 			System.out.println(udto.getType());
@@ -148,12 +152,6 @@ public class UserDAO {
 			return false;
 		}
 			
-	}
-	
-	public User getType(User udto){
-		
-		return udto;
-		
 	}
 	
 	public boolean DeActivedUsers( User udto){
