@@ -20,8 +20,10 @@ public class Process {
 	public void respondProcess() throws Exception{
 		User udto=new User();// create object of class User in dto
 		UserView choice = new UserView();//create object of class UserView in view
-		String opt = new AdminMenu().DisplayAminPage();
-		switch (opt.toUpperCase()) {
+		String opt = new AdminMenu().displayAminPage();
+		
+		switch (opt) {
+		
 		case "A":		
 			new UserView().InsertFormUser(udto);//get user object from view
 			new UserDAO().insertView(udto);//get user object from model and pass to view
@@ -44,6 +46,9 @@ public class Process {
 		case "L":
 			
 			break;
+		case "HM":
+			new AdminMenu().displayAminPage();
+			break;
 		default:
 			break;
 		}
@@ -51,14 +56,13 @@ public class Process {
 
 
 	public static void main(String[] args) throws Exception {
-		new Process().respondProcess();
-
+		
 
 		//new ArticleController().articleController();
 
 		/*Article art = new ArticleDAO().checkValidId(2);
 		System.out.println(art.getTitle());*/
-		new Process().articleController();
+		//new Process().articleController();
 
 	}
 	
