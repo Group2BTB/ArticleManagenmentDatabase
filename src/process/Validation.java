@@ -1,8 +1,12 @@
 package process;
 
+import java.awt.RenderingHints.Key;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.EmptyStackException;
 import java.util.Scanner;
+
+import javax.crypto.KeyGenerator;
 
 public class Validation {
 	public String[] checkNull(String str) {
@@ -137,10 +141,11 @@ public class Validation {
 		        String email_regex = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
 		        emString = email;
 		        b = emString.matches(email_regex);
-		        System.out.println("Your email was invalid, Please input again!");
+		        System.out.println("Your email was invalid, Please input again!"); 
 		    } while (!b);
+		    System.out.println("Email address is < " + email+" > was added !");
 		    return emString;
-
+		    
 	}
 	public void UserValidate(){
 			
