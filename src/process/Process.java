@@ -64,8 +64,13 @@ public class Process {
 				udao.checkUserLogin(user);
 				if(udao.checkUserLogin(user) == istrue){
 					System.out.println("Login success.");
-					try {
-						respondProcess();
+					try {System.out.println(user.getType());
+						if(user.getType().equalsIgnoreCase("admin")){
+							respondProcess();
+						}else{
+							System.out.println("You are the USer.");
+						}
+						
 					} catch (Exception e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
