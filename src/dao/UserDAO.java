@@ -141,13 +141,19 @@ public class UserDAO {
 			type = rs.getString("type");
 		}
 		if(active == 1){
-			System.out.println(active);
-			System.out.println(type);
+			udto.setType(type);
+			System.out.println(udto.getType());
 			return rs.last();
 		}else{
 			return false;
 		}
 			
+	}
+	
+	public User getType(User udto){
+		
+		return udto;
+		
 	}
 	
 	public boolean DeActivedUsers( User udto){
