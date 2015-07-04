@@ -24,10 +24,10 @@ public class UserView {
 		System.out.println("Input password: ");
 		udto.setPassword(in.nextLine());
 		System.out.println("Input UserType: ");
-		String userType = in.nextLine();		
+		udto.setType(in.next());
+		
 		return udto;
 	}
-
 
 	public User DeleteUser(User udto){		
 		Scanner in=new Scanner(System.in);
@@ -96,16 +96,6 @@ public class UserView {
 		System.out.println("Input UserID you want to View : ");
 		udto.setId(in.nextInt());
 		return udto;
-	}
-	public User Login(int id,int passwd, User udto){
-		Scanner in=new Scanner(System.in);
-		System.out.print("Input Usernmae:  ");	
-		int idCheck = in.nextInt();
-		System.out.println("Input Password: ");
-		int passCheck = in.nextInt();
-		
-		return udto;
-		
 	}
 	
 	//to display the user info by id selected
