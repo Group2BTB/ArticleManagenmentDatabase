@@ -30,7 +30,7 @@ public class AdminMenu {
 		Process pro = new Process();
 		System.out.println("========================>} Login Pages {<===========================");
 		System.out.println("Username: ");
-		user.setUsername(in.next());
+		user.setUsername("");
 		System.out.println("Password: ");
 		user.setPassword(in.next().toString());
 	}
