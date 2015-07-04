@@ -36,4 +36,8 @@ public class ArticleController {
 		}
 	}
 	
+	/*public ArrayList<Article> searchControl(){
+		
+	}*/
+	
 }

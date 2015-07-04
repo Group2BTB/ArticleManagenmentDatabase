@@ -40,7 +40,7 @@ public class Pagination {
 		}
 		return 0;
 	}
-	public static ArrayList<Article> getArticleBySearch(String value,String searchBy, String field,String orderTo,int stop) throws SQLException, ParseException{
+	public ArrayList<Article> getArticleBySearch(String value,String searchBy, String field,String orderTo,int stop) throws SQLException, ParseException{
 		ArrayList<Article> arr = new ArrayList<>();
 		Connection con = DBConnection.getConnection(); 
 		CallableStatement pre=null;
@@ -57,10 +57,6 @@ public class Pagination {
 			pre = con.prepareCall("{ call search_by_author(?,?,?,?,?) }");
 			pre.setString(1, value);
 			break;		
-		default:
-			pre = con.prepareCall("{ call search_all(?,?,?,?,?) }");
-			pre.setString(1, value);
-			break;
 		}
 				
 		pre.setString(2, field);

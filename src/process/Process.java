@@ -84,10 +84,7 @@ public class Process {
 
 	public static void main(String[] args) throws Exception {
 
-/*<<<<<<< .mine
 		//new Process().respondProcess();
->>>>>>> .r128
-
 
 		new Process().articleController();
 
@@ -98,6 +95,7 @@ public class Process {
 	}
 	
 	public void articleController() throws SQLException, ParseException{
+
 		new ArticleView().displayHomePage();
 		String searchAction=null;
 		while(true){
@@ -117,7 +115,7 @@ public class Process {
 				case "S":
 						ArrayList<Article> arrList = new ArrayList<Article>();
 						try{
-							arrList = new ArticleDAO().searchArticle(new ArticleView().setSrtSearch());
+							arrList = new ArticleDAO().searchArticle(new ArticleView().setSrtSearch(),"id","DESC",Pagination.perpage,0);
 						}catch (NullPointerException e) {
 							// TODO: handle exception
 							System.out.println("Null Pointer Exception!");
