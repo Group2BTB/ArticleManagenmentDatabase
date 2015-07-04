@@ -6,6 +6,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import view.AdminMenu;
+
 import view.ArticleView;
 import view.UserView;
 import dao.UserDAO;
@@ -13,9 +15,10 @@ import dto.User;
 
 public class Process {
 	
-	public void respondProcess(String opt) throws Exception{
+	public void respondProcess() throws Exception{
 		User udto=new User();// create object of class User in dto
 		UserView choice = new UserView();//create object of class UserView in view
+		String opt = new AdminMenu().DisplayAminPage();
 		switch (opt.toUpperCase()) {
 		case "A":		
 			new UserView().InsertFormUser(udto);//get user object from view
@@ -33,18 +36,27 @@ public class Process {
 			break;
 
 		case "D":
-
 			new UserView().DeleteUser(udto);// get id from view
 			new UserDAO().DeleteUsers(udto);// delete the row where id is set
+			break;
+		case "L":
+			
+			break;
 		default:
 			break;
 		}
 	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
+		new Process().respondProcess();
+
+
+		//new ArticleController().articleController();
+
 		/*Article art = new ArticleDAO().checkValidId(2);
 		System.out.println(art.getTitle());*/
 		new Process().articleController();
+
 	}
 	
 	public void articleController(){
