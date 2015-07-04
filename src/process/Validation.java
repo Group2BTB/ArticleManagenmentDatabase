@@ -140,36 +140,38 @@ public class Validation {
 			// check email condition
 			if (!b) {
 				email = name.nextLine();
-				
+
 			}
 			String email_regex = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
 					+ "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
 			emString = email;
 			b = emString.matches(email_regex);
 			System.out.println("Your email was invalid, Please input again!");
-			
+
 		} while (!b);
 		return emString;
 
 	}
-	// Name validation
-	
+
+	// fullname validation method
+
 	public String fullnameValidate(String fullName) {
 		Scanner sc = new Scanner(System.in);
-	    while (!sc.hasNext("[A-Za-z]+")) {
-	        System.out.println("Input only charater, Please input again!");
-	        sc.next();
-	    }
-	    String name = sc.nextLine();
+		while (!sc.hasNext("[A-Za-z]+")) {
+			System.out.println("Input only charater, Please input again!");
+			sc.next();
+		}
+		String name = sc.nextLine();
 		return name;
 	}
+	// Username validation method
 	public String UsernameValidate(String username) {
 		Scanner sc = new Scanner(System.in);
-	    while (!sc.hasNext("[A-Za-z]+")) {
-	        System.out.println("Input only charater, Please input again!");
-	        sc.next();
-	    }
-	    String name = sc.nextLine();
+		while (!sc.hasNext("[A-Za-z]+")) {
+			System.out.println("Input only charater, Please input again!");
+			sc.next();
+		}
+		String name = sc.nextLine();
 		return name;
 	}
 }
