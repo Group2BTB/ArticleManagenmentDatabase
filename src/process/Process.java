@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import view.AdminMenu;
-
 import view.ArticleView;
 import view.UI;
 import view.UserView;
@@ -65,6 +64,12 @@ public class Process {
 				udao.checkUserLogin(user);
 				if(udao.checkUserLogin(user) == istrue){
 					System.out.println("Login success.");
+					try {
+						respondProcess();
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				}else{
 					System.out.println("Invalid Username or Password! Login again.");
 				}
