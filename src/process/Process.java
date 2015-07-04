@@ -43,17 +43,11 @@ public class Process {
 			new UserView().DeleteUser(udto);// get id from view
 			new UserDAO().DeleteUsers(udto);// delete the row where id is set
 			break;
-		case "DE":
-			new UserView().deActiveUser(udto);
-			new UserDAO().DeActivedUsers(udto);
+		case "L":
+			
 			break;
 		case "HM":
 			new AdminMenu().displayAminPage();
-			break;
-		case "X":
-			
-
-			
 			break;
 		default:
 			break;
@@ -86,8 +80,6 @@ public class Process {
 	public static void main(String[] args) throws Exception {
 /*<<<<<<< .mine
 		//new Process().respondProcess();
-=======
->>>>>>> .r123
 
 		new Process().articleController();
 
