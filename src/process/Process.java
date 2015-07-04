@@ -59,9 +59,35 @@ public class Process {
 			break;
 		}
 	}
-
+	
+	public void userControl(){
+		AdminMenu adm = new AdminMenu();// create object of class AdminMenu in view
+		User user = new User();// create object of class User in dto
+		UserDAO udao = new UserDAO();
+		boolean istrue = true;
+		try {
+			do{
+				adm.displayLoginMenu(user);
+				udao.checkUserLogin(user);
+				if(udao.checkUserLogin(user) == istrue){
+					System.out.println("Login success.");
+				}else{
+					System.out.println("Invalid Username or Password! Login again.");
+				}
+			}while(udao.checkUserLogin(user) != istrue);
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
 	public static void main(String[] args) throws Exception {
+/*<<<<<<< .mine
+		//new Process().respondProcess();
+=======
+>>>>>>> .r123
 
 		new Process().articleController();
 
