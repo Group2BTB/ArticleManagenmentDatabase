@@ -1,16 +1,19 @@
 package view;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import process.Process;
 import process.Validation;
+import dao.UserDAO;
 import dto.User;
 public class UserView {
 	
 	//default constructor
 	public UserView() {
-		
 		// TODO Auto-generated constructor stub
+		
+		
 	}
 	
 	//to display the insert user form to complete
@@ -124,6 +127,10 @@ public class UserView {
 		System.out.println("Email\t: " + udto.getEmail());
 		System.out.println("Usertype: " + udto.getType());
 		return udto;
+	}
+	
+	public void displayUserDetail(ArrayList<User> arrList){
+		
 	}
 	
 }

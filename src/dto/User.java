@@ -34,7 +34,19 @@ public class User {
 	private int parentId;
 	private String type;
 	
-	
+	public User(){
+		
+	}
+	public User(int id, String fullname, String email, String username,
+			Date create_date, String userType) {
+		// TODO Auto-generated constructor stub
+		this.id = id;
+		this.fullName = fullname;
+		this.email = email;
+		this.username = username;
+		this.createDate = create_date;
+		this.type = userType;
+	}
 	public int getId() {
 		return id;
 	}

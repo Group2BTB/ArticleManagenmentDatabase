@@ -137,7 +137,7 @@ public class ArticleDAO implements IArticleDAO {
 						.getString(3), rs.getString(4)));
 			}
 			rs.close();
-			pre.close();
+			stm.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

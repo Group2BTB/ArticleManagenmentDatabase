@@ -17,7 +17,7 @@ import dto.User;
 public class Process {
 	
 	public void respondProcess() throws Exception{
-		User udto=new User();// create object of class User in dto
+		User udto= new User();// create object of class User in dto
 		UserView choice = new UserView();//create object of class UserView in view
 		String opt = new AdminMenu().displayAminPage();
 		
@@ -29,8 +29,8 @@ public class Process {
 			break;
 		case "V":
 			new UserView().getUserId(udto);// get user id from view
-			new UserDAO().viewUser(udto);// get user object from model and pass to view
-			new UserView().viewUserInfo(udto);// show the result in to console
+			// get user object from model and pass to view
+			new UserView().viewUserInfo(new UserDAO().viewUser(udto));// show the result in to console
 			
 			break;	
 		case "U": 
