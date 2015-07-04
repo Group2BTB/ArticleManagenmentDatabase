@@ -131,64 +131,56 @@ public class Validation {
 		return sb;
 	}
 
-	// to validate email
+	// Email Validation method 
 	public String EmailValidate(String email) {
 		Scanner sc = new Scanner(System.in);
-		while(true) {
-				if (email.matches("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
-						+ "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")) {
-					
-					return email;
-					
-				} else {
-					System.out.println("Input invalid email, Please input again!");
-					System.out.print("Input email: ");
-					return EmailValidate(sc.next());
-				}
-				
-				
-		}
-			
-		}
+		while (true) {
+			if (email.matches("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+					+ "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")) {
 
+				return email;
 
+			} else {
+				System.out.println("Input invalid email, Please input again!");
+				System.out.print("Input email: ");
+				return EmailValidate(sc.next());
+			}
+		}
+	}
 
 	// fullname validation method
 
 	public String fullnameValidate(String fullName) {
 		Scanner sc = new Scanner(System.in);
-		while(true) {
-				if (fullName.matches("[A-Za-z]+")) {
-					
-					return fullName;
-					
-				} else {
-					System.out.println("Input only charater, Please input again!");
-					System.out.print("Input Fullname: ");
-					return fullnameValidate(sc.next());
-				}
-				
-				
-		}
-			
+		while (true) {
+			if (fullName.matches("[A-Za-z]+")) {
+
+				return fullName;
+
+			} else {
+				System.out.println("Input only charater, Please input again!");
+				System.out.print("Input Fullname: ");
+				return fullnameValidate(sc.next());
+			}
+
 		}
 
-	
+	}
+
 	// Username validation method
 	public String UsernameValidate(String username) {
 		Scanner sc = new Scanner(System.in);
-		while(true) {
-				if (username.matches("[A-Za-z]+")) {
-					
-					return username;
-					
-				} else {
-					System.out.println("Input only charater, Please input again!");
-					System.out.print("Input Username: ");
-					return UsernameValidate(sc.next());
-				}
-				
-				
+		while (true) {
+			if (username.matches("[A-Za-z]+")) {
+
+				return username;
+
+			} else {
+				System.out.println("Input only charater, Please input again!");
+				System.out.print("Input Username: ");
+				return UsernameValidate(sc.next());
+			}
+
 		}
 	}
-	}
+}
