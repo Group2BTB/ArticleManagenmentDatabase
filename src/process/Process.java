@@ -62,11 +62,6 @@ public class Process {
 
 
 	public static void main(String[] args) throws Exception {
-/*<<<<<<< .mine
-		//new Process().respondProcess();
-=======
-		
->>>>>>> .r110*/
 
 		new Process().articleController();
 
