@@ -33,13 +33,28 @@ public class UserView {
 		Scanner in=new Scanner(System.in);
 		System.out.print("Input UserID you want to delete : ");	
 		int id = in.nextInt();
-		System.out.print("Are you sure you want to delete this record??? : [y/n] ==> ");	
+		System.out.print("Are you sure you want to delete this User??? : [y/n] ==> ");	
 		String yesNo = in.next();
 		if(yesNo.matches("y")){
 		udto.setId(id);
 		}
 		else{
 			System.out.println("Delete is cancelled");
+		}
+		return udto;
+	}	
+	
+	public User deActiveUser(User udto){		
+		Scanner in=new Scanner(System.in);
+		System.out.print("Input UserID you want to Deactive : ");			
+		int id = in.nextInt();
+		System.out.print("Are you sure you want to Deactive this User??? : [y/n] ==> ");	
+		String yesNo = in.next();
+		if(yesNo.matches("y")){
+		 udto.setId(id);
+		}
+		else{
+			System.out.println("Deactive is cancelled");
 		}
 		return udto;
 	}	
