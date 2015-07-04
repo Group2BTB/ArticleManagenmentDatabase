@@ -30,7 +30,7 @@ public class User {
 	private StringBuilder password;
 	private Date createDate;
 	private Date modifiedDate;
-	private boolean atived;
+	private int atived;
 	private int parentId;
 	private String type;
 	
@@ -77,11 +77,14 @@ public class User {
 	public void setModifiedDate(Date modifiedDate) {
 		this.modifiedDate = modifiedDate;
 	}
-	public boolean isAtived() {
+	public int getAtived() {
 		return atived;
 	}
-	public void setAtived(boolean atived) {
+	public void setAtived(int atived) {
 		this.atived = atived;
+	}
+	public void setPassword(StringBuilder password) {
+		this.password = password;
 	}
 	public int getParentId() {
 		return parentId;
