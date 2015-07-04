@@ -131,10 +131,11 @@ public class Validation {
 		return sb;
 	}
 
-	// Email Validation method 
+	// Email Validation method
 	public String EmailValidate(String email) {
 		Scanner sc = new Scanner(System.in);
 		while (true) {
+			// check character condition
 			if (email.matches("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
 					+ "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")) {
 
@@ -142,6 +143,7 @@ public class Validation {
 
 			} else {
 				System.out.println("Input invalid email, Please input again!");
+				// Reinput email
 				System.out.print("Input email: ");
 				return EmailValidate(sc.next());
 			}
@@ -149,16 +151,17 @@ public class Validation {
 	}
 
 	// fullname validation method
-
 	public String fullnameValidate(String fullName) {
 		Scanner sc = new Scanner(System.in);
 		while (true) {
+			// check character condition
 			if (fullName.matches("[A-Za-z]+")) {
 
 				return fullName;
 
 			} else {
 				System.out.println("Input only charater, Please input again!");
+				// Reinput fullname
 				System.out.print("Input Fullname: ");
 				return fullnameValidate(sc.next());
 			}
@@ -171,12 +174,14 @@ public class Validation {
 	public String UsernameValidate(String username) {
 		Scanner sc = new Scanner(System.in);
 		while (true) {
+			// check character condition
 			if (username.matches("[A-Za-z]+")) {
-
+				
 				return username;
 
 			} else {
 				System.out.println("Input only charater, Please input again!");
+				// Reinput username 
 				System.out.print("Input Username: ");
 				return UsernameValidate(sc.next());
 			}
