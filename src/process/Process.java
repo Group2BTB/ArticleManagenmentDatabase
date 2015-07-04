@@ -43,11 +43,17 @@ public class Process {
 			new UserView().DeleteUser(udto);// get id from view
 			new UserDAO().DeleteUsers(udto);// delete the row where id is set
 			break;
-		case "L":
-			
+		case "DE":
+			new UserView().deActiveUser(udto);
+			new UserDAO().DeActivedUsers(udto);
 			break;
 		case "HM":
 			new AdminMenu().displayAminPage();
+			break;
+		case "X":
+			
+
+			
 			break;
 		default:
 			break;
