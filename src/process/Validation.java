@@ -112,9 +112,11 @@ public class Validation {
 			md.update(Password.getBytes());
 			byte[] bytes=md.digest();
 			sb=new StringBuilder();
+			// loop for covert the password encrypt into hexadecimal numberal system
 			for(int i=0;i<bytes.length;i++){
 				sb.append(Integer.toString((bytes[i]&0xff)+ 0x100,16).substring(1));
 			}  
+			// Generate password to String
 			GeneratePass=sb.toString();		
 		} catch (NoSuchAlgorithmException e) {
 			e.printStackTrace();
@@ -125,21 +127,24 @@ public class Validation {
 	//to validate email
 	public String EmailValidate(String email){
 		String emString;
-		String emailAddress;
-		boolean b=false;
-		 do {
-		        Scanner name = new Scanner(System.in);
-		        emailAddress = name.nextLine();
+		boolean b=true;
+		Scanner name = new Scanner(System.in);
+		 do {				 
+			 	// check email condition 	 	
+			 	if (!b ) {
+				 email = name.nextLine();
+				}		 	
 		        String email_regex = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
-		        emString = emailAddress;
+		        emString = email;
 		        b = emString.matches(email_regex);
 		        System.out.println("Your email < " + emString + " > was " + b);
+		        
 		    } while (!b);
-		    System.out.println("Email address is < " + emailAddress+" > was added !");
-		    
+		    System.out.println("Email address is < " + email+" > was added !");
 		    return emString;
+		    
 	}
 	public void UserValidate(){
-		
+			
 	}
 }
