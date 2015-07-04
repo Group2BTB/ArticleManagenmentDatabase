@@ -109,6 +109,7 @@ public class UserDAO {
 			if(con!=null)try{con.close();}catch(SQLException e){throw e;}
 		}
 	}
+	
 	//this function is used for delect users from database
 	//to delete the user by selected id
 	public boolean DeleteUsers( User udto){
@@ -126,6 +127,16 @@ public class UserDAO {
 			}		
 	}
 	
+	public boolean checkUserLogin(User udto) throws SQLException{
+		//create connection
+		Connection con= DBConnection.getConnection();
+		//preparedStatement for view Information of Users
+		PreparedStatement ps=con.prepareStatement("select type from tbl_user where username=? and passwd=?",ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_UPDATABLE);
+		ps.setString(1, udto.getUsername());
+		ps.setString(2, udto.getPassword().toString());
+		ResultSet rs = ps.executeQuery();
+		return rs.last();	
+	}
 	
 	public boolean DeActivedUsers( User udto){
 		try(Connection con = DBConnection.getConnection();				
