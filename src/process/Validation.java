@@ -137,12 +137,7 @@ public class Validation {
 		        String email_regex = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
 		        emString = email;
 		        b = emString.matches(email_regex);
-
 		        System.out.println("Your email was invalid, Please input again!");
-
-		        //System.out.println("Your email < " + emString + " > was " + b);
-
-		        
 		    } while (!b);
 		    return emString;
 
