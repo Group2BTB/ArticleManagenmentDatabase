@@ -6,7 +6,7 @@ import dto.User;
 import process.Process;
 public class AdminMenu {
 	
-	public String DisplayAminPage() throws Exception{
+	public String displayAminPage() throws Exception{
 		Scanner in=new Scanner(System.in);
 		User user=new User();
 		Process pro=new Process();
@@ -22,6 +22,6 @@ public class AdminMenu {
 		System.out.print("\n*Choose: ");
 
 		System.out.println("==>"); 
-		return in.next();
+		return in.next().toUpperCase();
 	}
 }
