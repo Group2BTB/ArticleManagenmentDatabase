@@ -130,11 +130,24 @@ public class UserDAO {
 		//create connection
 		Connection con= DBConnection.getConnection();
 		//preparedStatement for view Information of Users
-		PreparedStatement ps=con.prepareStatement("select type from tbl_user where username=? and passwd=?",ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_UPDATABLE);
+		PreparedStatement ps=con.prepareStatement("select active, type from tbl_user where username=? and passwd=?",ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_UPDATABLE);
 		ps.setString(1, udto.getUsername());
 		ps.setString(2, udto.getPassword().toString());
 		ResultSet rs = ps.executeQuery();
-		return rs.last();	
+		int active=0;
+		String type="";
+		while(rs.next()){
+			active = rs.getInt("active");
+			type = rs.getString("type");
+		}
+		if(active == 1){
+			System.out.println(active);
+			System.out.println(type);
+			return rs.last();
+		}else{
+			return false;
+		}
+			
 	}
 	
 	public boolean DeActivedUsers( User udto){
