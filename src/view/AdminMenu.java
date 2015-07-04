@@ -24,4 +24,15 @@ public class AdminMenu {
 		System.out.println("==>"); 
 		return in.next().toUpperCase();
 	}
+	
+	public void displayLoginMenu(User user){
+		Scanner in=new Scanner(System.in);
+		Process pro = new Process();
+		System.out.println("========================>} Login Pages {<===========================");
+		System.out.println("Username: ");
+		user.setUsername(in.next());
+		System.out.println("Password: ");
+		user.setPassword(in.next().toString());
+	}
+	
 }
