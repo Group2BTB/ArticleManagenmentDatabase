@@ -8,17 +8,21 @@ public class UserController {
 		try {
 			
 			option = new AdminMenu().displayAminPage();
-			if(option != "A" ||option != "V"||option != "U"||option != "D"||option != "DE" ){
+			if(option.matches("A")  ||option.matches("V") ||option.matches("U")  ||option.matches("D")  ||option.matches("DE")   ){
+				new AdminMenu().displayAminPage();	new AdminMenu().displayAminPage();	
+				return option;
+			}else{
+			
 				System.out.println("Syntax Error!!!!");
 				new AdminMenu().displayAminPage();	new AdminMenu().displayAminPage();	
-			}else{
-				new AdminMenu().displayAminPage();				
+				return option;
 			}
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return option;
+		return null;
+		
 	}
 }
