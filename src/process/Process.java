@@ -68,7 +68,7 @@ public class Process {
 						if(user.getType().equalsIgnoreCase("admin")){
 							respondProcess();
 						}else{
-							System.out.println("You are the USer.");
+							new Process().articleController();
 						}
 						
 					} catch (Exception e) {
@@ -91,7 +91,7 @@ public class Process {
 
 		//new Process().respondProcess();
 
-		new Process().articleController();
+		new Process().userControl();
 
 		/*Article art = new ArticleDAO().checkValidId(2);
 		System.out.println(art.getTitle());*/
@@ -102,7 +102,7 @@ public class Process {
 	public void articleController() throws SQLException, ParseException{
 
 		new ArticleView().displayHomePage();
-		String searchAction=null;
+		String searchAction = null;
 		while(true){
 			String[] str = new ArticleView().getOption();
 			if(str.length>2 || str.length<=0){
@@ -120,7 +120,7 @@ public class Process {
 				case "S":
 						ArrayList<Article> arrList = new ArrayList<Article>();
 						try{
-							arrList = new ArticleDAO().searchArticle(new ArticleView().setSrtSearch(),"id","DESC",Pagination.perpage,0);
+							arrList = new ArticleDAO().searchArticle(new ArticleView().setSrtSearch());
 						}catch (NullPointerException e) {
 							// TODO: handle exception
 							System.out.println("Null Pointer Exception!");

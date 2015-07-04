@@ -1,5 +1,6 @@
 package view;
 
+import dto.User;
 import process.Process;
 
 public class Display {
@@ -7,7 +8,7 @@ public class Display {
 	public static void main(String[] args) {
 		Process pro = new Process();
 		try {
-			pro.userControl();
+
 //			pro.respondProcess();
 			//new Process().userControl();
 			

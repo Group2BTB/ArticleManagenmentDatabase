@@ -59,19 +59,13 @@ public class ArticleDAO implements IArticleDAO {
 	public boolean insertArticle(Article art) {
 		// TODO Auto-generated method stub
 		try(Connection con = DBConnection.getConnection(); //get connection to Database				
-				/*PreparedStatement prestm = con.prepareStatement("insert into tbl_article(title,author_id,content)values(?,?,?)");*/ ) {			
-			
-
-			/*prestm.setString(1, art.getTitle());
-			prestm.setInt(2,art.getAuthorId());
-			prestm.setString(3, art.getContent());
+			PreparedStatement prestm = con.prepareStatement("insert into tbl_article(title,author_id,content)values(?,?,?)"); ) {			
 			prestm.setString(1, art.getTitle()); //set title for an article to insert to Database
 			prestm.setInt(2,art.getAuthorId()); //set author_id for an article to insert to Database
 			prestm.setString(3, art.getContent()); //set content for an article to insert to Database
-
-			prestm.executeUpdate();	*/	
+			prestm.executeUpdate();		
 			
-			CallableStatement stmCall = con.prepareCall(" call search_all(?, ?, ?, ?)}");
+			//CallableStatement stmCall = con.prepareCall(" call search_all(?, ?, ?, ?)}");
 			return true;
 			
 		} catch (SQLException e) {
@@ -121,22 +115,23 @@ public class ArticleDAO implements IArticleDAO {
 		
 	} 
 
-	public ArrayList<Article> searchArticle(String value, String field, String orderTo, int numRow, int stop) {
+	public ArrayList<Article> searchArticle(String keyword) {
 
 		ArrayList<Article> arrList = new ArrayList<Article>();
 
 		ResultSet rs = null;
 		CallableStatement pre=null;
 		try(Connection con = DBConnection.getConnection();) {
-			//Statement stm = con.createStatement();
-			//String sql = "SELECT * from tbl_article JOIN tbl_user on tbl_article.author_id = tbl_user.id Where title ~* '.*"+str+".*' or content ~* '.*"+str+".*' or fullname ~* '.*"+str+".*'";
-			pre = con.prepareCall("{ call search_all(?,?,?,?,?) }");
+			Statement stm = con.createStatement();
+			String sql = "SELECT * from tbl_article JOIN tbl_user on tbl_article.author_id = tbl_user.id Where title ~* '.*"+keyword+".*' or content ~* '.*"+keyword+".*' or fullname ~* '.*"+keyword+".*'";
+			/*pre = con.prepareCall("{ call search_all(?,?,?,?,?) }");
 			pre.setString(1, value);
 			pre.setString(2, field);
 			pre.setString(3, orderTo);
 			pre.setInt(4, numRow);
 			pre.setInt(5, stop);
-			rs = pre.executeQuery();
+			rs = pre.executeQuery();*/
+			rs = stm.executeQuery(sql);
 			while (rs.next()) {
 				arrList.add(new Article(rs.getInt(1), rs.getString(2), rs
 						.getString(3), rs.getString(4)));

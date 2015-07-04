@@ -153,7 +153,7 @@ public class ArticleView {
 			new UI().listContent(Pagination.getArticleAll("id", "DESC", 0), Pagination.page, totalRecord, totalPage);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			System.out.println("Cannot connect to database");
+			System.out.println("Sql cannot get data from database");
 		}catch (ParseException e) {
 			// TODO Auto-generated catch block
 			System.err.println("Cannot pasre");
