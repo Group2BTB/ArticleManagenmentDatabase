@@ -77,7 +77,7 @@ public class User {
 	public void setModifiedDate(Date modifiedDate) {
 		this.modifiedDate = modifiedDate;
 	}
-	public int getAtived() {
+	public int isAtived() {
 		return atived;
 	}
 	public void setAtived(int atived) {
