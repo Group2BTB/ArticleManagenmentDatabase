@@ -152,13 +152,24 @@ public class Validation {
 		return emString;
 
 	}
-
-	public void UserValidate() {
+	// Name validation
+	
+	public String fullnameValidate(String fullName) {
 		Scanner sc = new Scanner(System.in);
 	    while (!sc.hasNext("[A-Za-z]+")) {
 	        System.out.println("Input only charater, Please input again!");
 	        sc.next();
 	    }
-	    String word = sc.next();
+	    String name = sc.nextLine();
+		return name;
+	}
+	public String UsernameValidate(String username) {
+		Scanner sc = new Scanner(System.in);
+	    while (!sc.hasNext("[A-Za-z]+")) {
+	        System.out.println("Input only charater, Please input again!");
+	        sc.next();
+	    }
+	    String name = sc.nextLine();
+		return name;
 	}
 }
