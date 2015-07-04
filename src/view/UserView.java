@@ -3,6 +3,7 @@ package view;
 import java.util.Scanner;
 
 import process.Process;
+import process.Validation;
 import dto.User;
 public class UserView {
 	
@@ -16,13 +17,13 @@ public class UserView {
 	public User InsertFormUser(User udto) {
 		Scanner in = new Scanner(System.in);
 		System.out.println("Input Fullname: ");
-		udto.setFullName(in.nextLine());
+		udto.setFullName(new Validation().fullnameValidate(in.next()));
 		System.out.println("Input Email: ");
-		udto.setEmail(in.nextLine());
+		udto.setEmail(new Validation().EmailValidate(in.next()));
 		System.out.println("Input Username: ");
-		udto.setUsername(in.nextLine());
+		udto.setUsername(new Validation().UsernameValidate(in.next()));
 		System.out.println("Input password: ");
-		udto.setPassword(in.nextLine());
+		udto.setPassword(new Validation().PassEncrypt(in.next()));
 		System.out.println("Input UserType: ");
 		udto.setType(in.next());
 		
@@ -49,9 +50,10 @@ public class UserView {
 		System.out.print("Input UserID you want to Deactive : ");			
 		int id = in.nextInt();
 		System.out.print("Are you sure you want to Deactive this User??? : [y/n] ==> ");	
-		String yesNo = in.next();
+		String yesNo = in.next().toLowerCase();
 		if(yesNo.matches("y")){
 		 udto.setId(id);
+		 System.out.println("This User is Deactived!!!");
 		}
 		else{
 			System.out.println("Deactive is cancelled");
@@ -80,7 +82,7 @@ public class UserView {
 			break;
 		case 3://if inputChoice == 3
 			System.out.print("Input new Password: ");
-			udto.setPassword(in.next());
+			udto.setPassword(new Validation().PassEncrypt(in.next()));
 			break;
 		case 4://if inputChoice == 4
 			System.out.print("Input new Email: ");
@@ -94,7 +96,7 @@ public class UserView {
 			udto.setUsername(in.next());
 			
 			System.out.print("Input new Password: ");
-			udto.setPassword(in.next());
+			udto.setPassword(new Validation().PassEncrypt(in.next()));
 			
 			System.out.print("Input new Email: ");
 			udto.setEmail(in.next());

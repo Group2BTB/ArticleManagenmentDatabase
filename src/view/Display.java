@@ -9,6 +9,8 @@ public class Display {
 		try {
 			pro.userControl();
 //			pro.respondProcess();
+			//new Process().userControl();
+			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

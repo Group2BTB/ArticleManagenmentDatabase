@@ -4,13 +4,13 @@ import java.sql.Date;
 
 import dto.User;
 import process.Process;
+import process.Validation;
 public class AdminMenu {
 	
 	public String displayAminPage() throws Exception{
 		Scanner in=new Scanner(System.in);
 		User user=new User();
 		Process pro=new Process();
-		//System.out.println("1.AddUser\n2.ViewUser\n3.UpdateUser\n4.DeleteUser\n5.ViewAllUsers");
 		System.out.println();
 		System.out.println("+=========================>} USER Management {<===============================+");
 		System.out.println("|                                                                             |");
@@ -32,7 +32,7 @@ public class AdminMenu {
 		System.out.println("Username: ");
 		user.setUsername("");
 		System.out.println("Password: ");
-		user.setPassword(in.next().toString());
+		user.setPassword(new Validation().PassEncrypt(in.next()));
 	}
 	
 }

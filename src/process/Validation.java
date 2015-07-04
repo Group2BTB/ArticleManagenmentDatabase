@@ -133,14 +133,13 @@ public class Validation {
 
 	// Email Validation method
 	public String EmailValidate(String email) {
+
 		Scanner sc = new Scanner(System.in);
 		while (true) {
 			// check character condition
 			if (email.matches("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
 					+ "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")) {
-
 				return email;
-
 			} else {
 				System.out.println("Input invalid email, Please input again!");
 				// Reinput email
@@ -156,9 +155,7 @@ public class Validation {
 		while (true) {
 			// check character condition
 			if (fullName.matches("[A-Za-z]+")) {
-
 				return fullName;
-
 			} else {
 				System.out.println("Input only charater, Please input again!");
 				// Reinput fullname

@@ -20,8 +20,7 @@ public class DBConnection {
 			/* Connect to database */
 			con = DriverManager.getConnection(
 
-					"jdbc:postgresql://localhost:5432/ArticleManagement","postgres", "111111");
-			
+					"jdbc:postgresql://localhost:5432/ArticleManagement","postgres", "72241993vichet");			
 			 //DatabaseMetaData dm = con.getMetaData();
 			//System.out.println(dm.getDatabaseProductName());
 			 

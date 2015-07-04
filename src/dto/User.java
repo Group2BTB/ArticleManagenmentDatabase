@@ -45,25 +45,22 @@ public class User {
 		return fullName;
 	}
 	public void setFullName(String fullName) {
-		this.fullName = new process.Validation().fullnameValidate(fullName);
+		this.fullName = fullName;
 	}
 	public String getEmail() {
 		return email;
 	}
 	public void setEmail(String email) {
-		this.email = new process.Validation().EmailValidate(email);
+		this.email = email;
 	}
 	public String getUsername() {
 		return username;
 	}
 	public void setUsername(String username) {
-		this.username = new process.Validation().UsernameValidate(username);
+		this.username = username;
 	}
 	public StringBuilder getPassword() {
 		return password;
-	}
-	public void setPassword(String password) {
-		this.password = new process.Validation().PassEncrypt(password);
 	}
 	public Date getCreateDate() {
 		return createDate;
