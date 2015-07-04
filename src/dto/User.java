@@ -45,7 +45,7 @@ public class User {
 		return fullName;
 	}
 	public void setFullName(String fullName) {
-		this.fullName = fullName;
+		this.fullName = new process.Validation().fullnameValidate(fullName);
 	}
 	public String getEmail() {
 		return email;
@@ -57,7 +57,7 @@ public class User {
 		return username;
 	}
 	public void setUsername(String username) {
-		this.username = username;
+		this.username = new process.Validation().UsernameValidate(username);
 	}
 	public StringBuilder getPassword() {
 		return password;
