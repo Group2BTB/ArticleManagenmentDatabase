@@ -15,13 +15,17 @@ import view.UI;
 
 public class ArticleController {
 
+	/*This method use to control when user want to update article*/
 	public void updateControl() {
 		ArticleDAO dao = new ArticleDAO();
 		ArticleView view = new ArticleView();
-		int id = view.updateForm();
+		int id = view.updateForm();//Call from ArticleView Class
+		
+		/*This method use to check does id that user want to update their article exist or not*/
 		Article art = dao.checkValidId(id);
 		if (art != null) {
-			boolean isTrue = dao.updateArticle(id, view.updateChoice(art));
+			/* Call method update article from ArticleDAO and return boolean */
+			boolean isTrue = dao.updateArticle(id, view.updateChoice(art)/*Call method from ArticleView to get user decision*/);
 			if (isTrue == true) {
 				System.out.println("Update successfully!");
 			} else {
@@ -31,7 +35,9 @@ public class ArticleController {
 			System.out.println("Invalid ID!");
 		}
 	}
-
+	/* The end of method */
+	
+	/* This method use to control when you user want to insert new Article */
 	public void insertControl(int userId) {
 		Article art = new ArticleView().insertForm();
 		art.setAuthorId(userId);
@@ -42,12 +48,8 @@ public class ArticleController {
 			System.out.println("Insert fail!");
 		}
 	}
+	/*The end of method*/
 
-	/*
-	 * public ArrayList<Article> searchControl(){
-	 * 
-	 * }
-	 */
 
 	public void deleteControl() {
 		int delID = new ArticleView().setIdOption();
