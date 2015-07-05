@@ -14,7 +14,7 @@ import dto.Article;
 
 public class Pagination {
 	public static int page=1;
-	public static int perpage=3;
+	public static int perpage=5;
 	public static ArrayList<Article> getArticleAll(String field,String orderTo,int stop) throws SQLException, ParseException{
 		ArrayList<Article> arr = new ArrayList<>();
 		Connection con = DBConnection.getConnection(); 
