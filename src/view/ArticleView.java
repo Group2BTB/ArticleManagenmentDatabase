@@ -151,6 +151,7 @@ public class ArticleView {
 			totalRecord = Pagination.countSelectAll();
 			int totalPage = Pagination.calculatePage(totalRecord);
 			new UI().listContent(Pagination.getArticleAll("id", "DESC", 0), Pagination.page, totalRecord, totalPage);
+			new UI().menu();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			System.out.println("Sql cannot get data from database");
@@ -158,6 +159,41 @@ public class ArticleView {
 			// TODO Auto-generated catch block
 			System.err.println("Cannot pasre");
 		}			 
+	}
+	
+	/* this method used to ask the user's choice */
+	public String userChoice(){
+		scan = new Scanner(System.in);
+		System.out.print("Do you want to delete this article? [y/n]: ");
+		String option = scan.next();
+		return option;
+	}
+	
+	public String searchBy(){
+		scan = new Scanner(System.in);
+		while(true){
+			System.out.print("Search By [id|Title|Author]: ");
+			String searchBy = scan.next();
+			if(searchBy.equalsIgnoreCase("id")||searchBy.equalsIgnoreCase("title")||searchBy.equalsIgnoreCase("author")){
+				return searchBy;
+			}else{
+				System.out.println("Invalid Option!");
+				searchBy();
+			}
+		}
+	}
+	
+	public String sortBy(){
+		scan = new Scanner(System.in);
+		while(true){
+			System.out.print("Sort By [1.id|2.Title|3.Author] :");
+			String sortBy = scan.next();
+			if(sortBy.equalsIgnoreCase("id")||sortBy.equalsIgnoreCase("title")||sortBy.equalsIgnoreCase("author")){
+				return sortBy;
+			}else{
+				System.out.println("Invalid Option!");
+			}
+		}
 	}
 
 }

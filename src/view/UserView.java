@@ -71,6 +71,7 @@ public class UserView {
 			// TODO: handle exception
 			System.out.println("\n *** Input is not valide!!! (Number only) \n");
 			new UserView().deActiveUser(udto);
+
 		}
 		
 		return udto;
@@ -83,7 +84,6 @@ public class UserView {
 		System.out.print("Input UserID you want to update : ");
 		try {
 			udto.setId(in.nextInt());
-			
 			System.out.print("what do you want to update? : [ 1.Fullname | 2.Username | 3.Password | 4.Email | 5.All ] ");
 			
 			inputChoice=in.nextInt();

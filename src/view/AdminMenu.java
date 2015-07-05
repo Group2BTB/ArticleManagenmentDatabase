@@ -19,19 +19,17 @@ public class AdminMenu {
 		System.out.println("| A)Add User| V)Views Users| U)Update User| D)Delete User| DE)Deactived User  |");
 		System.out.println("|                                                                             |");
 		System.out.println("|_____________________________________________________________________________|");
-		System.out.print("\n*Choose: ");
-
-		System.out.println("==>"); 
+		System.out.print("\n-> Choose: ");
 		return in.next().toUpperCase();
 	}
 	
 	public void displayLoginMenu(User user){
 		Scanner in=new Scanner(System.in);
-		Process pro = new Process();
+		//Process pro = new Process();
 		System.out.println("========================>} Login Pages {<===========================");
-		System.out.println("Username: ");
+		System.out.print("Username: ");
 		user.setUsername(new Validation().UsernameValidate(in.next()));
-		System.out.println("Password: ");
+		System.out.print("Password: ");
 		user.setPassword(new Validation().PassEncrypt(in.next()));
 	}
 	

@@ -202,7 +202,7 @@ public class UI {
 		System.out.println("|   F)First | P)Previous | N)Next | L)Last | G)Goto | R)Set Row | SO)Sort     |");
 		System.out.println("|   S)Search| RD)Read | A)Add | E)Edit | D)Delete | CA)CLEAR-All | B)Backup   |");
 		System.out.println("|_____________________________________________________________________________|");
-		System.out.print("\n*Choose: ");
+		//System.out.print("\n*Choose: ");
 	}
 	/**
 	 * Display Thank when user exit 
