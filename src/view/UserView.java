@@ -81,7 +81,6 @@ public class UserView {
 			System.out.println("\n *** Input is not valide!!! (Number only) \n");
 			new UserView().deActiveUser(udto);
 		}
-		
 		return udto;
 	}	
 	

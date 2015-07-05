@@ -30,7 +30,5 @@ public class UserController {
 	public void userDisplayControl(){
 		UserDAO dao = new UserDAO();
 		UserView view = new UserView();
-		
-		
 	}
 }

@@ -9,6 +9,7 @@ import dao.Pagination;
 import dao.Search;
 import dao.Sort;
 import dto.Article;
+import dto.User;
 import view.ArticleView;
 import view.UI;
 
@@ -31,8 +32,9 @@ public class ArticleController {
 		}
 	}
 
-	public void insertControl() {
+	public void insertControl(int userId) {
 		Article art = new ArticleView().insertForm();
+		art.setAuthorId(userId);
 		boolean status = new ArticleDAO().insertArticle(art);
 		if (status == true) {
 			System.out.println("Insert Successfully!");
@@ -160,4 +162,12 @@ public class ArticleController {
 			}
 		}
 	}
+	
+	public void readArticleControl(){
+		Article  art = new Article();
+		int id = new ArticleView().readChoice();
+		art = new ArticleDAO().readArticle(id);
+		new ArticleView().displayArticle(art);
+	}
+
 }

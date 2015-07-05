@@ -198,9 +198,9 @@ public class UI {
 	 */
 	public void menu(){
 		System.out.println("+=================================>} MENU {<==================================+");
-		System.out.println("|                        HM)Home SB)Restore Backup X)Exit H)Help              |");
-		System.out.println("|   F)First | P)Previous | N)Next | L)Last | G)Goto | R)Set Row | SO)Sort     |");
-		System.out.println("|   S)Search| RD)Read | A)Add | E)Edit | D)Delete | CA)CLEAR-All | B)Backup   |");
+		System.out.println("|                             HM)Home X)Exit H)Help                           |");
+		System.out.println("|   	F)First | P)Previous | N)Next | L)Last | G)Goto | R)Set Row           |");
+		System.out.println("|   S)Search| RD)Read | A)Add | E)Edit | D)Delete | SO)Sort  | B)Backup       |");
 		System.out.println("|_____________________________________________________________________________|");
 		//System.out.print("\n*Choose: ");
 	}
@@ -227,11 +227,10 @@ public class UI {
 		System.out.println("| 9.  A)Add : Add new Article. (*Choose: I)                                   |");
 		System.out.println("| 10. E)Edit : Edit Article by ID. (*Choose: E 10)                            |");
 		System.out.println("| 11. D)Delete : Delete Article by ID. (*Choose: D 10)                        |");
-		System.out.println("| 12. CA)CLEAR-All : CLEAR All Article. (*Choose: CA)                         |");
-		System.out.println("| 13. H)Help : Guiline application. (*Choose: H)                              |");
-		System.out.println("| 14. X)Exit : Exit application. (*Choose: X)                                 |");
-		System.out.println("| 15. HM)Home : Home page. (*Choose: HM)                                      |");
-		System.out.println("| 16. SO)Sort : Sort Article by Id, Title, Author. (*Choose: SO)              |");
+		System.out.println("| 12. H)Help : Guiline application. (*Choose: H)                              |");
+		System.out.println("| 13. X)Exit : Exit application. (*Choose: X)                                 |");
+		System.out.println("| 14. HM)Home : Home page. (*Choose: HM)                                      |");
+		System.out.println("| 15. SO)Sort : Sort Article by Id, Title, Author. (*Choose: SO)              |");
 		System.out.println("|_____________________________________________________________________________|");
 	}
 	/**

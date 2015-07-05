@@ -7,7 +7,6 @@ import java.util.Scanner;
 
 import dao.Pagination;
 import dto.Article;
-import process.ArticleController;
 import process.Validation;
 
 public class ArticleView {
@@ -50,15 +49,6 @@ public class ArticleView {
 		return str;// return user choice
 	}
 
-	/* ----------End-------- */
-
-	/* Method use to display list of Article from search */
-	public void searchDisplay(ArrayList<Article> arrList) {
-		for (Article art : arrList) {
-			System.out.println(art.getContent() + " " + art.getTitle());
-		}
-	}
-
 	/*---------End-----------*/
 
 	public Article insertForm() {
@@ -68,11 +58,9 @@ public class ArticleView {
 		art.setTitle(scan.next());
 		System.out.print("Enter Content");
 		art.setContent(getMiltiLineString());
-		System.out.print("Enter AuthorID: ");
-		art.setAuthorId(scan.nextInt());
-
 		return art;// return value of object Article to Model ArticleDAO
 	}
+	
 
 	public String getMiltiLineString(/* String msg */) {
 		Scanner scan = new Scanner(System.in);
@@ -206,6 +194,32 @@ public class ArticleView {
 				System.out.println("Invalid Option!");
 			}
 		}
+	}
+	
+	public void displayArticle(Article art){
+		try{
+			System.out.println("ID: "+art.getId());
+			System.out.println("Title: "+art.getTitle());
+			System.out.println("Author: "+art.getAuthorName());
+			System.out.println("Content: "+art.getContent());
+			System.out.println("Date: "+art.getDate());
+		}catch(NullPointerException e){
+			System.out.println("This id doesn't have content to read!");
+		}
+		
+	}
+	
+	public int readChoice(){
+		scan = new Scanner(System.in);
+		System.out.print("Enter Id to Read: ");
+		String id = scan.next();
+		if (isInteger(id) == true) {
+			return Integer.parseInt(id);
+		} else {
+			System.out.println("Please input digit!");
+			return 0;
+		}
+
 	}
 
 }

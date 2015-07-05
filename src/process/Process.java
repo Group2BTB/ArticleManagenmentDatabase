@@ -1,4 +1,5 @@
 package process;
+
 import dao.*;
 import dto.Article;
 
@@ -15,83 +16,104 @@ import dao.UserDAO;
 import dto.User;
 
 public class Process {
-	
-	public void respondProcess() throws Exception{
-		User udto=new User();// create object of class User in dto
-		UserView choice = new UserView();//create object of class UserView in view
-		String opt = new AdminMenu().displayAminPage();		
-		if(opt.matches("A") ||opt.matches("V")||opt.matches("U") ||opt.matches("D") ||opt.matches("DE") ||opt.matches("X") ||opt.matches("HM") ||opt.matches("H") ||opt.matches("A")  ){
-			
-		switch (opt) {		
-		
-		case "A":		
-			new UserView().InsertFormUser(udto);//get user object from view
-			new UserDAO().insertView(udto);//get user object from model and pass to view
-			break;
-		case "V":
-			new UserView().getUserId(udto);// get user id from view
-			new UserDAO().viewUser(udto);// get user object from model and pass to view
-			new UserView().viewUserInfo(udto);// show the result in to console
-			
-			break;	
-		case "U": 
-			int num = new UserView().UpdateUser(udto);//get user object from model and pass to view	
-			new UserDAO().Update(num,udto);//get choice and user object and updated to database
-			break;
+	/*
+	 * @param userId is used to store id of current user
+	 */
+	private static int userId = 0;//
 
-		case "D":
-			new UserView().DeleteUser(udto);// get id from view
-			new UserDAO().DeleteUsers(udto);// delete the row where id is set
-			break;
-		case "DE":
-			new UserView().deActiveUser(udto);// get id from view
-			new UserDAO().DeActivedUsers(udto);// delete the row where id is set
-			break;
-		case "X":
-			System.exit(0);
-			break;
-		case "HM":
+	public void respondProcess() throws Exception {
+		User udto = new User();// create object of class User in dto
+		UserView choice = new UserView();// create object of class UserView in
+											// view
+		String opt = new AdminMenu().displayAminPage();
+
+		if (opt.matches("A") || opt.matches("V") || opt.matches("U")
+				|| opt.matches("D") || opt.matches("DE") || opt.matches("X")
+				|| opt.matches("HM") || opt.matches("H") || opt.matches("A")) {
+
+			switch (opt) {
+
+			case "A":
+				new UserView().InsertFormUser(udto);// get user object from view
+				new UserDAO().insertView(udto);// get user object from model and
+												// pass to view
+				break;
+			case "V":
+				new UserView().getUserId(udto);// get user id from view
+				new UserDAO().viewUser(udto);// get user object from model and
+												// pass to view
+				new UserView().viewUserInfo(udto);// show the result in to
+													// console
+
+				break;
+			case "U":
+				int num = new UserView().UpdateUser(udto);// get user object
+															// from model and
+															// pass to view
+				new UserDAO().Update(num, udto);// get choice and user object
+												// and updated to database
+				break;
+
+			case "D":
+				new UserView().DeleteUser(udto);// get id from view
+				new UserDAO().DeleteUsers(udto);// delete the row where id is
+												// set
+				break;
+			case "DE":
+				new UserView().deActiveUser(udto);// get id from view
+				new UserDAO().DeActivedUsers(udto);// delete the row where id is
+													// set
+				break;
+			case "X":
+				System.exit(0);
+				break;
+			case "HM":
+				new Process().respondProcess();
+				break;
+			default:
+				break;
+			}
+
+		} else {
+			System.out.println("Syntax Error!!!");
 			new Process().respondProcess();
-			break;
-		default:
-			break;
+
 		}
-		
-	}else{
-		System.out.println("Syntax Error!!!");
-		new Process().respondProcess();
-		
 	}
-	}
-	
-	public void userControl(){
-		AdminMenu adm = new AdminMenu();// create object of class AdminMenu in view
+
+	public void userControl() {
+		AdminMenu adm = new AdminMenu();// create object of class AdminMenu in
+										// view
 		User user = new User();// create object of class User in dto
 		UserDAO udao = new UserDAO();
 		boolean istrue = true;
 		try {
-			do{
+			do {
 				adm.displayLoginMenu(user);
 				udao.checkUserLogin(user);
-				if(udao.checkUserLogin(user) == istrue){
+				if (udao.checkUserLogin(user) == istrue) {
 					System.out.println("Login success.");
-					try {System.out.println(user.getType());
-						if(user.getType().equalsIgnoreCase("admin")){
+					try {
+						// System.out.println(user.getType());
+						if (user.getType().equalsIgnoreCase("admin")) {
 							respondProcess();
-						}else{
+						} else {
+							// System.out.println(user.getId());
+							userId += user.getId();
 							new Process().articleController();
+
 						}
-						
+
 					} catch (Exception e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-				}else{
-					System.out.println("Invalid Username or Password! Login again.");
+				} else {
+					System.out
+							.println("Invalid Username or Password! Login again.");
 				}
-			}while(udao.checkUserLogin(user) != istrue);
-			
-			
+			} while (udao.checkUserLogin(user) != istrue);
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -100,41 +122,35 @@ public class Process {
 
 	public static void main(String[] args) throws Exception {
 
-		new Process().articleController();
-
-		//new Process().userControl();
-
-		/*Article art = new ArticleDAO().checkValidId(2);
-		System.out.println(art.getTitle());*/
-		//new Process().articleController();
-		//new ArticleController().searchControl();
-
+		new Process().userControl();
+		//new ArticleController().readArticleControl();
 	}
-	
-	public void articleController() throws SQLException, ParseException{
-		//new UI().head();
-		new ArticleView().displayHomePage();	
+
+	public void articleController() throws SQLException, ParseException {
+		new UI().head();
+		new ArticleView().displayHomePage();
 		String searchAction = null;
-		while(true){
+		while (true) {
 			String[] str = new ArticleView().getOption();
-			if(str.length>2 || str.length<=0){
+			if (str.length > 2 || str.length <= 0) {
 				System.out.println("Invalid Keyword!!! Please Input again!");
-			}else{
-				int totalRecord=0;
-				int totalPage=0;
-				if(str.length==2){
-					if(str[1].matches("[a-zA-z]{1}")){
-						System.out.println("Invalid Keyword!!! Please Input again!");
+			} else {
+				int totalRecord = 0;
+				int totalPage = 0;
+				if (str.length == 2) {
+					if (str[1].matches("[a-zA-z]{1}")) {
+						System.out
+								.println("Invalid Keyword!!! Please Input again!");
 						continue;
 					}
 				}
-				if(Search.searchAct == false){
-					switch(str[0]){
+				if (Search.searchAct == false) {
+					switch (str[0]) {
 					case "S":
-						new ArticleController().searchControl();					
+						new ArticleController().searchControl();
 						break;
 					case "A":
-						new ArticleController().insertControl();
+						new ArticleController().insertControl(userId);
 						new ArticleView().displayHomePage();
 						break;
 					case "E":
@@ -149,45 +165,64 @@ public class Process {
 						Search.notSearch();
 						new ArticleView().displayHomePage();
 						break;
-					case "R":					
-						if(Integer.parseInt(str[1])>0){
+					case "R":
+						if (Integer.parseInt(str[1]) > 0) {
 							Pagination.setRow(Integer.parseInt(str[1]));
-						}else{
+						} else {
 							System.out.println("Set Row must be biger than 0.");
 							continue;
 						}
 						totalRecord = Pagination.countSelectAll();
 						totalPage = Pagination.calculatePage(totalRecord);
-						new UI().listContent(Pagination.getArticleAll(Sort.order, Sort.sort, Pagination.startIndex()), Pagination.page, totalRecord, totalPage);
+						new UI().listContent(
+								Pagination.getArticleAll(Sort.order, Sort.sort,
+										Pagination.startIndex()),
+								Pagination.page, totalRecord, totalPage);
 						new UI().menu();
 						break;
-					case "N":				
-						totalRecord = Pagination.countSelectAll();	
+					case "N":
+						totalRecord = Pagination.countSelectAll();
 						totalPage = Pagination.calculatePage(totalRecord);
 						Pagination.next(totalPage);
-						new UI().listContent(Pagination.getArticleAll(Sort.order, Sort.sort, Pagination.startIndex()), Pagination.page, totalRecord, totalPage);
+						new UI().listContent(
+								Pagination.getArticleAll(Sort.order, Sort.sort,
+										Pagination.startIndex()),
+								Pagination.page, totalRecord, totalPage);
 						new UI().menu();
 						break;
-					case "L":				
-						totalRecord = Pagination.countSelectAll();	
+					case "L":
+						totalRecord = Pagination.countSelectAll();
 						totalPage = Pagination.calculatePage(totalRecord);
 						Pagination.last(totalPage);
-						new UI().listContent(Pagination.getArticleAll(Sort.order, Sort.sort, Pagination.startIndex()), Pagination.page, totalRecord, totalPage);
+						new UI().listContent(
+								Pagination.getArticleAll(Sort.order, Sort.sort,
+										Pagination.startIndex()),
+								Pagination.page, totalRecord, totalPage);
 						new UI().menu();
 						break;
-					case "P":				
-						totalRecord = Pagination.countSelectAll();	
+					case "P":
+						totalRecord = Pagination.countSelectAll();
 						totalPage = Pagination.calculatePage(totalRecord);
 						Pagination.previous();
-						new UI().listContent(Pagination.getArticleAll(Sort.order, Sort.sort, Pagination.startIndex()), Pagination.page, totalRecord, totalPage);
+						new UI().listContent(
+								Pagination.getArticleAll(Sort.order, Sort.sort,
+										Pagination.startIndex()),
+								Pagination.page, totalRecord, totalPage);
 						new UI().menu();
 						break;
-					case "F":				
-						totalRecord = Pagination.countSelectAll();	
+					case "F":
+						totalRecord = Pagination.countSelectAll();
 						totalPage = Pagination.calculatePage(totalRecord);
-						Pagination.first();					
-						new UI().listContent(Pagination.getArticleAll(Sort.order, Sort.sort, Pagination.startIndex()), Pagination.page, totalRecord, totalPage);
+						Pagination.first();
+						new UI().listContent(
+								Pagination.getArticleAll(Sort.order, Sort.sort,
+										Pagination.startIndex()),
+								Pagination.page, totalRecord, totalPage);
 						new UI().menu();
+						break;
+					case "RD":
+						new ArticleController().readArticleControl();
+						new ArticleView().displayHomePage();
 						break;
 					case "H":
 						new UI().help();
@@ -197,16 +232,16 @@ public class Process {
 						System.exit(0);
 						break;
 					case "SO":
-						new ArticleController().sortControl();						
+						new ArticleController().sortControl();
 						break;
 					}
-				}else{
-					switch(str[0]){
+				} else {
+					switch (str[0]) {
 					case "S":
-						new ArticleController().searchControl();					
+						new ArticleController().searchControl();
 						break;
 					case "A":
-						new ArticleController().insertControl();
+						new ArticleController().insertControl(userId);
 						new ArticleView().displayHomePage();
 						break;
 					case "E":
@@ -221,94 +256,154 @@ public class Process {
 						Search.notSearch();
 						new ArticleView().displayHomePage();
 						break;
-					case "R":					
-						if(Integer.parseInt(str[1])>0){
+					case "R":
+						if (Integer.parseInt(str[1]) > 0) {
 							Pagination.setRow(Integer.parseInt(str[1]));
-						}else{
+						} else {
 							System.out.println("Set Row must be biger than 0.");
 							continue;
 						}
 						new ArticleController().displaySearch();
 						break;
-					case "N":						
-						if(Search.searchType.equals("id")){	
-							ArrayList<Article> arr = Pagination.getArticleBySearch(Search.searchValue, Search.searchType, Sort.order, Sort.sort, Pagination.startIndex());
+					case "N":
+						if (Search.searchType.equals("id")) {
+							ArrayList<Article> arr = Pagination
+									.getArticleBySearch(Search.searchValue,
+											Search.searchType, Sort.order,
+											Sort.sort, Pagination.startIndex());
 							totalRecord = arr.size();
 							totalPage = Pagination.calculatePage(totalRecord);
 							Pagination.next(totalPage);
-							new UI().listContent(arr, Pagination.page, totalRecord, totalPage);
-						}else if(Search.searchType.equals("title")){
-							totalRecord = Pagination.countSearchBy(Search.searchValue, Search.searchType);
+							new UI().listContent(arr, Pagination.page,
+									totalRecord, totalPage);
+						} else if (Search.searchType.equals("title")) {
+							totalRecord = Pagination.countSearchBy(
+									Search.searchValue, Search.searchType);
 							totalPage = Pagination.calculatePage(totalRecord);
 							Pagination.next(totalPage);
-							new UI().listContent(Pagination.getArticleBySearch(Search.searchValue, Search.searchType, Sort.order, Sort.sort, Pagination.startIndex()), Pagination.page, totalRecord, totalPage);			
-						}else if(Search.searchType.equals("author")){
-							totalRecord = Pagination.countSearchBy(Search.searchValue, Search.searchType);
+							new UI().listContent(Pagination.getArticleBySearch(
+									Search.searchValue, Search.searchType,
+									Sort.order, Sort.sort,
+									Pagination.startIndex()), Pagination.page,
+									totalRecord, totalPage);
+						} else if (Search.searchType.equals("author")) {
+							totalRecord = Pagination.countSearchBy(
+									Search.searchValue, Search.searchType);
 							totalPage = Pagination.calculatePage(totalRecord);
 							Pagination.next(totalPage);
-							new UI().listContent(Pagination.getArticleBySearch(Search.searchValue, Search.searchType, Sort.order, Sort.sort, Pagination.startIndex()), Pagination.page, totalRecord, totalPage);			
+							new UI().listContent(Pagination.getArticleBySearch(
+									Search.searchValue, Search.searchType,
+									Sort.order, Sort.sort,
+									Pagination.startIndex()), Pagination.page,
+									totalRecord, totalPage);
 						}
 						new UI().menu();
 						break;
-					case "L":						
-						if(Search.searchType.equals("id")){	
-							ArrayList<Article> arr = Pagination.getArticleBySearch(Search.searchValue, Search.searchType, Sort.order, Sort.sort, Pagination.startIndex());
+					case "L":
+						if (Search.searchType.equals("id")) {
+							ArrayList<Article> arr = Pagination
+									.getArticleBySearch(Search.searchValue,
+											Search.searchType, Sort.order,
+											Sort.sort, Pagination.startIndex());
 							totalRecord = arr.size();
 							totalPage = Pagination.calculatePage(totalRecord);
 							Pagination.last(totalPage);
-							new UI().listContent(arr, Pagination.page, totalRecord, totalPage);
-						}else if(Search.searchType.equals("title")){
-							totalRecord = Pagination.countSearchBy(Search.searchValue, Search.searchType);
+							new UI().listContent(arr, Pagination.page,
+									totalRecord, totalPage);
+						} else if (Search.searchType.equals("title")) {
+							totalRecord = Pagination.countSearchBy(
+									Search.searchValue, Search.searchType);
 							totalPage = Pagination.calculatePage(totalRecord);
 							Pagination.last(totalPage);
-							new UI().listContent(Pagination.getArticleBySearch(Search.searchValue, Search.searchType, Sort.order, Sort.sort, Pagination.startIndex()), Pagination.page, totalRecord, totalPage);			
-						}else if(Search.searchType.equals("author")){
-							totalRecord = Pagination.countSearchBy(Search.searchValue, Search.searchType);
+							new UI().listContent(Pagination.getArticleBySearch(
+									Search.searchValue, Search.searchType,
+									Sort.order, Sort.sort,
+									Pagination.startIndex()), Pagination.page,
+									totalRecord, totalPage);
+						} else if (Search.searchType.equals("author")) {
+							totalRecord = Pagination.countSearchBy(
+									Search.searchValue, Search.searchType);
 							totalPage = Pagination.calculatePage(totalRecord);
 							Pagination.last(totalPage);
-							new UI().listContent(Pagination.getArticleBySearch(Search.searchValue, Search.searchType, Sort.order, Sort.sort, Pagination.startIndex()), Pagination.page, totalRecord, totalPage);			
+							new UI().listContent(Pagination.getArticleBySearch(
+									Search.searchValue, Search.searchType,
+									Sort.order, Sort.sort,
+									Pagination.startIndex()), Pagination.page,
+									totalRecord, totalPage);
 						}
 						new UI().menu();
 						break;
-					case "P":						
-						if(Search.searchType.equals("id")){	
-							ArrayList<Article> arr = Pagination.getArticleBySearch(Search.searchValue, Search.searchType, Sort.order, Sort.sort, Pagination.startIndex());
+					case "P":
+						if (Search.searchType.equals("id")) {
+							ArrayList<Article> arr = Pagination
+									.getArticleBySearch(Search.searchValue,
+											Search.searchType, Sort.order,
+											Sort.sort, Pagination.startIndex());
 							totalRecord = arr.size();
 							totalPage = Pagination.calculatePage(totalRecord);
 							Pagination.previous();
-							new UI().listContent(arr, Pagination.page, totalRecord, totalPage);
-						}else if(Search.searchType.equals("title")){
-							totalRecord = Pagination.countSearchBy(Search.searchValue, Search.searchType);
+							new UI().listContent(arr, Pagination.page,
+									totalRecord, totalPage);
+						} else if (Search.searchType.equals("title")) {
+							totalRecord = Pagination.countSearchBy(
+									Search.searchValue, Search.searchType);
 							totalPage = Pagination.calculatePage(totalRecord);
 							Pagination.previous();
-							new UI().listContent(Pagination.getArticleBySearch(Search.searchValue, Search.searchType, Sort.order, Sort.sort, Pagination.startIndex()), Pagination.page, totalRecord, totalPage);			
-						}else if(Search.searchType.equals("author")){
-							totalRecord = Pagination.countSearchBy(Search.searchValue, Search.searchType);
+							new UI().listContent(Pagination.getArticleBySearch(
+									Search.searchValue, Search.searchType,
+									Sort.order, Sort.sort,
+									Pagination.startIndex()), Pagination.page,
+									totalRecord, totalPage);
+						} else if (Search.searchType.equals("author")) {
+							totalRecord = Pagination.countSearchBy(
+									Search.searchValue, Search.searchType);
 							totalPage = Pagination.calculatePage(totalRecord);
 							Pagination.previous();
-							new UI().listContent(Pagination.getArticleBySearch(Search.searchValue, Search.searchType, Sort.order, Sort.sort, Pagination.startIndex()), Pagination.page, totalRecord, totalPage);			
+							new UI().listContent(Pagination.getArticleBySearch(
+									Search.searchValue, Search.searchType,
+									Sort.order, Sort.sort,
+									Pagination.startIndex()), Pagination.page,
+									totalRecord, totalPage);
 						}
 						new UI().menu();
 						break;
 					case "F":
-						if(Search.searchType.equals("id")){	
-							ArrayList<Article> arr = Pagination.getArticleBySearch(Search.searchValue, Search.searchType, Sort.order, Sort.sort, Pagination.startIndex());
+						if (Search.searchType.equals("id")) {
+							ArrayList<Article> arr = Pagination
+									.getArticleBySearch(Search.searchValue,
+											Search.searchType, Sort.order,
+											Sort.sort, Pagination.startIndex());
 							totalRecord = arr.size();
 							totalPage = Pagination.calculatePage(totalRecord);
-							Pagination.first();	
-							new UI().listContent(arr, Pagination.page, totalRecord, totalPage);
-						}else if(Search.searchType.equals("title")){
-							totalRecord = Pagination.countSearchBy(Search.searchValue, Search.searchType);
+							Pagination.first();
+							new UI().listContent(arr, Pagination.page,
+									totalRecord, totalPage);
+						} else if (Search.searchType.equals("title")) {
+							totalRecord = Pagination.countSearchBy(
+									Search.searchValue, Search.searchType);
 							totalPage = Pagination.calculatePage(totalRecord);
-							Pagination.first();	
-							new UI().listContent(Pagination.getArticleBySearch(Search.searchValue, Search.searchType, Sort.order, Sort.sort, Pagination.startIndex()), Pagination.page, totalRecord, totalPage);			
-						}else if(Search.searchType.equals("author")){
-							totalRecord = Pagination.countSearchBy(Search.searchValue, Search.searchType);
+							Pagination.first();
+							new UI().listContent(Pagination.getArticleBySearch(
+									Search.searchValue, Search.searchType,
+									Sort.order, Sort.sort,
+									Pagination.startIndex()), Pagination.page,
+									totalRecord, totalPage);
+						} else if (Search.searchType.equals("author")) {
+							totalRecord = Pagination.countSearchBy(
+									Search.searchValue, Search.searchType);
 							totalPage = Pagination.calculatePage(totalRecord);
-							Pagination.first();	
-							new UI().listContent(Pagination.getArticleBySearch(Search.searchValue, Search.searchType, Sort.order, Sort.sort, Pagination.startIndex()), Pagination.page, totalRecord, totalPage);			
+							Pagination.first();
+							new UI().listContent(Pagination.getArticleBySearch(
+									Search.searchValue, Search.searchType,
+									Sort.order, Sort.sort,
+									Pagination.startIndex()), Pagination.page,
+									totalRecord, totalPage);
 						}
 						new UI().menu();
+						break;
+					case "RD":
+						new ArticleController().readArticleControl();
+						new ArticleView().displayHomePage();
 						break;
 					case "H":
 						new UI().help();
@@ -318,12 +413,11 @@ public class Process {
 						System.exit(0);
 						break;
 					case "SO":
-						new ArticleController().sortControl();						
+						new ArticleController().sortControl();
 						break;
 					}
 				}
 			}
 		}
 	}
-	
 }

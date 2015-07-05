@@ -144,5 +144,34 @@ public class ArticleDAO implements IArticleDAO {
 		} 
 		return arrList;
 	}
-
+	
+	public Article readArticle(int id){
+		Article art = new Article();
+		ResultSet rs  = null;
+		PreparedStatement pstm = null;
+		try(Connection con = DBConnection.getConnection()){
+			pstm = con.prepareStatement("SELECT art.title, art.content, us.fullname, art.create_date from tbl_article art join tbl_user us on art.author_id = us.id where art.id=?",ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+			pstm.setInt(1, id);
+			if((rs = pstm.executeQuery()).last()){
+				art.setContent(rs.getString("content")); //set content for the article
+				art.setTitle(rs.getString("title")); //set title for the article
+				art.setId(id); //set id for the article
+				art.setAuthorName(rs.getString("fullname"));
+				art.setDate(rs.getString("create_date"));
+				return art;
+			}
+			/*while(rs.next()){
+				art.setId(id);
+				art.setTitle(rs.getString("title"));
+				art.setContent(rs.getString("content"));
+			}*/
+			rs.close();
+			pstm.close();
+			return null;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
+	}
 }

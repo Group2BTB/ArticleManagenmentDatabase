@@ -70,7 +70,6 @@ public class UserDAO {
 				strup = udto.getUsername();
 				strup = udto.getPassword().toString();
 				strup = udto.getEmail();
-
 			} else {
 				ps.setString(1, strup);
 				ps.setInt(2, udto.getId());
@@ -151,7 +150,7 @@ public class UserDAO {
 		// preparedStatement for view Information of Users
 		PreparedStatement ps = con
 				.prepareStatement(
-						"select active, type from tbl_user where username=? and passwd=?",
+						"select id, active, type from tbl_user where username=? and passwd=?",
 						ResultSet.TYPE_SCROLL_SENSITIVE,
 						ResultSet.CONCUR_UPDATABLE);
 		// set value to username, and password
@@ -160,15 +159,18 @@ public class UserDAO {
 		ResultSet rs = ps.executeQuery();
 		int active = 0;
 		String type = "";
+		int id = 0;
 		// get value 'active', 'type' from selected username and password
 		while (rs.next()) {
+			id = rs.getInt("id");
 			active = rs.getInt("active");
 			type = rs.getString("type");
 		}
 		// check if user is active or de-active
 		if (active == 1) {
 			udto.setType(type);
-			System.out.println(udto.getType());
+			udto.setId(id);
+			//System.out.println(udto.getType());
 			return rs.last();
 		} else {
 			return false;
