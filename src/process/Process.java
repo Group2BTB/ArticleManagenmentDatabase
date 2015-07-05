@@ -17,11 +17,13 @@ import dto.User;
 public class Process {
 	
 	public void respondProcess() throws Exception{
-		User udto= new User();// create object of class User in dto
+		User udto=new User();// create object of class User in dto
 		UserView choice = new UserView();//create object of class UserView in view
 		String opt = new AdminMenu().displayAminPage();
 		
-		switch (opt) {
+		if(opt.matches("A") ||opt.matches("V")||opt.matches("U") ||opt.matches("D") ||opt.matches("DE") ||opt.matches("X") ||opt.matches("HM") ||opt.matches("H") ||opt.matches("A")  ){
+			
+		switch (opt) {		
 		
 		case "A":		
 			new UserView().InsertFormUser(udto);//get user object from view
@@ -29,8 +31,8 @@ public class Process {
 			break;
 		case "V":
 			new UserView().getUserId(udto);// get user id from view
-			// get user object from model and pass to view
-			new UserView().viewUserInfo(new UserDAO().viewUser(udto));// show the result in to console
+			new UserDAO().viewUser(udto);// get user object from model and pass to view
+			new UserView().viewUserInfo(udto);// show the result in to console
 			
 			break;	
 		case "U": 
@@ -42,15 +44,25 @@ public class Process {
 			new UserView().DeleteUser(udto);// get id from view
 			new UserDAO().DeleteUsers(udto);// delete the row where id is set
 			break;
-		case "L":
-			
+		case "DE":
+			new UserView().deActiveUser(udto);// get id from view
+			new UserDAO().DeActivedUsers(udto);// delete the row where id is set
+			break;
+		case "X":
+			System.exit(0);
 			break;
 		case "HM":
-			new AdminMenu().displayAminPage();
+			new Process().respondProcess();
 			break;
 		default:
 			break;
 		}
+		
+	}else{
+		System.out.println("Syntax Error!!!");
+		new Process().respondProcess();
+		
+	}
 	}
 	
 	public void userControl(){
