@@ -17,7 +17,7 @@ public class UserView {
 	public User InsertFormUser(User udto) {
 		Scanner in = new Scanner(System.in);
 		System.out.print("Input Fullname: ");
-		udto.setFullName(new Validation().fullnameValidate(in.next()));
+		udto.setFullName(new Validation().fullnameValidate(in.nextLine()));
 		System.out.print("Input Email: ");
 		udto.setEmail(new Validation().EmailValidate(in.next()));
 		System.out.print("Input Username: ");
@@ -26,7 +26,13 @@ public class UserView {
 		udto.setPassword(new Validation().PassEncrypt(in.next()));
 		System.out.print("Input UserType: ");
 		udto.setType(in.next());
-		
+		System.out.println("\nAdd successfully!!!");
+		try {
+			new Process().respondProcess();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return udto;
 	}
 
@@ -39,6 +45,9 @@ public class UserView {
 			String yesNo = in.next();
 			if(yesNo.matches("y")){
 			udto.setId(id);
+			System.out.println("\nDelete successfully!!!");
+			new Process().respondProcess();
+			
 			}
 			else{
 				System.out.println("Delete is cancelled");
@@ -48,7 +57,6 @@ public class UserView {
 			System.out.println("\n *** Input is not valide!!! (Number only) \n");
 			new UserView().DeleteUser(udto);
 		}
-	
 		return udto;
 	}	
 	
@@ -62,7 +70,8 @@ public class UserView {
 			String yesNo = in.next().toLowerCase();
 			if(yesNo.matches("y")){
 			 udto.setId(id);
-			 System.out.println("This User is Deactived!!!");
+			 System.out.println("\nThis User is Deactived!!!");
+			 new Process().respondProcess();
 			}
 			else{
 				System.out.println("Deactive is cancelled");
@@ -71,7 +80,6 @@ public class UserView {
 			// TODO: handle exception
 			System.out.println("\n *** Input is not valide!!! (Number only) \n");
 			new UserView().deActiveUser(udto);
-
 		}
 		
 		return udto;
@@ -84,7 +92,7 @@ public class UserView {
 		System.out.print("Input UserID you want to update : ");
 		try {
 			udto.setId(in.nextInt());
-			System.out.print("what do you want to update? : [ 1.Fullname | 2.Username | 3.Password | 4.Email | 5.All ] ");
+			System.out.print("what do you want to update? : [ 1.Fullname | 2.Username | 3.Password | 4.Email ] ");
 			
 			inputChoice=in.nextInt();
 			if(inputChoice!=1 ||inputChoice!=2 ||inputChoice!=3 ||inputChoice!=4 ||inputChoice!=5){
@@ -105,25 +113,13 @@ public class UserView {
 			case 4://if inputChoice == 4
 				System.out.print("Input new Email: ");
 				udto.setEmail(in.next());
-				break;
-			case 5://if inputChoice == 5
-				System.out.print("Input new Fullname: ");
-				udto.setFullName(new Validation().fullnameValidate(in.next()));
-				
-				System.out.print("Input new Username: ");
-				udto.setUsername(new Validation().fullnameValidate(in.next()));
-				
-				System.out.print("Input new Password: ");
-				udto.setPassword(new Validation().PassEncrypt(in.next()));
-				
-				System.out.print("Input new Email: ");
-				udto.setEmail(in.next());
-				break;			
+				break;				
 				default:
+				new Process().respondProcess();
 				break;
 			}
-			}else{
-				
+			
+			}else{	
 				System.out.println("Syntax Error!!!");
 				new UserView().UpdateUser(udto);
 			}
@@ -162,6 +158,12 @@ public class UserView {
 		System.out.println("Username: " + udto.getUsername());
 		System.out.println("Email\t: " + udto.getEmail());
 		System.out.println("Usertype: " + udto.getType());
+		try {
+			new Process().respondProcess();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return udto;
 	}
 	
