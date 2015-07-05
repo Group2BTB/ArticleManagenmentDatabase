@@ -21,7 +21,7 @@ public class UserDAO {
 		try (Connection con = DBConnection.getConnection();
 		// preparedStatement for insert Infomaiton of Users
 				PreparedStatement ps = con
-						.prepareStatement("insert into tbl_user(full_name, email, username, passwd ,type)"
+						.prepareStatement("insert into tbl_user(fullname, email, username, passwd ,type)"
 								+ "values(?, ?, ?, ?, ?)");) {
 			ps.setString(1, udto.getFullName());
 			ps.setString(2, udto.getEmail());
