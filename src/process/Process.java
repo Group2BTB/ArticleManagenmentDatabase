@@ -19,8 +19,7 @@ public class Process {
 	public void respondProcess() throws Exception{
 		User udto=new User();// create object of class User in dto
 		UserView choice = new UserView();//create object of class UserView in view
-		String opt = new AdminMenu().displayAminPage();
-		
+		String opt = new AdminMenu().displayAminPage();		
 		if(opt.matches("A") ||opt.matches("V")||opt.matches("U") ||opt.matches("D") ||opt.matches("DE") ||opt.matches("X") ||opt.matches("HM") ||opt.matches("H") ||opt.matches("A")  ){
 			
 		switch (opt) {		
