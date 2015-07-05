@@ -115,29 +115,29 @@ public class ArticleDAO implements IArticleDAO {
 		
 	} 
 
-	public ArrayList<Article> searchArticle(String keyword) {
+	public ArrayList<Article> searchArticle(String keyword, String field, String orderTo, int numRow, int startRow) {
 
 		ArrayList<Article> arrList = new ArrayList<Article>();
 
 		ResultSet rs = null;
 		CallableStatement pre=null;
 		try(Connection con = DBConnection.getConnection();) {
-			Statement stm = con.createStatement();
-			String sql = "SELECT * from tbl_article JOIN tbl_user on tbl_article.author_id = tbl_user.id Where title ~* '.*"+keyword+".*' or content ~* '.*"+keyword+".*' or fullname ~* '.*"+keyword+".*'";
-			/*pre = con.prepareCall("{ call search_all(?,?,?,?,?) }");
-			pre.setString(1, value);
+			//Statement stm = con.createStatement();
+			//String sql = "SELECT * from tbl_article JOIN tbl_user on tbl_article.author_id = tbl_user.id Where title ~* '.*"+keyword+".*' or content ~* '.*"+keyword+".*' or fullname ~* '.*"+keyword+".*'";
+			pre = con.prepareCall("{ call search_all(?,?,?,?,?) }");
+			pre.setString(1, keyword);
 			pre.setString(2, field);
 			pre.setString(3, orderTo);
 			pre.setInt(4, numRow);
-			pre.setInt(5, stop);
-			rs = pre.executeQuery();*/
-			rs = stm.executeQuery(sql);
+			pre.setInt(5, startRow);
+			rs = pre.executeQuery();
+			//rs = stm.executeQuery(sql);
 			while (rs.next()) {
 				arrList.add(new Article(rs.getInt(1), rs.getString(2), rs
 						.getString(3), rs.getString(4)));
 			}
 			rs.close();
-			stm.close();
+			pre.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

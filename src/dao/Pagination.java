@@ -50,7 +50,7 @@ public class Pagination {
 			pre.setInt(1, Integer.parseInt(value));
 			break;
 		case "title":
-			pre = con.prepareCall("{ call searchbytitle(?,?,?,?,?) }");
+			pre = con.prepareCall("{ call search_by_title(?,?,?,?,?) }");
 			pre.setString(1, value);
 			break;
 		case "author":
