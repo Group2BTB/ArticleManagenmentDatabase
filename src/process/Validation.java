@@ -1,8 +1,6 @@
 package process;
-
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-
 import java.util.Scanner;
 
 
@@ -73,7 +71,7 @@ public class Validation {
 				System.out.println("Input only charater, Please input again!");
 				// Reinput fullname
 				System.out.print("Input Fullname: ");
-				return fullnameValidate(sc.next());
+				return fullnameValidate(sc.nextLine());
 			}
 
 		}
