@@ -40,7 +40,7 @@ public class Pagination {
 		}
 		return 0;
 	}
-	public ArrayList<Article> getArticleBySearch(String value,String searchBy, String field,String orderTo,int stop) throws SQLException, ParseException{
+	public static ArrayList<Article> getArticleBySearch(String value,String searchBy, String field,String orderTo,int stop) throws SQLException, ParseException{
 		ArrayList<Article> arr = new ArrayList<>();
 		Connection con = DBConnection.getConnection(); 
 		CallableStatement pre=null;

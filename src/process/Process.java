@@ -100,14 +100,14 @@ public class Process {
 
 	public static void main(String[] args) throws Exception {
 
-		//new Process().respondProcess();
+		new Process().articleController();
 
 		//new Process().userControl();
 
 		/*Article art = new ArticleDAO().checkValidId(2);
 		System.out.println(art.getTitle());*/
 		//new Process().articleController();
-		new ArticleController().searchControl();
+		//new ArticleController().searchControl();
 
 	}
 	
@@ -128,83 +128,200 @@ public class Process {
 						continue;
 					}
 				}
-				switch(str[0]){
-				case "S":
-						ArrayList<Article> arrList = new ArrayList<Article>();
-						try{
-							arrList = new ArticleDAO().searchArticle(new ArticleView().setSrtSearch(), "id", "DESC", 5,0);
-						}catch (NullPointerException e) {
-							// TODO: handle exception
-							System.out.println("Null Pointer Exception!");
+				if(Search.searchAct == false){
+					switch(str[0]){
+					case "S":
+						new ArticleController().searchControl();					
+						break;
+					case "A":
+						new ArticleController().insertControl();
+						new ArticleView().displayHomePage();
+						break;
+					case "E":
+						new ArticleController().updateControl();
+						new ArticleView().displayHomePage();
+						break;
+					case "D":
+						new ArticleController().deleteControl();
+						new ArticleView().displayHomePage();
+						break;
+					case "HM":
+						Search.notSearch();
+						new ArticleView().displayHomePage();
+						break;
+					case "R":					
+						if(Integer.parseInt(str[1])>0){
+							Pagination.setRow(Integer.parseInt(str[1]));
+						}else{
+							System.out.println("Set Row must be biger than 0.");
+							continue;
 						}
-						new ArticleView().searchDisplay(arrList);
-						
-					break;
-				case "A":
-					new ArticleController().insertControl();
-					new ArticleView().displayHomePage();
-					break;
-				case "E":
-					new ArticleController().updateControl();
-					new ArticleView().displayHomePage();
-					break;
-				case "D":
-					new ArticleController().deleteControl();
-					new ArticleView().displayHomePage();
-					break;
-				case "HM":
-					searchAction = null;
-					new ArticleView().displayHomePage();
-					break;
-				case "R":					
-					if(Integer.parseInt(str[1])>0){
-						Pagination.setRow(Integer.parseInt(str[1]));
-					}else{
-						System.out.println("Set Row must be biger than 0.");
-						continue;
+						totalRecord = Pagination.countSelectAll();
+						totalPage = Pagination.calculatePage(totalRecord);
+						new UI().listContent(Pagination.getArticleAll(Sort.order, Sort.sort, Pagination.startIndex()), Pagination.page, totalRecord, totalPage);
+						new UI().menu();
+						break;
+					case "N":				
+						totalRecord = Pagination.countSelectAll();	
+						totalPage = Pagination.calculatePage(totalRecord);
+						Pagination.next(totalPage);
+						new UI().listContent(Pagination.getArticleAll(Sort.order, Sort.sort, Pagination.startIndex()), Pagination.page, totalRecord, totalPage);
+						new UI().menu();
+						break;
+					case "L":				
+						totalRecord = Pagination.countSelectAll();	
+						totalPage = Pagination.calculatePage(totalRecord);
+						Pagination.last(totalPage);
+						new UI().listContent(Pagination.getArticleAll(Sort.order, Sort.sort, Pagination.startIndex()), Pagination.page, totalRecord, totalPage);
+						new UI().menu();
+						break;
+					case "P":				
+						totalRecord = Pagination.countSelectAll();	
+						totalPage = Pagination.calculatePage(totalRecord);
+						Pagination.previous();
+						new UI().listContent(Pagination.getArticleAll(Sort.order, Sort.sort, Pagination.startIndex()), Pagination.page, totalRecord, totalPage);
+						new UI().menu();
+						break;
+					case "F":				
+						totalRecord = Pagination.countSelectAll();	
+						totalPage = Pagination.calculatePage(totalRecord);
+						Pagination.first();					
+						new UI().listContent(Pagination.getArticleAll(Sort.order, Sort.sort, Pagination.startIndex()), Pagination.page, totalRecord, totalPage);
+						new UI().menu();
+						break;
+					case "H":
+						new UI().help();
+						break;
+					case "X":
+						new UI().thanks();
+						System.exit(0);
+						break;
+					case "SO":
+						new ArticleController().sortControl();						
+						break;
 					}
-					totalRecord = Pagination.countSelectAll();
-					totalPage = Pagination.calculatePage(totalRecord);
-					new UI().listContent(Pagination.getArticleAll("id", "DESC", Pagination.startIndex()), Pagination.page, totalRecord, totalPage);
-					new UI().menu();
-					break;
-				case "N":				
-					totalRecord = Pagination.countSelectAll();	
-					totalPage = Pagination.calculatePage(totalRecord);
-					Pagination.next(totalPage);
-					new UI().listContent(Pagination.getArticleAll("id", "DESC", Pagination.startIndex()), Pagination.page, totalRecord, totalPage);
-					new UI().menu();
-					break;
-				case "L":				
-					totalRecord = Pagination.countSelectAll();	
-					totalPage = Pagination.calculatePage(totalRecord);
-					Pagination.last(totalPage);
-					new UI().listContent(Pagination.getArticleAll("id", "DESC", Pagination.startIndex()), Pagination.page, totalRecord, totalPage);
-					new UI().menu();
-					break;
-				case "P":				
-					totalRecord = Pagination.countSelectAll();	
-					totalPage = Pagination.calculatePage(totalRecord);
-					Pagination.previous();
-					new UI().listContent(Pagination.getArticleAll("id", "DESC", Pagination.startIndex()), Pagination.page, totalRecord, totalPage);
-					new UI().menu();
-					break;
-				case "F":				
-					totalRecord = Pagination.countSelectAll();	
-					totalPage = Pagination.calculatePage(totalRecord);
-					Pagination.first();					
-					new UI().listContent(Pagination.getArticleAll("id", "DESC", Pagination.startIndex()), Pagination.page, totalRecord, totalPage);
-					new UI().menu();
-					break;
-				case "H":
-					new UI().help();
-					break;
-				case "X":
-					new UI().thanks();
-					System.exit(0);
-					break;
+				}else{
+					switch(str[0]){
+					case "S":
+						new ArticleController().searchControl();					
+						break;
+					case "A":
+						new ArticleController().insertControl();
+						new ArticleView().displayHomePage();
+						break;
+					case "E":
+						new ArticleController().updateControl();
+						new ArticleView().displayHomePage();
+						break;
+					case "D":
+						new ArticleController().deleteControl();
+						new ArticleView().displayHomePage();
+						break;
+					case "HM":
+						Search.notSearch();
+						new ArticleView().displayHomePage();
+						break;
+					case "R":					
+						if(Integer.parseInt(str[1])>0){
+							Pagination.setRow(Integer.parseInt(str[1]));
+						}else{
+							System.out.println("Set Row must be biger than 0.");
+							continue;
+						}
+						new ArticleController().displaySearch();
+						break;
+					case "N":						
+						if(Search.searchType.equals("id")){	
+							ArrayList<Article> arr = Pagination.getArticleBySearch(Search.searchValue, Search.searchType, Sort.order, Sort.sort, Pagination.startIndex());
+							totalRecord = arr.size();
+							totalPage = Pagination.calculatePage(totalRecord);
+							Pagination.next(totalPage);
+							new UI().listContent(arr, Pagination.page, totalRecord, totalPage);
+						}else if(Search.searchType.equals("title")){
+							totalRecord = Pagination.countSearchBy(Search.searchValue, Search.searchType);
+							totalPage = Pagination.calculatePage(totalRecord);
+							Pagination.next(totalPage);
+							new UI().listContent(Pagination.getArticleBySearch(Search.searchValue, Search.searchType, Sort.order, Sort.sort, Pagination.startIndex()), Pagination.page, totalRecord, totalPage);			
+						}else if(Search.searchType.equals("author")){
+							totalRecord = Pagination.countSearchBy(Search.searchValue, Search.searchType);
+							totalPage = Pagination.calculatePage(totalRecord);
+							Pagination.next(totalPage);
+							new UI().listContent(Pagination.getArticleBySearch(Search.searchValue, Search.searchType, Sort.order, Sort.sort, Pagination.startIndex()), Pagination.page, totalRecord, totalPage);			
+						}
+						new UI().menu();
+						break;
+					case "L":						
+						if(Search.searchType.equals("id")){	
+							ArrayList<Article> arr = Pagination.getArticleBySearch(Search.searchValue, Search.searchType, Sort.order, Sort.sort, Pagination.startIndex());
+							totalRecord = arr.size();
+							totalPage = Pagination.calculatePage(totalRecord);
+							Pagination.last(totalPage);
+							new UI().listContent(arr, Pagination.page, totalRecord, totalPage);
+						}else if(Search.searchType.equals("title")){
+							totalRecord = Pagination.countSearchBy(Search.searchValue, Search.searchType);
+							totalPage = Pagination.calculatePage(totalRecord);
+							Pagination.last(totalPage);
+							new UI().listContent(Pagination.getArticleBySearch(Search.searchValue, Search.searchType, Sort.order, Sort.sort, Pagination.startIndex()), Pagination.page, totalRecord, totalPage);			
+						}else if(Search.searchType.equals("author")){
+							totalRecord = Pagination.countSearchBy(Search.searchValue, Search.searchType);
+							totalPage = Pagination.calculatePage(totalRecord);
+							Pagination.last(totalPage);
+							new UI().listContent(Pagination.getArticleBySearch(Search.searchValue, Search.searchType, Sort.order, Sort.sort, Pagination.startIndex()), Pagination.page, totalRecord, totalPage);			
+						}
+						new UI().menu();
+						break;
+					case "P":						
+						if(Search.searchType.equals("id")){	
+							ArrayList<Article> arr = Pagination.getArticleBySearch(Search.searchValue, Search.searchType, Sort.order, Sort.sort, Pagination.startIndex());
+							totalRecord = arr.size();
+							totalPage = Pagination.calculatePage(totalRecord);
+							Pagination.previous();
+							new UI().listContent(arr, Pagination.page, totalRecord, totalPage);
+						}else if(Search.searchType.equals("title")){
+							totalRecord = Pagination.countSearchBy(Search.searchValue, Search.searchType);
+							totalPage = Pagination.calculatePage(totalRecord);
+							Pagination.previous();
+							new UI().listContent(Pagination.getArticleBySearch(Search.searchValue, Search.searchType, Sort.order, Sort.sort, Pagination.startIndex()), Pagination.page, totalRecord, totalPage);			
+						}else if(Search.searchType.equals("author")){
+							totalRecord = Pagination.countSearchBy(Search.searchValue, Search.searchType);
+							totalPage = Pagination.calculatePage(totalRecord);
+							Pagination.previous();
+							new UI().listContent(Pagination.getArticleBySearch(Search.searchValue, Search.searchType, Sort.order, Sort.sort, Pagination.startIndex()), Pagination.page, totalRecord, totalPage);			
+						}
+						new UI().menu();
+						break;
+					case "F":
+						if(Search.searchType.equals("id")){	
+							ArrayList<Article> arr = Pagination.getArticleBySearch(Search.searchValue, Search.searchType, Sort.order, Sort.sort, Pagination.startIndex());
+							totalRecord = arr.size();
+							totalPage = Pagination.calculatePage(totalRecord);
+							Pagination.first();	
+							new UI().listContent(arr, Pagination.page, totalRecord, totalPage);
+						}else if(Search.searchType.equals("title")){
+							totalRecord = Pagination.countSearchBy(Search.searchValue, Search.searchType);
+							totalPage = Pagination.calculatePage(totalRecord);
+							Pagination.first();	
+							new UI().listContent(Pagination.getArticleBySearch(Search.searchValue, Search.searchType, Sort.order, Sort.sort, Pagination.startIndex()), Pagination.page, totalRecord, totalPage);			
+						}else if(Search.searchType.equals("author")){
+							totalRecord = Pagination.countSearchBy(Search.searchValue, Search.searchType);
+							totalPage = Pagination.calculatePage(totalRecord);
+							Pagination.first();	
+							new UI().listContent(Pagination.getArticleBySearch(Search.searchValue, Search.searchType, Sort.order, Sort.sort, Pagination.startIndex()), Pagination.page, totalRecord, totalPage);			
+						}
+						new UI().menu();
+						break;
+					case "H":
+						new UI().help();
+						break;
+					case "X":
+						new UI().thanks();
+						System.exit(0);
+						break;
+					case "SO":
+						new ArticleController().sortControl();						
+						break;
+					}
 				}
-				
 			}
 		}
 	}

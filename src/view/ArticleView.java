@@ -18,12 +18,24 @@ public class ArticleView {
 	public String setSrtSearch() {
 		scan = new Scanner(System.in);
 		System.out.print("Enter keywoard to search: ");
-		String keyword = scan.nextLine();
-		return keyword;// return value of user's choice
+		//String keyword = scan.nextLine();
+		return scan.nextLine();// return value of user's choice
 	}
 
 	/*--------End------------*/
-
+	public String setSrtSort() {
+		scan = new Scanner(System.in);
+		while(true){
+			System.out.print("Sort By [ASC|DESC]: ");
+			String sort = scan.next();
+			if(sort.equalsIgnoreCase("ASC")||sort.equalsIgnoreCase("DESC")){
+				return sort;
+			}else{
+				System.out.println("Invalid Option!");
+				setSrtSort();
+			}
+		}
+	}
 	/* This method use to ask user to choose option that they want to do */
 	public String[] getOption() {
 		scan = new Scanner(System.in);
@@ -158,7 +170,7 @@ public class ArticleView {
 		}catch (ParseException e) {
 			// TODO Auto-generated catch block
 			System.err.println("Cannot pasre");
-		}			 
+		}	 
 	}
 	
 	/* this method used to ask the user's choice */
