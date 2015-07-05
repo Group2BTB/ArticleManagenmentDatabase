@@ -37,6 +37,7 @@ public class Process {
 				new UserView().InsertFormUser(udto);// get user object from view
 				new UserDAO().insertView(udto);// get user object from model and
 												// pass to view
+				new Process().respondProcess();
 				break;
 			case "V":
 				new UserView().getUserId(udto);// get user id from view
@@ -44,7 +45,7 @@ public class Process {
 												// pass to view
 				new UserView().viewUserInfo(udto);// show the result in to
 													// console
-
+				new Process().respondProcess();
 				break;
 			case "U":
 				int num = new UserView().UpdateUser(udto);// get user object
@@ -52,17 +53,20 @@ public class Process {
 															// pass to view
 				new UserDAO().Update(num, udto);// get choice and user object
 												// and updated to database
+				new Process().respondProcess();
 				break;
 
 			case "D":
 				new UserView().DeleteUser(udto);// get id from view
 				new UserDAO().DeleteUsers(udto);// delete the row where id is
 												// set
+				new Process().respondProcess();
 				break;
 			case "DE":
 				new UserView().deActiveUser(udto);// get id from view
 				new UserDAO().DeActivedUsers(udto);// delete the row where id is
 													// set
+				new Process().respondProcess();
 				break;
 			case "X":
 				System.exit(0);
@@ -70,7 +74,11 @@ public class Process {
 			case "HM":
 				new Process().respondProcess();
 				break;
+			case "H":
+				new AdminMenu().helpe();
+				break;
 			default:
+				new Process().respondProcess();
 				break;
 			}
 
