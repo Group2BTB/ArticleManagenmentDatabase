@@ -103,17 +103,18 @@ public class Process {
 
 		//new Process().respondProcess();
 
-		new Process().userControl();
+		//new Process().userControl();
 
 		/*Article art = new ArticleDAO().checkValidId(2);
 		System.out.println(art.getTitle());*/
 		//new Process().articleController();
+		new ArticleController().searchControl();
 
 	}
 	
 	public void articleController() throws SQLException, ParseException{
-
-		new ArticleView().displayHomePage();
+		//new UI().head();
+		new ArticleView().displayHomePage();	
 		String searchAction = null;
 		while(true){
 			String[] str = new ArticleView().getOption();
@@ -132,12 +133,13 @@ public class Process {
 				case "S":
 						ArrayList<Article> arrList = new ArrayList<Article>();
 						try{
-							arrList = new ArticleDAO().searchArticle(new ArticleView().setSrtSearch());
+							arrList = new ArticleDAO().searchArticle(new ArticleView().setSrtSearch(), "id", "DESC", 5,0);
 						}catch (NullPointerException e) {
 							// TODO: handle exception
 							System.out.println("Null Pointer Exception!");
 						}
 						new ArticleView().searchDisplay(arrList);
+						
 					break;
 				case "A":
 					new ArticleController().insertControl();
@@ -145,10 +147,11 @@ public class Process {
 					break;
 				case "E":
 					new ArticleController().updateControl();
+					new ArticleView().displayHomePage();
 					break;
 				case "D":
-					int delID = new ArticleView().setIdOption();
-					new ArticleDAO().deleteArticle(delID);
+					new ArticleController().deleteControl();
+					new ArticleView().displayHomePage();
 					break;
 				case "HM":
 					searchAction = null;
@@ -164,30 +167,42 @@ public class Process {
 					totalRecord = Pagination.countSelectAll();
 					totalPage = Pagination.calculatePage(totalRecord);
 					new UI().listContent(Pagination.getArticleAll("id", "DESC", Pagination.startIndex()), Pagination.page, totalRecord, totalPage);
+					new UI().menu();
 					break;
 				case "N":				
 					totalRecord = Pagination.countSelectAll();	
 					totalPage = Pagination.calculatePage(totalRecord);
 					Pagination.next(totalPage);
 					new UI().listContent(Pagination.getArticleAll("id", "DESC", Pagination.startIndex()), Pagination.page, totalRecord, totalPage);
+					new UI().menu();
 					break;
 				case "L":				
 					totalRecord = Pagination.countSelectAll();	
 					totalPage = Pagination.calculatePage(totalRecord);
 					Pagination.last(totalPage);
 					new UI().listContent(Pagination.getArticleAll("id", "DESC", Pagination.startIndex()), Pagination.page, totalRecord, totalPage);
+					new UI().menu();
 					break;
 				case "P":				
 					totalRecord = Pagination.countSelectAll();	
 					totalPage = Pagination.calculatePage(totalRecord);
 					Pagination.previous();
 					new UI().listContent(Pagination.getArticleAll("id", "DESC", Pagination.startIndex()), Pagination.page, totalRecord, totalPage);
+					new UI().menu();
 					break;
 				case "F":				
 					totalRecord = Pagination.countSelectAll();	
 					totalPage = Pagination.calculatePage(totalRecord);
 					Pagination.first();					
 					new UI().listContent(Pagination.getArticleAll("id", "DESC", Pagination.startIndex()), Pagination.page, totalRecord, totalPage);
+					new UI().menu();
+					break;
+				case "H":
+					new UI().help();
+					break;
+				case "X":
+					new UI().thanks();
+					System.exit(0);
 					break;
 				}
 				
