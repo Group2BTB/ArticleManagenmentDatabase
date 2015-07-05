@@ -98,4 +98,17 @@ public class Validation {
 
 		}
 	}
+	
+	/*To check for immoral words in a content
+	* @content the content to check for immoral words
+	*/
+	public static String checkWord(String content){
+		
+		String[] str = {"fuck","fucked","sex","porn","pornography","shit"}; //list of immoral words
+		for(int i=0; i<str.length; i++){
+			if(content.matches(".*"+str[i]+".*"))
+				return str[i];
+		}
+		return null;		
+	}
 }
