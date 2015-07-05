@@ -75,7 +75,6 @@ public class UI {
 					continue;
 				}
 			System.out.print("-");
-			
 				
 		}
 	}

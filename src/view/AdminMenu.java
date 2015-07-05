@@ -33,4 +33,18 @@ public class AdminMenu {
 		user.setPassword(new Validation().PassEncrypt(in.next()));
 	}
 	
+	public void helpe(){
+		System.out.println("+=================================>} HELP {<==================================+");
+		System.out.println("+-----------------------------------------------------------------------------+");
+		System.out.println("| 1.  HM)Home : Display homepage. (*Choose: HM)                               |");
+		System.out.println("| 2.  A)Add User : Add new user (*Choose: A)                                  |");
+		System.out.println("| 3.  V)View User : View user by Id. (*Choose: V)                             |");
+		System.out.println("| 4.  U)Edit : Edit User by ID. (*Choose: U)                                  |");
+		System.out.println("| 5.  D)Delete : Delete User by ID. (*Choose: D)                              |");
+		System.out.println("| 6.  DE)Deactive User by ID(*Choose: DE)                                     |");
+		System.out.println("| 7.  H)Help : Guiline application. (*Choose: H)                              |");
+		System.out.println("| 8.  X)Exit : Close Program (*Choose: X)                                     |");
+		System.out.println("+-----------------------------------------------------------------------------+");
+	}
+	
 }
