@@ -198,8 +198,8 @@ public class UI {
 	public void menu(){
 		System.out.println("+=================================>} MENU {<==================================+");
 		System.out.println("|                             HM)Home X)Exit H)Help                           |");
+		System.out.println("|         S)Search| RD)Read | A)Add | E)Edit | D)Delete | SO)Sort             |");
 		System.out.println("|   	F)First | P)Previous | N)Next | L)Last | G)Goto | R)Set Row           |");
-		System.out.println("|   S)Search| RD)Read | A)Add | E)Edit | D)Delete | SO)Sort  | B)Backup       |");
 		System.out.println("|_____________________________________________________________________________|");
 		//System.out.print("\n*Choose: ");
 	}

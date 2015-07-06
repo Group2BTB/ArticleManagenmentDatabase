@@ -83,9 +83,10 @@ public class ArticleController {
 				int totalPage = Pagination.calculatePage(totalRecord);
 				new UI().listContent(Pagination.getArticleBySearch(Search.searchValue, Search.searchType, Sort.order, Sort.sort, Pagination.startIndex()), Pagination.page, totalRecord, totalPage);			
 			}						
-		} catch (SQLException | ParseException e) {
+		} catch (SQLException | ParseException |NumberFormatException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			//e.printStackTrace();
+			new ArticleView().invalid();
 		}finally{
 			new UI().menu();
 		}
@@ -116,7 +117,6 @@ public class ArticleController {
 				totalRecord = Pagination.countSelectAll();
 				int totalPage = Pagination.calculatePage(totalRecord);
 				Pagination.first();
-				System.out.println(totalRecord);
 				new UI().listContent(Pagination.getArticleAll(Sort.order, Sort.sort, Pagination.startIndex()), Pagination.page, totalRecord, totalPage);							
 			} catch (SQLException | ParseException e) {
 				// TODO Auto-generated catch block
@@ -132,8 +132,7 @@ public class ArticleController {
 				try {
 					arr = Pagination.getArticleBySearch(Search.searchValue, Search.searchType, Sort.order, Sort.sort, Pagination.startIndex());
 					totalRecord = arr.size();
-					totalPage = Pagination.calculatePage(totalRecord);
-					Pagination.first();	
+					totalPage = Pagination.calculatePage(totalRecord);	
 					new UI().listContent(arr, Pagination.page, totalRecord, totalPage);
 				} catch (SQLException | ParseException e) {
 					// TODO Auto-generated catch block
@@ -159,8 +158,7 @@ public class ArticleController {
 				} catch (SQLException | ParseException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
-				}
-						
+				}	
 			}
 		}
 	}
@@ -170,6 +168,22 @@ public class ArticleController {
 		int id = new ArticleView().readChoice();
 		art = new ArticleDAO().readArticle(id);
 		new ArticleView().displayArticle(art);
+	}
+	
+	public void displayHomePage(){
+		int totalRecord = 0;
+		try {
+			totalRecord = Pagination.countSelectAll();
+			int totalPage = Pagination.calculatePage(totalRecord);
+			new UI().listContent(Pagination.getArticleAll(Sort.order, Sort.sort, Pagination.startIndex()), Pagination.page, totalRecord, totalPage);
+			new UI().menu();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.out.println("Sql cannot get data from database");
+		}catch (ParseException e) {
+			// TODO Auto-generated catch block
+			System.err.println("Cannot pasre");
+		}	 
 	}
 
 }

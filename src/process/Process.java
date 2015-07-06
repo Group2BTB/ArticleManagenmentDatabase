@@ -144,7 +144,7 @@ public class Process {
 
 	public void articleController() throws SQLException, ParseException {
 		new UI().head();
-		new ArticleView().displayHomePage();
+		new ArticleController().displayHomePage();
 		String searchAction = null;
 		while (true) {
 			String[] str = new ArticleView().getOption();
@@ -167,33 +167,37 @@ public class Process {
 						break;
 					case "A":
 						new ArticleController().insertControl(userId);
-						new ArticleView().displayHomePage();
+						new ArticleController().displayHomePage();
 						break;
 					case "E":
 						new ArticleController().updateControl();
-						new ArticleView().displayHomePage();
+						new ArticleController().displayHomePage();
 						break;
 					case "D":
 						new ArticleController().deleteControl();
-						new ArticleView().displayHomePage();
+						new ArticleController().displayHomePage();
 						break;
 					case "HM":
 						Search.notSearch();
-						new ArticleView().displayHomePage();
+						new ArticleController().displayHomePage();
 						break;
 					case "R":
-						if (Integer.parseInt(str[1]) > 0) {
-							Pagination.setRow(Integer.parseInt(str[1]));
-						} else {
-							System.out.println("Set Row must be biger than 0.");
-							continue;
+						if(str.length>1){
+							if (Integer.parseInt(str[1]) > 0) {
+								Pagination.setRow(Integer.parseInt(str[1]));
+							} else {
+								System.out.println("Set Row must be biger than 0.");
+								continue;
+							}
+							totalRecord = Pagination.countSelectAll();
+							totalPage = Pagination.calculatePage(totalRecord);
+							new UI().listContent(
+									Pagination.getArticleAll(Sort.order, Sort.sort,
+											Pagination.startIndex()),
+									Pagination.page, totalRecord, totalPage);
+						}else{
+							new ArticleView().invalid();
 						}
-						totalRecord = Pagination.countSelectAll();
-						totalPage = Pagination.calculatePage(totalRecord);
-						new UI().listContent(
-								Pagination.getArticleAll(Sort.order, Sort.sort,
-										Pagination.startIndex()),
-								Pagination.page, totalRecord, totalPage);
 						new UI().menu();
 						break;
 					case "N":
@@ -238,7 +242,7 @@ public class Process {
 						break;
 					case "RD":
 						new ArticleController().readArticleControl();
-						new ArticleView().displayHomePage();
+						//new ArticleController().displayHomePage();
 						break;
 					case "H":
 						new UI().help();
@@ -258,19 +262,19 @@ public class Process {
 						break;
 					case "A":
 						new ArticleController().insertControl(userId);
-						new ArticleView().displayHomePage();
+						new ArticleController().displayHomePage();
 						break;
 					case "E":
 						new ArticleController().updateControl();
-						new ArticleView().displayHomePage();
+						new ArticleController().displayHomePage();
 						break;
 					case "D":
 						new ArticleController().deleteControl();
-						new ArticleView().displayHomePage();
+						new ArticleController().displayHomePage();
 						break;
 					case "HM":
 						Search.notSearch();
-						new ArticleView().displayHomePage();
+						new ArticleController().displayHomePage();
 						break;
 					case "R":
 						if (Integer.parseInt(str[1]) > 0) {
@@ -419,7 +423,7 @@ public class Process {
 						break;
 					case "RD":
 						new ArticleController().readArticleControl();
-						new ArticleView().displayHomePage();
+						//new ArticleController().displayHomePage();
 						break;
 					case "H":
 						new UI().help();

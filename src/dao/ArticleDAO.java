@@ -13,6 +13,7 @@ import java.util.Scanner;
 import java.util.concurrent.Callable;
 
 import process.Format;
+import process.Validation;
 import dto.Article;
 import utilities.DBConnection;
 
@@ -59,10 +60,18 @@ public class ArticleDAO implements IArticleDAO {
 	public boolean insertArticle(Article art) {
 		// TODO Auto-generated method stub
 		try(Connection con = DBConnection.getConnection(); //get connection to Database				
-			PreparedStatement prestm = con.prepareStatement("insert into tbl_article(title,author_id,content)values(?,?,?)"); ) {			
+			PreparedStatement prestm = con.prepareStatement("insert into tbl_article(title,author_id,content,approved)values(?,?,?,?)"); ) {			
+			
+				
 			prestm.setString(1, art.getTitle()); //set title for an article to insert to Database
 			prestm.setInt(2,art.getAuthorId()); //set author_id for an article to insert to Database
-			prestm.setString(3, art.getContent()); //set content for an article to insert to Database
+			prestm.setString(3, art.getContent()); //set content for an article to insert to Database			
+			if((Validation.checkWord(art.getTitle())!= null) || (Validation.checkWord(art.getContent().toString())!= null)){				
+				prestm.setInt(4, 0);
+			}else{
+				prestm.setInt(4, 1);
+			}
+			
 			prestm.executeUpdate();		
 			
 			//CallableStatement stmCall = con.prepareCall(" call search_all(?, ?, ?, ?)}");
@@ -83,11 +92,15 @@ public class ArticleDAO implements IArticleDAO {
 	public boolean updateArticle(int id, Article art) {
 		
 		try(Connection con = DBConnection.getConnection(); //get connection to Database
-				PreparedStatement prestm = con.prepareStatement("update tbl_article set title=?, author_id=?,content=? where id=?");){
+				PreparedStatement prestm = con.prepareStatement("update tbl_article set title=?, author_id=?,content=?, approved=? where id=?");){
 			prestm.setString(1, art.getTitle()); //set new title to be updated
 			prestm.setInt(2, art.getAuthorId()); //set new author_id to be updated
-			prestm.setString(3, art.getContent()); //set new content to be updated
-			prestm.setInt(4, id); //set id for article to update
+			prestm.setString(3, art.getContent()); //set new content to be updated			
+			if((Validation.checkWord(art.getTitle())!= null) || (Validation.checkWord(art.getContent())!= null))
+				prestm.setInt(4, 0);
+			else
+				prestm.setInt(4, 1);
+			prestm.setInt(5, id); //set id for article to update
 			prestm.executeUpdate();
 			return true;
 		}catch(SQLException ex){

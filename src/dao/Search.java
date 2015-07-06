@@ -22,7 +22,7 @@ public class Search {
 	
 	public static void notSearch(){
 		Pagination.page = 1;
-		Pagination.perpage=3;
+		Pagination.perpage=5;
 		
 		searchValue = null;
 		searchAct = false;

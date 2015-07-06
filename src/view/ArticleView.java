@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import dao.Pagination;
+import dao.Sort;
 import dto.Article;
 import process.Validation;
 
@@ -145,21 +146,6 @@ public class ArticleView {
 		return art;
 	}
 	
-	public void displayHomePage(){
-		int totalRecord = 0;
-		try {
-			totalRecord = Pagination.countSelectAll();
-			int totalPage = Pagination.calculatePage(totalRecord);
-			new UI().listContent(Pagination.getArticleAll("id", "DESC", 0), Pagination.page, totalRecord, totalPage);
-			new UI().menu();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			System.out.println("Sql cannot get data from database");
-		}catch (ParseException e) {
-			// TODO Auto-generated catch block
-			System.err.println("Cannot pasre");
-		}	 
-	}
 	
 	/* this method used to ask the user's choice */
 	public String userChoice(){
@@ -220,6 +206,9 @@ public class ArticleView {
 			return 0;
 		}
 
+	}
+	public void invalid(){
+		System.out.println("Invalid Keyword! Please input again!!");
 	}
 
 }
