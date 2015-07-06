@@ -79,19 +79,19 @@ public class ArticleController {
 		String searchBy = view.searchBy();
 		try {
 			String keyword = view.setSrtSearch();
-			if(searchBy.equals("id")){ // searchBy equal to id				
-				Search.searchByID(Integer.parseInt(keyword));
+			if(searchBy.equals("id")){ // if searchBy option equal to id				
+				Search.searchByID(Integer.parseInt(keyword));//
 				/* get value from method getArticleBySearch() store in arrayList arr*/
 				ArrayList<Article> arr = Pagination.getArticleBySearch(Search.searchValue, Search.searchType, Sort.order, Sort.sort, Pagination.startIndex());
 				int totalRecord = arr.size();// get size of arraList
-				int totalPage = Pagination.calculatePage(totalRecord);
-				new UI().listContent(arr, Pagination.page, totalRecord, totalPage);
-			}else if(searchBy.equals("title")){
+				int totalPage = Pagination.calculatePage(totalRecord);//get total record from database
+				new UI().listContent(arr, Pagination.page, totalRecord, totalPage);// call method listContent() From class UI in package view
+			}else if(searchBy.equals("title")){ //if searchBy option equal to title
 				Search.searchByTitle(keyword);
 				int totalRecord = Pagination.countSearchBy(keyword, Search.searchType);
 				int totalPage = Pagination.calculatePage(totalRecord);
 				new UI().listContent(Pagination.getArticleBySearch(Search.searchValue, Search.searchType, Sort.order, Sort.sort, Pagination.startIndex()), Pagination.page, totalRecord, totalPage);			
-			}else if(searchBy.equals("author")){
+			}else if(searchBy.equals("author")){//if searchBy option equal to author
 				Search.searchByAuthor(keyword);
 				int totalRecord = Pagination.countSearchBy(keyword, Search.searchType);
 				int totalPage = Pagination.calculatePage(totalRecord);
