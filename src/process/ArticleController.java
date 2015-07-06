@@ -139,7 +139,7 @@ public class ArticleController {
 				int totalPage = Pagination.calculatePage(totalRecord);
 				Pagination.first();
 				new UI().listContent(Pagination.getArticleAll(Sort.order, Sort.sort, Pagination.startIndex()), Pagination.page, totalRecord, totalPage);							
-			} catch (SQLException | ParseException e) {
+			} catch (SQLException | ParseException | NumberFormatException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}finally{

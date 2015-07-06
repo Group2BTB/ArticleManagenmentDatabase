@@ -68,10 +68,10 @@ public class ArticleDAO implements IArticleDAO {
 			prestm.setInt(2,art.getAuthorId()); //set author_id for an article to insert to Database
 			prestm.setString(3, art.getContent()); //set content for an article to insert to Database			
 			if((Validation.checkWord(art.getTitle())!= null) || (Validation.checkWord(art.getContent().trim())!= null)){				
-				System.out.println("dddd");
+				//System.out.println("dddd");
 				prestm.setInt(4, 0);
 			}else{
-				System.out.println("fffff");
+				//System.out.println("fffff");
 				prestm.setInt(4, 1);
 			}
 			
