@@ -31,6 +31,27 @@ public class AdminMenu {
 		user.setPassword(new Validation().PassEncrypt(in.next()));
 	}
 	
+	public int confirmMenu(){
+		Scanner in=new Scanner(System.in);
+		System.out.println("1)Try Again\n2)Forgot Password");
+		System.out.println("==>");
+		return in.nextInt();
+	}
+	
+	public String getUsername(User udto){
+		Scanner in=new Scanner(System.in);
+		System.out.println("Enter Username:");
+		udto.setUsername(in.next());
+		return udto.getUsername();
+	}
+	
+	public String inputNewPassword(){
+		Scanner in=new Scanner(System.in);
+		System.out.println("Enter new password:");
+		String passwd = in.next();
+		return passwd;
+	}
+	
 	public void helpe(){
 		System.out.println("+=================================>} HELP {<==================================+");
 		System.out.println("+-----------------------------------------------------------------------------+");
