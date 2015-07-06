@@ -1,5 +1,6 @@
 package dao;
 
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.sql.Connection;
@@ -56,6 +57,20 @@ public class UserDAO {
 			e.printStackTrace();
 			return false;
 		}
+	}
+	
+	public boolean newPasswd(String passwd, String username){
+		try (Connection con = DBConnection.getConnection();
+				PreparedStatement ps=con.prepareStatement("insert into tbl_user(passwd) values(?) where username=?")){
+			ps.setString(1, passwd);
+			ps.setString(2, username);
+			if(ps.executeUpdate()>0){
+				return true;
+			}
+			return false;
+		}catch(Exception e){return false;}
+		
+		
 	}
 
 	// getUpdateUsername is used for Update of users informaition
@@ -195,6 +210,26 @@ public class UserDAO {
 		}
 
 	}
+	
+	public boolean getNewPassword(String username){
+		try(Connection con = DBConnection.getConnection();
+		// preparedStatement for insert Infomaiton of Users
+		PreparedStatement ps=con.prepareStatement("select username from tbl_user")){
+			ResultSet rs = ps.executeQuery();
+			boolean isTrue = true;
+			while(rs.next()){
+				String getUsername = rs.getString("username");
+				if(username.equalsIgnoreCase(getUsername)){
+					return isTrue;
+				}
+			}
+			if(isTrue == true){
+				return true;
+			}
+			return false;
+		}catch(Exception e){return false;}
+		
+	}
 
 	
 	public User getType(User udto){
@@ -260,6 +295,7 @@ public class UserDAO {
 			e.printStackTrace();
 		}
 	}
+	
 
 	public ArrayList<User> listUser() throws SQLException {
 		ArrayList<User> arrList = new ArrayList<User>();
