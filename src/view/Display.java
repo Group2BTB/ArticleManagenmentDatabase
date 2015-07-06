@@ -9,13 +9,12 @@ public class Display {
 		Process pro = new Process();
 		try {
 
+			//pro.userControl();
 			pro.respondProcess();
-			//new Process().userControl();
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
 	}
 }

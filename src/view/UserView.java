@@ -18,7 +18,7 @@ public class UserView {
 	public User InsertFormUser(User udto) {
 		Scanner in = new Scanner(System.in);
 		System.out.print("Input Fullname: ");
-		udto.setFullName(new Validation().fullnameValidate(in.nextLine()));
+		udto.setFullName(new Validation().fullnameValidate(in.next()));
 		System.out.print("Input Email: ");
 		udto.setEmail(new Validation().EmailValidate(in.next()));
 		System.out.print("Input Username: ");
@@ -28,15 +28,10 @@ public class UserView {
 		System.out.print("Input UserType: ");
 		udto.setType(in.next());
 		System.out.println("\nAdd successfully!!!");
-		try {
-			new Process().respondProcess();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
 		return udto;
 	}
-
+	//This function is used for Delete User from Database
 	public User DeleteUser(User udto){		
 		Scanner in=new Scanner(System.in);
 		System.out.print("Input UserID you want to delete : ");	
@@ -60,7 +55,7 @@ public class UserView {
 		}
 		return udto;
 	}	
-	
+	//This function is used for Deactive User from Database
 	public User deActiveUser(User udto){		
 		Scanner in=new Scanner(System.in);
 		System.out.print("Input UserID you want to Deactive : ");

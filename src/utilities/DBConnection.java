@@ -19,7 +19,7 @@ public class DBConnection {
 			Class.forName("org.postgresql.Driver");// load postgresql driver
 			/* Connect to database */
 /*<<<<<<< .mine*/
-			con = DriverManager.getConnection("jdbc:postgresql://localhost:5432/ART","postgres", "111111");
+			con = DriverManager.getConnection("jdbc:postgresql://localhost:5432/ArticleManagement","postgres", "72241993vichet");
 /*=======
 			con = DriverManager.getConnection(
 					"jdbc:postgresql://localhost:5432/ArticleManagement","postgres","12345");

@@ -111,6 +111,8 @@ public class UserDAO {
 		ps.setInt(1, udto.getId());// set id to PreparedStatement
 		ResultSet rs = ps.executeQuery();
 		// loop to set the each value
+		if(rs.last())
+			return null;
 		if (rs.next()) {
 			udto.setId(rs.getInt("id"));// set id
 			udto.setFullName(rs.getString("fullname"));// set full name
@@ -195,6 +197,13 @@ public class UserDAO {
 
 	}
 
+	
+	public User getType(User udto){
+		
+		return udto;
+		
+	}
+	//This function is used for Deactived User
 	public boolean DeActivedUsers(User udto) {
 		try (Connection con = DBConnection.getConnection();
 				PreparedStatement ps = con
@@ -204,6 +213,7 @@ public class UserDAO {
 			ps.setInt(2, udto.getId());
 
 			if (ps.executeUpdate() <= 0) {
+
 				return false;
 			} else {
 				return true;
