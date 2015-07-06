@@ -111,8 +111,6 @@ public class UserDAO {
 		ps.setInt(1, udto.getId());// set id to PreparedStatement
 		ResultSet rs = ps.executeQuery();
 		// loop to set the each value
-		if(rs.last())
-			return null;
 		if (rs.next()) {
 			udto.setId(rs.getInt("id"));// set id
 			udto.setFullName(rs.getString("fullname"));// set full name
