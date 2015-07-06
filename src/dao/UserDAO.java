@@ -224,6 +224,28 @@ public class UserDAO {
 		}
 	}
 	
+	
+	public boolean activedUsers(User udto) {
+		try (Connection con = DBConnection.getConnection();
+				PreparedStatement ps = con
+						.prepareStatement("update tbl_user set active=? where id=?");) {
+
+			ps.setInt(1, 1);
+			ps.setInt(2, udto.getId());
+
+			if (ps.executeUpdate() <= 0) {
+
+				return false;
+			} else {
+				return true;
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+	
 	//to trace all user by write into logfile
 	public void writeLogFile(String action, String desc, String status){
 		try(FileWriter fw=new FileWriter("logfile.log", true)){//use try with resource
