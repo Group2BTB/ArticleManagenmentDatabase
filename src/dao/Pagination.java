@@ -118,4 +118,8 @@ public class Pagination {
 		perpage=num;
 		page=1;
 	}
+	public static void gotoPage(int num){
+		page = num;
+	}
+	
 }

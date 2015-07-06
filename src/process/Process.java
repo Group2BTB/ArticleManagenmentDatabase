@@ -154,14 +154,13 @@ public class Process {
 		while (true) {
 			String[] str = new ArticleView().getOption();
 			if (str.length > 2 || str.length <= 0) {
-				System.out.println("Invalid Keyword!!! Please Input again!");
+				new ArticleView().invalid();
 			} else {
 				int totalRecord = 0;
 				int totalPage = 0;
 				if (str.length == 2) {
 					if (str[1].matches("[a-zA-z]{1}")) {
-						System.out
-								.println("Invalid Keyword!!! Please Input again!");
+						new ArticleView().invalid();
 						continue;
 					}
 				}
@@ -196,6 +195,30 @@ public class Process {
 							}
 							totalRecord = Pagination.countSelectAll();
 							totalPage = Pagination.calculatePage(totalRecord);
+							new UI().listContent(
+									Pagination.getArticleAll(Sort.order, Sort.sort,
+											Pagination.startIndex()),
+									Pagination.page, totalRecord, totalPage);
+						}else{
+							new ArticleView().invalid();
+						}
+						new UI().menu();
+						break;
+					case "G":
+						if(str.length>1){
+							totalRecord = Pagination.countSelectAll();
+							totalPage = Pagination.calculatePage(totalRecord);
+							if (Integer.parseInt(str[1]) > 0) {
+								if(Integer.parseInt(str[1]) > totalPage){
+									System.out.println("Goto page must be small or equal Total page .");
+									continue;
+								}else{
+									Pagination.gotoPage(Integer.parseInt(str[1]));
+								}
+							}else{
+								System.out.println("Goto page must be biger than 0.");
+								continue;
+							}
 							new UI().listContent(
 									Pagination.getArticleAll(Sort.order, Sort.sort,
 											Pagination.startIndex()),
@@ -289,6 +312,75 @@ public class Process {
 							continue;
 						}
 						new ArticleController().displaySearch();
+						break;
+					case "G":
+						if(str.length>1){
+													
+							if (Search.searchType.equals("id")) {
+								ArrayList<Article> arr = Pagination
+										.getArticleBySearch(Search.searchValue,
+												Search.searchType, Sort.order,
+												Sort.sort, Pagination.startIndex());
+								totalRecord = arr.size();
+								totalPage = Pagination.calculatePage(totalRecord);
+								if (Integer.parseInt(str[1]) > 0) {
+									if(Integer.parseInt(str[1]) > totalPage){
+										System.out.println("Goto page must be small or equal Total page .");
+										continue;
+									}else{
+										Pagination.gotoPage(Integer.parseInt(str[1]));
+									}
+								}else{
+									System.out.println("Goto page must be biger than 0.");
+									continue;
+								}
+								new UI().listContent(arr, Pagination.page,
+										totalRecord, totalPage);
+							} else if (Search.searchType.equals("title")) {
+								totalRecord = Pagination.countSearchBy(
+										Search.searchValue, Search.searchType);
+								totalPage = Pagination.calculatePage(totalRecord);
+								if (Integer.parseInt(str[1]) > 0) {
+									if(Integer.parseInt(str[1]) > totalPage){
+										System.out.println("Goto page must be small or equal Total page .");
+										continue;
+									}else{
+										Pagination.gotoPage(Integer.parseInt(str[1]));
+									}
+								}else{
+									System.out.println("Goto page must be biger than 0.");
+									continue;
+								}
+								new UI().listContent(Pagination.getArticleBySearch(
+										Search.searchValue, Search.searchType,
+										Sort.order, Sort.sort,
+										Pagination.startIndex()), Pagination.page,
+										totalRecord, totalPage);
+							} else if (Search.searchType.equals("author")) {
+								totalRecord = Pagination.countSearchBy(
+										Search.searchValue, Search.searchType);
+								totalPage = Pagination.calculatePage(totalRecord);
+								if (Integer.parseInt(str[1]) > 0) {
+									if(Integer.parseInt(str[1]) > totalPage){
+										System.out.println("Goto page must be small or equal Total page .");
+										continue;
+									}else{
+										Pagination.gotoPage(Integer.parseInt(str[1]));
+									}
+								}else{
+									System.out.println("Goto page must be biger than 0.");
+									continue;
+								}
+								new UI().listContent(Pagination.getArticleBySearch(
+										Search.searchValue, Search.searchType,
+										Sort.order, Sort.sort,
+										Pagination.startIndex()), Pagination.page,
+										totalRecord, totalPage);
+							}
+						}else{
+							new ArticleView().invalid();
+						}
+						new UI().menu();
 						break;
 					case "N":
 						if (Search.searchType.equals("id")) {

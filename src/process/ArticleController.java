@@ -62,6 +62,7 @@ public class ArticleController {
 	}
 	
 	public void searchControl(){
+		Pagination.page=1;
 		ArticleView view = new ArticleView();
 		String searchBy = view.searchBy();
 		try {

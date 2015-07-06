@@ -104,7 +104,7 @@ public class Validation {
 		
 		String[] str = {"fuck","fucked","sex","porn","pornography","shit"}; //list of immoral words
 		for(int i=0; i<str.length; i++){
-			if(content.matches(".*"+str[i]+".*"))
+			if(content.trim().matches(".*"+str[i]+".*"))
 				return str[i];
 		}
 		return null;		
