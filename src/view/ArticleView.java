@@ -210,5 +210,9 @@ public class ArticleView {
 	public void invalid(){
 		System.out.println("Invalid Keyword! Please input again!!");
 	}
+	
+	/*public void listAllUnApproveArticle(ArrayList<Article> arrList){
+		new UI().listContentApproved(arrList);
+	}*/
 
 }

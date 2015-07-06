@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.ArrayList;
 
+import dao.ArticleApproved;
 import dao.ArticleDAO;
 import dao.Pagination;
 import dao.Search;
@@ -206,6 +207,19 @@ public class ArticleController {
 			// TODO Auto-generated catch block
 			System.err.println("Cannot pasre");
 		}	 
+	}
+	
+	public void listUnApproveControl(){
+		try {
+			ArrayList arr = new ArticleApproved().getArticleApproved(0);
+			new UI().listContentApproved(arr);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }

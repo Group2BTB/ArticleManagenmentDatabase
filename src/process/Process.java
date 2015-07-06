@@ -4,7 +4,6 @@ import dao.*;
 import dto.Article;
 
 import java.sql.SQLException;
-import java.text.ParseException;
 import java.util.ArrayList;
 
 import view.AdminMenu;
@@ -28,7 +27,7 @@ public class Process {
 
 		if (opt.matches("A") || opt.matches("V") || opt.matches("U") || opt.matches("L")
 				|| opt.matches("D") || opt.matches("DE") || opt.matches("X")
-				|| opt.matches("HM") || opt.matches("H") || opt.matches("A")  || opt.matches("AC") ) {
+				|| opt.matches("HM") || opt.matches("H") || opt.matches("A")  || opt.matches("AC") || opt.matches("AP") ) {
 
 			switch (opt.toUpperCase()) {
 			case "AC":
@@ -86,13 +85,11 @@ public class Process {
 			case "L":
 
 				new UserDAO().writeLogFile("Logout", udto.getUsername(), "Successful"); 
-
-
 				userControl();
 				break;
-			case "LO":
+			case "AP":
+				new ArticleController().listUnApproveControl();
 				new Process().respondProcess();
-				break;
 			default:
 
 			}
@@ -123,6 +120,7 @@ public class Process {
 						// System.out.println(user.getType());
 						if (user.getType().equalsIgnoreCase("admin")) {//to check if user type as admin
 							respondProcess();//call admin menu
+							//new Process().articleController();
 						} else {//user type as user
 							// System.out.println(user.getId());
 							userId += user.getId();
@@ -152,6 +150,13 @@ public class Process {
 
 		new Process().userControl();
 		//new ArticleController().readArticleControl();
+		/*System.out.println("Start...");
+		long start = System.currentTimeMillis();
+		for(int i=1;i<=1_000;i++){
+			new ArticleDAO().insertArticle(new Article(i, "title", 5, "content", "2015-07-06"));
+		}
+		System.out.println("END");
+		System.out.println(System.currentTimeMillis()-start);*/
 	}
 
 	public void articleController() throws Exception {

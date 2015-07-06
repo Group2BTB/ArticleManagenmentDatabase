@@ -258,5 +258,12 @@ public class UI {
 		// dislay footer table
 		tbl_footer(page, total_page, totalRecord,width);
 	}
-
+	public void listContentApproved(ArrayList<Article> arr){
+		table_head();
+		// display body table 
+		for(Article art: arr){
+			String[] str ={""+art.getId(),art.getTitle(),art.getAuthorName(),art.getDate()};
+			tbl_row(str);		
+		}		
+	}
 }
