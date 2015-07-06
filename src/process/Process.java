@@ -30,7 +30,7 @@ public class Process {
 				|| opt.matches("D") || opt.matches("DE") || opt.matches("X")
 				|| opt.matches("HM") || opt.matches("H") || opt.matches("A")  || opt.matches("AC") ) {
 
-			switch (opt) {
+			switch (opt.toUpperCase()) {
 			case "AC":
 				new UserView().activeUser(udto);
 				new UserDAO().activedUsers(udto);
