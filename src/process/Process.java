@@ -99,6 +99,8 @@ public class Process {
 			do {
 				adm.displayLoginMenu(user);
 				udao.checkUserLogin(user);
+				String login = "Login";
+				String logout = "Logout";
 				if (udao.checkUserLogin(user) == istrue) {
 					System.out.println("Login success.");
 					try {
@@ -109,6 +111,7 @@ public class Process {
 							// System.out.println(user.getId());
 							userId += user.getId();
 							new Process().articleController();
+							udao.writeLogFile(login, user.getUsername(), "Successful");
 
 						}
 
