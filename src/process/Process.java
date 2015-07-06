@@ -78,8 +78,8 @@ public class Process {
 				new AdminMenu().helpe();
 				break;
 			case "L":
-				userControl();
 				new UserDAO().writeLogFile("Logout", udto.getUsername(), "Successful");
+				userControl();
 				break;
 			default:
 				new Process().respondProcess();
@@ -97,25 +97,24 @@ public class Process {
 		AdminMenu adm = new AdminMenu();// create object of class AdminMenu in
 										// view
 		User user = new User();// create object of class User in dto
-		UserDAO udao = new UserDAO();
-		boolean istrue = true;
+		UserDAO udao = new UserDAO();//create object of class UserDAO
+		boolean istrue = true;//declare a variable as boolean true
 		try {
 			do {
-				adm.displayLoginMenu(user);
-				udao.checkUserLogin(user);
-				String login = "Login";
-				String logout = "Logout";
-				if (udao.checkUserLogin(user) == istrue) {
-					System.out.println("Login success.");
+				adm.displayLoginMenu(user);//to display login menu
+				udao.checkUserLogin(user);//to check whether account active and type of user
+				String login = "Login";//declare a variable in string as login
+				if (udao.checkUserLogin(user) == istrue) {//to check if it correct and active or not
+					System.out.println("Login success.");//display susscess
 					try {
 						// System.out.println(user.getType());
-						if (user.getType().equalsIgnoreCase("admin")) {
-							respondProcess();
-						} else {
+						if (user.getType().equalsIgnoreCase("admin")) {//to check if user type as admin
+							respondProcess();//call admin menu
+						} else {//user type as user
 							// System.out.println(user.getId());
 							userId += user.getId();
-							udao.writeLogFile(login, user.getUsername(), "Successful");
-							new Process().articleController();
+							udao.writeLogFile(login, user.getUsername(), "Successful");//to write all user transaction to logfile
+							new Process().articleController();//call user menu
 							
 
 						}
