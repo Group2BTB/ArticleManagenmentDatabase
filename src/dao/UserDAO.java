@@ -47,6 +47,7 @@ public class UserDAO {
 				
 			}
 			if (test.equalsIgnoreCase("") && ps.executeUpdate() > 0) {
+				System.out.println("\nAdd successfully!!!");
 				return true;
 			}
 			return false;
