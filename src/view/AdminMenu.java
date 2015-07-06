@@ -16,8 +16,9 @@ public class AdminMenu {
 		System.out.println("|                                                                             |");
 		System.out.println("|                        HM)Home  X)Exit H)Help                               |");
 		System.out.println("|                                                                             |");
-		System.out.println("| A)Add User| V)Views Users| U)Update User| D)Delete User| DE)Deactived User  |");
-		System.out.println("|                            L)Logout                                         |");
+		System.out.println("|           A)Add User| V)Views Users| U)Update User| D)Delete User           |");
+		System.out.println("|                                                                             |");
+		System.out.println("|                L)Logout  DE)Deactived User | AC) Active User                |");
 		System.out.println("|_____________________________________________________________________________|");
 		System.out.print("\n-> Choose: ");
 		return in.next().toUpperCase();
@@ -44,6 +45,7 @@ public class AdminMenu {
 		System.out.println("| 6.  DE)Deactive User by ID(*Choose: DE)                                     |");
 		System.out.println("| 7.  H)Help : Guiline application. (*Choose: H)                              |");
 		System.out.println("| 8.  X)Exit : Close Program (*Choose: X)                                     |");
+		System.out.println("| 9.  AC)Active : Active User by ID (*Choose: AC)                             |");
 		System.out.println("+-----------------------------------------------------------------------------+");
 	}
 	
