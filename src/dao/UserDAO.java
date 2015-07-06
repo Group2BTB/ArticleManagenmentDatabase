@@ -1,11 +1,16 @@
 package dao;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import javax.swing.DefaultButtonModel;
 
@@ -207,6 +212,19 @@ public class UserDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
+		}
+	}
+	
+	//to trace all user by write into logfile
+	public void writeLogFile(String action, String desc, String status){
+		try(FileWriter fw=new FileWriter("logfile.log", true)){//use try with resource
+			Date today = (Date) Calendar.getInstance().getTime();//to get current time
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");//to format time
+			String ass="\n" + sdf.format(today) +"\t\t"+ action +"\t\t"+ desc +"\t\t\t\t"+ status;			
+			fw.append(ass);
+			
+		}catch(IOException e){
+			e.printStackTrace();
 		}
 	}
 
