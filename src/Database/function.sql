@@ -1,3 +1,17 @@
+CREATE or REPLACE FUNCTION select_approved(status INTEGER)
+	RETURNS TABLE(ID INTEGER, TITLE VARCHAR, AUTHOR VARCHAR, DATES TIMESTAMP) AS $BODY$
+			BEGIN				
+						RETURN QUERY
+						SELECT 
+								a.id,a.title,u.fullname,a.create_date
+						FROM
+								tbl_article a JOIN tbl_user u ON a.author_id = u.id	
+						WHERE a.approved = status
+						ORDER BY a.id DESC;								
+			END;				
+		$BODY$
+  LANGUAGE 'plpgsql';
+
 -------------------select_all----------------------------------------------------------------------
 CREATE or REPLACE FUNCTION select_all(__field VARCHAR, __order_to VARCHAR, _s INTEGER, _e INTEGER)
 	RETURNS TABLE(ID INTEGER, TITLE VARCHAR, AUTHOR VARCHAR, DATES TIMESTAMP) AS $BODY$
