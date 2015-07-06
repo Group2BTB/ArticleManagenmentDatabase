@@ -17,7 +17,7 @@ public class AdminMenu {
 		System.out.println("|                        HM)Home  X)Exit H)Help                               |");
 		System.out.println("|                                                                             |");
 		System.out.println("| A)Add User| V)Views Users| U)Update User| D)Delete User| DE)Deactived User  |");
-		System.out.println("|                                                                             |");
+		System.out.println("|                            L)Logout                                         |");
 		System.out.println("|_____________________________________________________________________________|");
 		System.out.print("\n-> Choose: ");
 		return in.next().toUpperCase();
