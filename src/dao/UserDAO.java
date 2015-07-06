@@ -311,4 +311,33 @@ public class UserDAO {
 		}
 		return arrList;//return value of user ArrayList
 	}
+	
+	//CheckID when Input
+	public User checkID(int id) throws SQLException {
+		User udto = new User();
+		ResultSet rs = null;
+		// create connection
+		Connection con = DBConnection.getConnection();
+		// preparedStatement for view Information of Users
+		PreparedStatement ps = con
+				.prepareStatement("select * from tbl_user where id=?", ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_UPDATABLE);
+		ps.setInt(1,id);// set id to PreparedStatement
+		
+		// loop to set the each value
+		if ((rs = ps.executeQuery()).last()) {
+			udto.setId(id);// set id
+			udto.setFullName(rs.getString("fullname"));// set full name
+			udto.setEmail(rs.getString("email"));
+			udto.setUsername(rs.getString("username"));// set user name
+			udto.setType(rs.getString("type"));// set user type
+			
+			return udto;
+		}else
+		{
+			return null;
+		}
+	}
+	
+	
+	
 }

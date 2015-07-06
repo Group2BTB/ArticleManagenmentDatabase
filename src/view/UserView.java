@@ -106,6 +106,19 @@ public class UserView {
 		}
 		return udto;
 	}	
+	public int returnID(){
+		Scanner in=new Scanner(System.in);
+		System.out.print("Input UserID you want to display : ");
+		String opt= in.next();
+		if(new ArticleView().isInteger(opt) == true){
+			return Integer.parseInt(opt);
+		}else{
+			System.out.println("Please input number!");
+			return returnID();
+		}
+		
+		
+	}
 	//to display input user id to update and choice to update
 	public int UpdateUser(User udto){
 		int inputChoice = 0;// declare a variable to get input choice method
@@ -115,18 +128,11 @@ public class UserView {
 		
 		ResultSet rs = null;
 		
-		try(Connection con = DBConnection.getConnection(); 
-				PreparedStatement pre = con.prepareStatement("select * from tbl_user where id=?",ResultSet.CONCUR_UPDATABLE,ResultSet.TYPE_SCROLL_SENSITIVE);
-			) {
+		try {
 			
 			int id = in.nextInt();
-			pre.setInt(1, id);			
-			udto.setId(id);			
-			
-			rs = pre.executeQuery();
-			
-			if(rs.last() == false)				 
-					new UserView().UpdateUser(udto);							
+			udto.setId(id);				
+									
 						
 			System.out.print("what do you want to update? : [ 1.Fullname | 2.Username | 3.Password | 4.Email ] ");
 			
@@ -136,7 +142,8 @@ public class UserView {
 			switch (inputChoice) {
 			case 1://if inputChoice == 1
 				System.out.print("Input new Fullname: ");
-				udto.setFullName(new Validation().fullnameValidate(in.next()));
+				udto.setFullName(new Validation().fullnameValidate(in.nextLine()));
+				System.out.println("Successfuly Update!!!");
 				break;
 			case 2://if inputChoice == 2
 				System.out.print("Input new Username: ");
@@ -171,14 +178,7 @@ public class UserView {
 			System.out.println("\n *** Input is not valide!!! (Number only) \n");
 			new UserView().UpdateUser(udto);
 		}
-		finally{
-			try {
-				rs.close();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
+		
 		return inputChoice;// return input choice method
 		
 	}
@@ -200,20 +200,21 @@ public class UserView {
 	}
 	
 	//to display the user info by id selected
-	public User viewUserInfo(User udto){
-		System.out.println("User Detail");
-		System.out.println("ID\t: " + udto.getId());
-		System.out.println("Fullname: " + udto.getFullName());
-		System.out.println("Username: " + udto.getUsername());
-		System.out.println("Email\t: " + udto.getEmail());
-		System.out.println("Usertype: " + udto.getType());
+	public void viewUserInfo(User udto){
 		try {
-			new Process().respondProcess();
+			System.out.println("User Detail");
+			System.out.println("ID\t: " + udto.getId());
+			System.out.println("Fullname: " + udto.getFullName());
+			System.out.println("Username: " + udto.getUsername());
+			System.out.println("Email\t: " + udto.getEmail());
+			System.out.println("Usertype: " + udto.getType());
+		
+			//new Process().respondProcess();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("No record!");
 		}
-		return udto;
+		
 	}
 	
 }

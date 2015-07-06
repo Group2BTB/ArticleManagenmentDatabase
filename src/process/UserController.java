@@ -1,10 +1,13 @@
 package process;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import dao.UserDAO;
 import dto.Article;
+import dto.User;
 import view.AdminMenu;
+import view.ArticleView;
 import view.UserView;
 
 public class UserController {
@@ -30,5 +33,21 @@ public class UserController {
 	public void userDisplayControl(){
 		UserDAO dao = new UserDAO();
 		UserView view = new UserView();
+		User user = new User();
+		 try {
+			user = dao.checkID(new UserView().returnID());
+			if(user != null){
+				new UserView().viewUserInfo(user);
+			}
+			else{
+				
+				System.out.println("No record!");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
+	
 }

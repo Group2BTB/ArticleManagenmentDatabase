@@ -91,7 +91,7 @@ public class Validation {
 				System.out.println("Input only charater, Please input again!");
 				// Reinput username 
 				System.out.print("Input Username: ");
-				return UsernameValidate(sc.next());
+				return UsernameValidate(sc.nextLine());
 			}
 
 		}

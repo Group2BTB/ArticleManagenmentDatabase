@@ -44,11 +44,12 @@ public class Process {
 				new Process().respondProcess();
 				break;
 			case "V":
-				new UserView().getUserId(udto);// get user id from view
-				new UserDAO().viewUser(udto);// get user object from model and
+				//new UserView().getUserId(udto);// get user id from view
+				//new UserDAO().viewUser(udto);// get user object from model and
 												// pass to view
-				new UserView().viewUserInfo(udto);// show the result in to
+				//new UserView().viewUserInfo(udto);// show the result in to
 													// console
+				new UserController().userDisplayControl();
 				new Process().respondProcess();
 				break;
 			case "U":
@@ -76,21 +77,24 @@ public class Process {
 				System.exit(0);
 				break;
 			case "HM":
-				new Process().respondProcess();
+				new Process().respondProcess();//go page respone for show menu
 				break;
 			case "H":
-				new AdminMenu().helpe();
+				new AdminMenu().helpe();//go to page help
 				new Process().respondProcess();
 				break;
 			case "L":
+
+				new UserDAO().writeLogFile("Logout", udto.getUsername(), "Successful"); 
+
+
 				userControl();
 				break;
 			case "LO":
 				new Process().respondProcess();
 				break;
 			default:
-				new Process().respondProcess();
-				break;
+
 			}
 
 		} else {
@@ -99,6 +103,8 @@ public class Process {
 
 		}
 	}
+	
+	
 
 	public void userControl() {
 		AdminMenu adm = new AdminMenu();// create object of class AdminMenu in
