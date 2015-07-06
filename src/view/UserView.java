@@ -1,10 +1,16 @@
 package view;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import process.Process;
 import process.Validation;
+import utilities.DBConnection;
 import dto.User;
 public class UserView {
 	
@@ -39,10 +45,9 @@ public class UserView {
 			System.out.print("Are you sure you want to delete this User??? : [y/n] ==> ");	
 			String yesNo = in.next();
 			if(yesNo.matches("y")){
-			udto.setId(id);
+				udto.setId(id);
 			System.out.println("\nDelete successfully!!!");
-			new Process().respondProcess();
-			
+		
 			}
 			else{
 				System.out.println("Delete is cancelled");
@@ -66,7 +71,6 @@ public class UserView {
 			if(yesNo.matches("y")){
 			 udto.setId(id);
 			 System.out.println("\nThis User is Deactived!!!");
-			 new Process().respondProcess();
 			}
 			else{
 				System.out.println("Deactive is cancelled");
@@ -84,8 +88,23 @@ public class UserView {
 		int inputChoice = 0;// declare a variable to get input choice method
 		Scanner in=new Scanner(System.in);
 		System.out.print("Input UserID you want to update : ");
-		try {
-			udto.setId(in.nextInt());
+		
+		
+		ResultSet rs = null;
+		
+		try(Connection con = DBConnection.getConnection(); 
+				PreparedStatement pre = con.prepareStatement("select * from tbl_user where id=?",ResultSet.CONCUR_UPDATABLE,ResultSet.TYPE_SCROLL_SENSITIVE);
+			) {
+			
+			int id = in.nextInt();
+			pre.setInt(1, id);			
+			udto.setId(id);			
+			
+			rs = pre.executeQuery();
+			
+			if(rs.last() == false)				 
+					new UserView().UpdateUser(udto);							
+						
 			System.out.print("what do you want to update? : [ 1.Fullname | 2.Username | 3.Password | 4.Email ] ");
 			
 			inputChoice=in.nextInt();
@@ -108,21 +127,34 @@ public class UserView {
 				System.out.print("Input new Email: ");
 				udto.setEmail(in.next());
 				break;				
-				default:
-				new Process().respondProcess();
-				break;
+			default:
+					
 			}
 			
 			}else{	
 				System.out.println("Syntax Error!!!");
 				new UserView().UpdateUser(udto);
+				
 			}
 				
 
-		} catch (Exception e) {
+		}catch(InputMismatchException ex){
+			
+			System.out.println("\n *** Input is not valide!!! (Number only) \n");
+			new UserView().UpdateUser(udto);
+			
+		}catch (Exception e) {
 			// TODO: handle exception
 			System.out.println("\n *** Input is not valide!!! (Number only) \n");
 			new UserView().UpdateUser(udto);
+		}
+		finally{
+			try {
+				rs.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		return inputChoice;// return input choice method
 		
