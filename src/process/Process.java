@@ -81,6 +81,7 @@ public class Process {
 				break;
 			case "H":
 				new AdminMenu().helpe();
+				new Process().respondProcess();
 				break;
 			case "L":
 				new UserDAO().writeLogFile("Logout", udto.getUsername(), "Successful");
