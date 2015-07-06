@@ -12,12 +12,9 @@ public class AdminMenu {
 		User user=new User();
 		Process pro=new Process();
 		System.out.println();
-		System.out.println("+=========================>} USER Management {<===============================+");
-		System.out.println("|                                                                             |");
-		System.out.println("|                        HM)Home  X)Exit H)Help                               |");
-		System.out.println("|                                                                             |");
-		System.out.println("|           A)Add User| V)Views Users| U)Update User| D)Delete User           |");
-		System.out.println("|                                                                             |");
+		System.out.println("+=========================>} USER Management {<===============================+");		
+		System.out.println("|                        HM)Home  X)Exit H)Help                               |");		
+		System.out.println("|           A)Add User| V)Views Users| U)Update User| D)Delete User           |");		
 		System.out.println("|                L)Logout  DE)Deactived User | AC) Active User                |");
 		System.out.println("|_____________________________________________________________________________|");
 		System.out.print("\n-> Choose: ");
