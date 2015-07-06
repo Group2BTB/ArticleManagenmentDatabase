@@ -27,7 +27,6 @@ public class UserView {
 		udto.setPassword(new Validation().PassEncrypt(in.next()));
 		System.out.print("Input UserType: ");
 		udto.setType(in.next());
-		System.out.println("\nAdd successfully!!!");
 		
 		return udto;
 	}
