@@ -83,7 +83,6 @@ public class Process {
 				new Process().respondProcess();
 				break;
 			case "L":
-				new UserDAO().writeLogFile("Logout", udto.getUsername(), "Successful");
 				userControl();
 				break;
 			case "LO":
@@ -134,6 +133,21 @@ public class Process {
 				} else {
 					System.out
 							.println("Invalid Username or Password! Login again.");
+					int opt = adm.confirmMenu();
+					switch(opt){
+					case 1:
+						userControl();
+						break;
+					case 2:
+						String username = adm.getUsername(user);
+						udao.getNewPassword(username);
+						if(udao.getNewPassword(username) == istrue){
+							String newPasswd = adm.inputNewPassword();
+							udao.newPasswd(newPasswd, username);
+							userControl();
+						}
+						break;
+					}
 				}
 			} while (udao.checkUserLogin(user) != istrue);
 
