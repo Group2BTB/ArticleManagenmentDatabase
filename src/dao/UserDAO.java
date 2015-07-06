@@ -227,7 +227,7 @@ public class UserDAO {
 	//to trace all user by write into logfile
 	public void writeLogFile(String action, String desc, String status){
 		try(FileWriter fw=new FileWriter("logfile.log", true)){//use try with resource
-			Date today = (Date) Calendar.getInstance().getTime();//to get current time
+			java.util.Date today = Calendar.getInstance().getTime();//to get current time
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");//to format time
 			String ass="\n" + sdf.format(today) +"\t\t"+ action +"\t\t"+ desc +"\t\t\t\t"+ status;			
 			fw.append(ass);
