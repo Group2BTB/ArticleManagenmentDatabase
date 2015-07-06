@@ -123,11 +123,9 @@ public class UserView {
 	public int UpdateUser(User udto){
 		int inputChoice = 0;// declare a variable to get input choice method
 		Scanner in=new Scanner(System.in);
+		//in.useDelimiter("");
 		System.out.print("Input UserID you want to update : ");
-		
-		
-		ResultSet rs = null;
-		
+			
 		try {
 			
 			int id = in.nextInt();
@@ -142,7 +140,9 @@ public class UserView {
 			switch (inputChoice) {
 			case 1://if inputChoice == 1
 				System.out.print("Input new Fullname: ");
-				udto.setFullName(new Validation().fullnameValidate(in.nextLine()));
+				String name = in.next();
+				name = name +" " + in.nextLine();
+				udto.setFullName(new Validation().fullnameValidate(name));
 				System.out.println("Successfuly Update!!!");
 				break;
 			case 2://if inputChoice == 2
