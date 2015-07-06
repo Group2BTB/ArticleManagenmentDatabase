@@ -27,7 +27,7 @@ public class Process {
 											// view
 		String opt = new AdminMenu().displayAminPage();
 
-		if (opt.matches("A") || opt.matches("V") || opt.matches("U")
+		if (opt.matches("A") || opt.matches("V") || opt.matches("U") || opt.matches("L")
 				|| opt.matches("D") || opt.matches("DE") || opt.matches("X")
 				|| opt.matches("HM") || opt.matches("H") || opt.matches("A")) {
 
@@ -76,6 +76,9 @@ public class Process {
 				break;
 			case "H":
 				new AdminMenu().helpe();
+				break;
+			case "L":
+				userControl();
 				break;
 			default:
 				new Process().respondProcess();
