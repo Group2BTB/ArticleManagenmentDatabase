@@ -27,7 +27,7 @@ public class AdminMenu {
 	public void displayLoginMenu(User user){
 		Scanner in=new Scanner(System.in);
 		//Process pro = new Process();
-		System.out.println("========================>} Login Pages {<===========================");
+		System.out.println("=============================>} Login Pages {<================================");
 		System.out.print("Username: ");
 		user.setUsername(new Validation().UsernameValidate(in.next()));
 		System.out.print("Password: ");
