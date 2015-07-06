@@ -79,20 +79,23 @@ public class ArticleController {
 		String searchBy = view.searchBy();
 		try {
 			String keyword = view.setSrtSearch();
+			
 			if(searchBy.equals("id")){ // if searchBy option equal to id				
-				Search.searchByID(Integer.parseInt(keyword));//
+				Search.searchByID(Integer.parseInt(keyword));//call method searchByID() from class Search
 				/* get value from method getArticleBySearch() store in arrayList arr*/
 				ArrayList<Article> arr = Pagination.getArticleBySearch(Search.searchValue, Search.searchType, Sort.order, Sort.sort, Pagination.startIndex());
 				int totalRecord = arr.size();// get size of arraList
-				int totalPage = Pagination.calculatePage(totalRecord);//get total record from database
+				int totalPage = Pagination.calculatePage(totalRecord);//get total pages that we want to display
 				new UI().listContent(arr, Pagination.page, totalRecord, totalPage);// call method listContent() From class UI in package view
+			
 			}else if(searchBy.equals("title")){ //if searchBy option equal to title
-				Search.searchByTitle(keyword);
-				int totalRecord = Pagination.countSearchBy(keyword, Search.searchType);
-				int totalPage = Pagination.calculatePage(totalRecord);
+				Search.searchByTitle(keyword);//call method searchByTitle() from class Search
+				int totalRecord = Pagination.countSearchBy(keyword, Search.searchType);// get totall record
+				int totalPage = Pagination.calculatePage(totalRecord);//get total pages that we want to display
 				new UI().listContent(Pagination.getArticleBySearch(Search.searchValue, Search.searchType, Sort.order, Sort.sort, Pagination.startIndex()), Pagination.page, totalRecord, totalPage);			
+			
 			}else if(searchBy.equals("author")){//if searchBy option equal to author
-				Search.searchByAuthor(keyword);
+				Search.searchByAuthor(keyword);//call method searchByAuthor() from class Search
 				int totalRecord = Pagination.countSearchBy(keyword, Search.searchType);
 				int totalPage = Pagination.calculatePage(totalRecord);
 				new UI().listContent(Pagination.getArticleBySearch(Search.searchValue, Search.searchType, Sort.order, Sort.sort, Pagination.startIndex()), Pagination.page, totalRecord, totalPage);			
@@ -105,21 +108,24 @@ public class ArticleController {
 			new UI().menu();// call method menu from UI class
 		}
 	}
+	
+	/* method use to display article after search */
 	public void displaySearch(){
 		int totalRecord;
 		try {
 			totalRecord = Pagination.countSearchBy(Search.searchValue, Search.searchType);
-			int totalPage = Pagination.calculatePage(totalRecord);			
+			int totalPage = Pagination.calculatePage(totalRecord);
 			new UI().listContent(Pagination.getArticleBySearch(Search.searchValue, Search.searchType, Sort.order, Sort.sort, Pagination.startIndex()), Pagination.page, totalRecord, totalPage);			
 		
 		} catch (SQLException | ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}finally{
-			new UI().menu();
+			new UI().menu();//call method menu() from Class UI 
 		}
 		
 	}
+	/*-----------------the end of method-----------------*/
 	
 	public void sortControl(){
 		ArticleView view = new ArticleView();
@@ -177,12 +183,14 @@ public class ArticleController {
 		}
 	}
 	
+	/* Show article detail */
 	public void readArticleControl(){
 		Article  art = new Article();
-		int id = new ArticleView().readChoice();
-		art = new ArticleDAO().readArticle(id);
-		new ArticleView().displayArticle(art);
+		int id = new ArticleView().readChoice();// ask user choice
+		art = new ArticleDAO().readArticle(id); // user choice to method readArticle() get value from database and store to object article
+		new ArticleView().displayArticle(art);// response article to user request
 	}
+	/*--------the end of method-----------*/
 	
 	public void displayHomePage(){
 		int totalRecord = 0;
