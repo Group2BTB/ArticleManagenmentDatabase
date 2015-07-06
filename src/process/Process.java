@@ -79,6 +79,7 @@ public class Process {
 				break;
 			case "L":
 				userControl();
+				new UserDAO().writeLogFile("Logout", udto.getUsername(), "Successful");
 				break;
 			default:
 				new Process().respondProcess();
@@ -113,8 +114,9 @@ public class Process {
 						} else {
 							// System.out.println(user.getId());
 							userId += user.getId();
-							new Process().articleController();
 							udao.writeLogFile(login, user.getUsername(), "Successful");
+							new Process().articleController();
+							
 
 						}
 
