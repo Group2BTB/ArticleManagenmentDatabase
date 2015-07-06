@@ -29,10 +29,15 @@ public class Process {
 
 		if (opt.matches("A") || opt.matches("V") || opt.matches("U") || opt.matches("L")
 				|| opt.matches("D") || opt.matches("DE") || opt.matches("X")
-				|| opt.matches("HM") || opt.matches("H") || opt.matches("A")) {
+				|| opt.matches("HM") || opt.matches("H") || opt.matches("A")  || opt.matches("AC") ) {
 
 			switch (opt) {
-
+			case "AC":
+				new UserView().activeUser(udto);
+				new UserDAO().activedUsers(udto);
+				new Process().respondProcess();
+				break;
+				
 			case "A":
 				new UserView().InsertFormUser(udto);// get user object from view
 				new UserDAO().insertView(udto);// get user object from model and
