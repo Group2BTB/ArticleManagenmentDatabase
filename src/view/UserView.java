@@ -24,7 +24,7 @@ public class UserView {
 	public User InsertFormUser(User udto) {
 		Scanner in = new Scanner(System.in);
 		System.out.print("Input Fullname: ");
-		udto.setFullName(new Validation().fullnameValidate(in.next()));
+		udto.setFullName(new Validation().fullnameValidate(in.nextLine()));
 		System.out.print("Input Email: ");
 		udto.setEmail(new Validation().EmailValidate(in.next()));
 		System.out.print("Input Username: ");
@@ -32,7 +32,7 @@ public class UserView {
 		System.out.print("Input password: ");
 		udto.setPassword(new Validation().PassEncrypt(in.next()));
 		System.out.print("Input UserType: ");
-		udto.setType(in.next());
+		udto.setType(in.next().toLowerCase());
 		
 		return udto;
 	}
@@ -83,6 +83,29 @@ public class UserView {
 		return udto;
 	}	
 	
+	
+	public User activeUser(User udto){		
+		Scanner in=new Scanner(System.in);
+		System.out.print("Input UserID you want to Active : ");
+		try {
+			int id = in.nextInt();
+			
+			System.out.print("Are you sure you want to Active this User??? : [y/n] ==> ");	
+			String yesNo = in.next().toLowerCase();
+			if(yesNo.matches("y")){
+			 udto.setId(id);
+			 System.out.println("\nThis User is Actived!!!");
+			}
+			else{
+				System.out.println("Active is cancelled");
+			}		
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println("\n *** Input is not valide!!! (Number only) \n");
+			new UserView().deActiveUser(udto);
+		}
+		return udto;
+	}	
 	//to display input user id to update and choice to update
 	public int UpdateUser(User udto){
 		int inputChoice = 0;// declare a variable to get input choice method
