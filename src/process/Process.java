@@ -6,7 +6,6 @@ import dto.Article;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 import view.AdminMenu;
 import view.ArticleView;
@@ -87,6 +86,9 @@ public class Process {
 				new UserDAO().writeLogFile("Logout", udto.getUsername(), "Successful");
 				userControl();
 				break;
+			case "LO":
+				new Process().respondProcess();
+				break;
 			default:
 				new Process().respondProcess();
 				break;
@@ -147,7 +149,7 @@ public class Process {
 		//new ArticleController().readArticleControl();
 	}
 
-	public void articleController() throws SQLException, ParseException {
+	public void articleController() throws Exception {
 		new UI().head();
 		new ArticleController().displayHomePage();
 		String searchAction = null;
@@ -281,6 +283,9 @@ public class Process {
 						break;
 					case "SO":
 						new ArticleController().sortControl();
+						break;
+					case "LO":
+						new Process().userControl();
 						break;
 					}
 				} else {
@@ -524,6 +529,9 @@ public class Process {
 						break;
 					case "H":
 						new UI().help();
+						break;
+					case "LO":
+						new Process().userControl();
 						break;
 					case "X":
 						new UI().thanks();

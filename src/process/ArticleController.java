@@ -50,27 +50,40 @@ public class ArticleController {
 	}
 	/*The end of method*/
 
-
+	/* This method use to control when user want to delete*/
 	public void deleteControl() {
+		
+		/*
+		 *  Call to method from Class ArticleView to ask user to input id to delete
+		 *  @param delID use to store value of Id from user input
+		 */
 		int delID = new ArticleView().setIdOption();
-		if (new ArticleView().userChoice().equalsIgnoreCase("y")) {
-			new ArticleDAO().deleteArticle(delID);
+		
+		/* Check user option */
+		if (new ArticleView().userChoice().equalsIgnoreCase("y")/*check if user agree to delete this article*/) {
+			new ArticleDAO().deleteArticle(delID);// Call method deleteArticle from ArticleDAO Class
 			System.out.println("Delete successfully!");
 		} else {
 			System.out.println("Delete was canceled!");
 		}
 	}
+	/*----------------The end of method---------------------*/
 	
+	/* 
+	 * Method searchControl() use to control on article when user want to  
+	 * search by option Like 'ID', 'Title', 'author'
+	 */
 	public void searchControl(){
 		Pagination.page=1;
 		ArticleView view = new ArticleView();
 		String searchBy = view.searchBy();
 		try {
 			String keyword = view.setSrtSearch();
-			if(searchBy.equals("id")){				
+			if(searchBy.equals("id")){ // searchBy equal to id				
 				Search.searchByID(Integer.parseInt(keyword));
+				/* get value from method getArticleBySearch() store in arrayList arr*/
 				ArrayList<Article> arr = Pagination.getArticleBySearch(Search.searchValue, Search.searchType, Sort.order, Sort.sort, Pagination.startIndex());
-				int totalRecord = arr.size();
+				int totalRecord = arr.size();// get size of arraList
 				int totalPage = Pagination.calculatePage(totalRecord);
 				new UI().listContent(arr, Pagination.page, totalRecord, totalPage);
 			}else if(searchBy.equals("title")){
@@ -87,9 +100,9 @@ public class ArticleController {
 		} catch (SQLException | ParseException |NumberFormatException e) {
 			// TODO Auto-generated catch block
 			//e.printStackTrace();
-			new ArticleView().invalid();
+			new ArticleView().invalid();/*call method invalid() from class ArticleView to show message when user input invalid keyword*/
 		}finally{
-			new UI().menu();
+			new UI().menu();// call method menu from UI class
 		}
 	}
 	public void displaySearch(){

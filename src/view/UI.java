@@ -198,8 +198,8 @@ public class UI {
 	public void menu(){
 		System.out.println("+=================================>} MENU {<==================================+");
 		System.out.println("|                             HM)Home X)Exit H)Help                           |");
-		System.out.println("|         S)Search| RD)Read | A)Add | E)Edit | D)Delete | SO)Sort             |");
 		System.out.println("|   	F)First | P)Previous | N)Next | L)Last | G)Goto | R)Set Row           |");
+		System.out.println("|   S)Search| RD)Read | A)Add | E)Edit | D)Delete | SO)Sort | LO)Logout       |");
 		System.out.println("|_____________________________________________________________________________|");
 		//System.out.print("\n*Choose: ");
 	}
@@ -230,6 +230,7 @@ public class UI {
 		System.out.println("| 13. X)Exit : Exit application. (*Choose: X)                                 |");
 		System.out.println("| 14. HM)Home : Home page. (*Choose: HM)                                      |");
 		System.out.println("| 15. SO)Sort : Sort Article by Id, Title, Author. (*Choose: SO)              |");
+		System.out.println("| 16. LO)Logout : Logout from user. (*Choose: LO)                             |");
 		System.out.println("|_____________________________________________________________________________|");
 	}
 	/**
