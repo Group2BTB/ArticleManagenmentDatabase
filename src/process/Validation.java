@@ -65,7 +65,7 @@ public class Validation {
 		Scanner sc = new Scanner(System.in);
 		while (true) {
 			// check character condition
-			if (fullName.matches("[A-Za-z]+")) {
+			if (fullName.matches("[A-Za-z\\s]+") && !fullName.trim().equalsIgnoreCase("")) {
 				return fullName;
 			} else {
 				System.out.println("Input only charater, Please input again!");
@@ -83,7 +83,7 @@ public class Validation {
 		Scanner sc = new Scanner(System.in);
 		while (true) {
 			// check character condition
-			if (username.matches("[A-Za-z]+")) {
+			if (username.matches("[A-Za-z\\s]+") && !username.trim().equalsIgnoreCase("")) {
 				
 				return username;
 
