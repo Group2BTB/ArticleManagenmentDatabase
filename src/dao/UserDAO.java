@@ -22,14 +22,26 @@ public class UserDAO {
 		// preparedStatement for insert Infomaiton of Users
 				PreparedStatement ps = con
 						.prepareStatement("insert into tbl_user(fullname, email, username, passwd ,type)"
-								+ "values(?, ?, ?, ?, ?)");) {
+								+ "values(?, ?, ?, ?, ?)"); PreparedStatement ps1=con.prepareStatement("select username from tbl_user")) {
 			ps.setString(1, udto.getFullName());
 			ps.setString(2, udto.getEmail());
 			ps.setString(3, udto.getUsername().toString());
 			ps.setString(4, udto.getPassword().toString());
 			ps.setString(5, udto.getType());
 			// check if it affected row or not
-			if (ps.executeUpdate() > 0) {
+			ResultSet rs=ps1.executeQuery();
+			String username="";
+			String test="";
+			//to loop and check username if duplicate or not
+			while(rs.next()){
+				username=rs.getString("username");
+				if(udto.getFullName().equalsIgnoreCase(username)){
+					test += "Username existing.";
+					System.out.println(test);
+				}
+				
+			}
+			if (test.equalsIgnoreCase("") && ps.executeUpdate() > 0) {
 				return true;
 			}
 			return false;
